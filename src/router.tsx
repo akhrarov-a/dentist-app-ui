@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { Auth } from '@auth';
+import { Login, ResetPassword } from '@auth';
 import { App } from './app';
 
 /**
@@ -7,14 +7,23 @@ import { App } from './app';
  */
 const router = createBrowserRouter([
   {
-    path: '/auth',
-    element: <Auth />,
+    path: '/login',
+    element: <Login />
+  },
+  {
+    path: '/reset-password',
+    element: <ResetPassword />
   },
   {
     path: '/',
     element: <App />,
-    children: [],
-  },
+    children: [
+      {
+        path: '/patients',
+        element: <div>Patients</div>
+      }
+    ]
+  }
 ]);
 
 export { router };
