@@ -4,7 +4,7 @@ import { AuthService, HttpService } from './services';
  * Api service
  */
 class ApiService {
-  private http = new HttpService(import.meta.env.API_URL);
+  private http = new HttpService(import.meta.env.VITE_API_URL);
 
   public auth = new AuthService(this.http);
 }

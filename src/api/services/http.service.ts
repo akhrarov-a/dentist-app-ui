@@ -1,9 +1,4 @@
-import axios, {
-  AxiosError,
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-} from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 /**
  * Http service
@@ -12,7 +7,7 @@ class HttpService {
   public constructor(
     baseUrl: string,
     private getHeaders: () => any = () => ({}),
-    private handler?: (error: AxiosError) => any,
+    private handler?: (error: AxiosError) => any
   ) {
     this.instance = axios.create({ baseURL: baseUrl });
   }
@@ -29,9 +24,9 @@ class HttpService {
           method: 'get',
           headers: {
             ...this.getHeaders(),
-            ...headers,
+            ...headers
           },
-          ...config,
+          ...config
         });
 
         return resolve(response);
