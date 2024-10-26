@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@api": ["./src/api/index"],
+      "@components": ["./src/components/index"],
+      "@hooks": ["./src/hooks/index"],
+      "@utils": ["./src/utils/index"],
+      "@store": ["./src/store/index"],
+      "@auth": ["./src/modules/auth/index"],
+      "@auth/*": ["./src/modules/auth/*"],
+      "@test": ["./src/modules/test/index"],
+      "@test/*": ["./src/modules/test/*"]
+    }
+  },
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+}
