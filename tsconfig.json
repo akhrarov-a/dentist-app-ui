@@ -30,8 +30,8 @@
       "@store": ["./src/store/index"],
       "@auth": ["./src/modules/auth/index"],
       "@auth/*": ["./src/modules/auth/*"],
-      "@test": ["./src/modules/test/index"],
-      "@test/*": ["./src/modules/test/*"]
+      "@patients": ["./src/modules/patients/index"],
+      "@patients/*": ["./src/modules/patients/*"]
     }
   },
   "include": [

@@ -1,6 +1,7 @@
+import { makeAutoObservable, runInAction } from 'mobx';
 import { ApiService } from '@api';
 import { AuthStore } from '@auth/auth.store';
-import { makeAutoObservable, runInAction } from 'mobx';
+import { PatientsStore } from '@patients/patients.store.ts';
 
 /**
  * Global store
@@ -8,10 +9,12 @@ import { makeAutoObservable, runInAction } from 'mobx';
 class GlobalStore {
   public api: ApiService;
   public auth: AuthStore;
+  public patients: PatientsStore;
 
   constructor() {
     this.api = new ApiService();
     this.auth = new AuthStore(this);
+    this.patients = new PatientsStore(this);
 
     makeAutoObservable(this, {}, { autoBind: true });
   }

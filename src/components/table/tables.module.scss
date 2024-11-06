@@ -1,0 +1,84 @@
+@import 'src/styles/common.scss';
+
+.tables {
+  @include flex(normal, normal, column);
+
+  &_header {
+    @include flex(space-between, center);
+  }
+
+  &_buttonContainer {
+    @include flex(normal, flex-end, row);
+
+    align-self: end;
+
+    &_button {
+      height: 35px;
+      min-width: fit-content;
+      margin-left: 10px;
+      overflow: hidden;
+      color: $white;
+      border-radius: 5%;
+    }
+
+    &_button:hover {
+      color: $white;
+    }
+  }
+
+  &_addBotton {
+    margin-top: 1rem;
+  }
+
+  &_table {
+    margin-top: 1rem;
+    margin-bottom: 20px;
+    border: 1px solid #dddddd;
+    border-collapse: collapse;
+
+    table {
+      thead {
+        tr {
+          th {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    table {
+      tbody {
+        tr {
+          td {
+            white-space: nowrap;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  .more-columns-dropdown {
+    position: absolute;
+    z-index: 10;
+    top: 185px;
+    right: 16px;
+    min-width: 10%;
+    color: $primary-blue;
+    background-color: $white;
+    border-radius: $border-radius;
+    box-shadow: 2px 6px 21px -2px $primary-blue;
+
+    label {
+      margin: 0;
+    }
+  }
+
+  .option {
+    @include flex(flex-start, flex-start);
+
+    margin: 0;
+    padding: 20px 40px 20px 20px;
+    border-bottom: 1px solid $grey;
+  }
+}

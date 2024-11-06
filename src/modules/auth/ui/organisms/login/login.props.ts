@@ -1,10 +1,14 @@
 import { Form } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import { useStore } from '@store';
+import { AuthCredentials } from '@api';
 
 /**
  * <Login /> props
  */
 const useLoginProps = () => {
+  const navigate = useNavigate();
+
   const {
     auth: { login }
   } = useStore();
@@ -13,7 +17,8 @@ const useLoginProps = () => {
 
   return {
     form,
-    onLogin: login
+    onLogin: (authCredentials: AuthCredentials) =>
+      login(authCredentials, navigate)
   };
 };
 

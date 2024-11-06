@@ -1,6 +1,6 @@
-import { hoc } from '@utils';
-import { GlobalStore, useStore } from '@store';
 import { PropsWithChildren } from 'react';
+import { GlobalStore, useStore } from '@store';
+import { hoc } from '@utils';
 import styles from './layout.module.scss';
 
 /**
@@ -8,7 +8,7 @@ import styles from './layout.module.scss';
  */
 const Layout = hoc.observer<PropsWithChildren, GlobalStore>(
   useStore,
-  ({ children }) => <div className={styles.container}>{children}</div>,
+  ({ children }) => <div className={styles.container}>{children}</div>
 );
 
 export { Layout };

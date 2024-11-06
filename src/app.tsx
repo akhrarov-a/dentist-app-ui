@@ -6,12 +6,10 @@ import { hoc } from '@utils';
 /**
  * App
  */
-const App = hoc.observer(useStore, () => {
-  return (
-    <Layout>
-      <Outlet />
-    </Layout>
-  );
-});
+const App = hoc.observer(useStore, () => (
+  <Layout>
+    <Outlet />
+  </Layout>
+));
 
 export { App };

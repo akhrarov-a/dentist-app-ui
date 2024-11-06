@@ -1,6 +1,8 @@
 import { makeAutoObservable } from 'mobx';
-import { GlobalStore } from '@store';
+import { NavigateFunction } from 'react-router-dom';
+import { message } from 'antd';
 import { AuthCredentials } from '@api';
+import { GlobalStore } from '@store';
 
 /**
  * Auth store
@@ -16,13 +18,18 @@ class AuthStore {
 
   public isAuthorized: boolean = false;
 
-  public login = async (authCredentials: AuthCredentials) => {
+  public login = async (
+    authCredentials: AuthCredentials,
+    navigate: NavigateFunction
+  ) => {
     try {
       await this.global.api.auth.login(authCredentials);
 
       this.isAuthorized = true;
+
+      navigate('/');
     } catch (error) {
-      console.log(error);
+      message.error('Invalid credentials');
     }
   };
 }

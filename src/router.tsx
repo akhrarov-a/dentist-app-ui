@@ -1,5 +1,6 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { Login, ResetPassword } from '@auth';
+import { PatientsList } from '@patients';
 import { App } from './app';
 
 /**
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/patients',
-        element: <div>Patients</div>
+        element: <PatientsList />
+      },
+      {
+        path: '',
+        element: <Navigate to="/patients" />
       }
     ]
   }

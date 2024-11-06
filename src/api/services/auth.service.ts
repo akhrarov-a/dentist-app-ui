@@ -25,6 +25,9 @@ class AuthService {
   private requestInterceptorId: number;
   private responseInterceptorId: number;
 
+  /**
+   * Set tokens
+   */
   private setTokens = ({ refreshToken, accessToken }: Tokens) => {
     this.accessToken = accessToken;
     this.refreshToken = refreshToken;
@@ -33,6 +36,9 @@ class AuthService {
     cookie.save('refreshToken', refreshToken, { maxAge: 7776000 });
   };
 
+  /**
+   * Set interceptors
+   */
   private setInterceptors = () => {
     this.requestInterceptorId = this.http.instance.interceptors.request.use(
       config => {
@@ -75,30 +81,44 @@ class AuthService {
     );
   };
 
+  /**
+   * Clear tokens
+   */
   private clearTokens = () => {
     delete this.accessToken;
     delete this.refreshToken;
   };
 
+  /**
+   * Clear interceptors
+   */
   private clearInterceptors = () => {
     this.http.instance.interceptors.request.eject(this.requestInterceptorId);
     this.http.instance.interceptors.response.eject(this.responseInterceptorId);
   };
 
+  /**
+   * Get token
+   */
   public getToken = () => this.accessToken;
 
+  /**
+   * Login
+   */
   public login = async (data: AuthCredentials) => {
     const response = await this.http.request<Tokens>({
       url: `/auth/sign-in`,
       method: 'POST',
       data
     });
-
     this.setTokens(response.data);
 
     this.setInterceptors();
   };
 
+  /**
+   * Refresh
+   */
   public refresh = (refreshToken: string) =>
     this.http.request<Tokens>({
       url: `/auth/refresh`,
@@ -106,11 +126,17 @@ class AuthService {
       data: { refreshToken }
     });
 
-  public getCurrent = () =>
+  /**
+   * Get current user
+   */
+  public getCurrentUser = () =>
     this.http.request<User>({
       url: '/users/current'
     });
 
+  /**
+   * Logout
+   */
   public logout = async () => {
     await this.http.request({
       url: `/auth/logout`,
@@ -125,16 +151,25 @@ class AuthService {
   };
 }
 
+/**
+ * Tokens
+ */
 type Tokens = {
   accessToken: string;
   refreshToken: string;
 };
 
+/**
+ * Auth credentials
+ */
 type AuthCredentials = {
   email: string;
   password: string;
 };
 
+/**
+ * User
+ */
 type User = {
   id: number;
   firstname: string;
@@ -145,8 +180,8 @@ type User = {
   password: string;
   salt: string;
   role: UserRole;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export { AuthService };
