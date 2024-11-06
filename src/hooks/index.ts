@@ -1,1 +1,1 @@
-export * from './use-click-outside.ts';
+export * from './use-click-outside';

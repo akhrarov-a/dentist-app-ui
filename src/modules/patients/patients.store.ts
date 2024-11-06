@@ -3,6 +3,7 @@ import { NavigateFunction } from 'react-router-dom';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { GetPatientsParams, PatientContract } from '@api';
+import { filterOutFalsyValuesFromObject } from '@utils';
 import { PatientForm } from './patients.types.ts';
 import { PatientsAdapter } from './lib';
 
@@ -40,9 +41,7 @@ class PatientsStore {
       const response = await this.global.api.patients.getPatients({
         page,
         perPage,
-        ...Object.fromEntries(
-          Object.entries(this.patientsFilters).filter(([_, value]) => !!value)
-        )
+        ...filterOutFalsyValuesFromObject(this.patientsFilters)
       });
 
       this.patients = response.data.data;

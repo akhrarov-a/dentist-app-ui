@@ -1,4 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
+import cookie from 'react-cookies';
 import { ApiService } from '@api';
 import { AuthStore } from '@auth/auth.store';
 import { PatientsStore } from '@patients/patients.store.ts';
@@ -20,6 +21,21 @@ class GlobalStore {
   }
 
   public loading = false;
+
+  public autoLogin = async () => {
+    const accessToken = cookie.load('accessToken');
+    const refreshToken = cookie.load('refreshToken');
+
+    if (!accessToken && !refreshToken) return;
+
+    try {
+      // TODO: call get user
+      // await this.auth.profile.getUser();
+      this.auth.isAuthorized = true;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   public showLoader = () => {
     runInAction(() => {

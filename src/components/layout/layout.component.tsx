@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import { GlobalStore, useStore } from '@store';
 import { hoc } from '@utils';
 import styles from './layout.module.scss';
@@ -8,7 +8,17 @@ import styles from './layout.module.scss';
  */
 const Layout = hoc.observer<PropsWithChildren, GlobalStore>(
   useStore,
-  ({ children }) => <div className={styles.container}>{children}</div>
+  ({ autoLogin, auth: { isAuthorized }, children }) => {
+    useEffect(() => {
+      autoLogin();
+    }, []);
+
+    return (
+      <div className={styles.container}>
+        {isAuthorized && <div className={styles.content}>{children}</div>}
+      </div>
+    );
+  }
 );
 
 export { Layout };
