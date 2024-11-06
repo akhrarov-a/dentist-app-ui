@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import cookie from 'react-cookies';
 import { HttpService } from './http.service';
 import { UserRole } from '../models';
@@ -14,7 +14,7 @@ class AuthService {
     this.accessToken = accessToken;
     this.refreshToken = refreshToken;
 
-    if (!accessToken) return;
+    if (!accessToken && !refreshToken) return;
 
     this.setInterceptors();
   }
@@ -25,6 +25,15 @@ class AuthService {
   private requestInterceptorId: number;
   private responseInterceptorId: number;
 
+  private refreshPromise: Promise<any> = null;
+
+  /**
+   * Clear promise
+   */
+  private clearPromise = () => {
+    this.refreshPromise = null;
+  };
+
   /**
    * Set tokens
    */
@@ -33,7 +42,7 @@ class AuthService {
     this.refreshToken = refreshToken;
 
     cookie.save('accessToken', accessToken, {});
-    cookie.save('refreshToken', refreshToken, { maxAge: 7776000 });
+    cookie.save('refreshToken', refreshToken, { maxAge: 604800 });
   };
 
   /**
@@ -41,14 +50,16 @@ class AuthService {
    */
   private setInterceptors = () => {
     this.requestInterceptorId = this.http.instance.interceptors.request.use(
-      config => {
-        if (
-          !config.url.startsWith('/auth') ||
-          config.url.includes('reset-password') ||
-          config.url === '/auth/logout'
-        ) {
-          config.headers.Authorization = `Bearer ${this.getToken()}`;
+      async config => {
+        if (!config.url.includes('auth/refresh') && this.refreshPromise) {
+          try {
+            await this.refreshPromise;
+          } catch (error) {
+            console.log(error, 'REFRESH ERROR');
+          }
         }
+
+        config.headers.Authorization = `Bearer ${this.getToken()}`;
 
         return config;
       }
@@ -57,26 +68,49 @@ class AuthService {
     this.responseInterceptorId = this.http.instance.interceptors.response.use(
       response => response,
       async error => {
+        const refreshToken: string = cookie.load('refreshToken');
+
         if (
           !(axios.isAxiosError(error) && error.response?.status === 401) ||
-          error.config.url.startsWith('/auth')
+          (error.config.url.startsWith('/auth') &&
+            !error.config.url.includes('logout')) ||
+          !refreshToken
         )
           throw error;
 
-        const refreshToken: string = cookie.load('refreshToken');
+        return new Promise(async (resolve, reject) => {
+          const config: AxiosRequestConfig & { _retry?: boolean } =
+            error.config;
 
-        try {
-          const refreshResponse = await this.refresh(refreshToken);
+          try {
+            if (!this.refreshPromise) {
+              this.refreshPromise = this.refresh(refreshToken)
+                .then(response => {
+                  this.setTokens(response.data);
+                })
 
-          this.setTokens(refreshResponse.data);
-        } catch (e) {
-          cookie.remove('accessToken');
-          cookie.remove('refreshToken');
+                .finally(this.clearPromise);
+            }
 
-          window.location.reload();
-        }
+            await this.refreshPromise;
+          } catch (e) {
+            this.clearTokens();
+            this.clearInterceptors();
 
-        return this.http.request(error.config);
+            cookie.remove('accessToken');
+            cookie.remove('refreshToken');
+
+            window.location.reload();
+          }
+
+          try {
+            const response = await this.http.request(config);
+
+            resolve({ data: response });
+          } catch (e) {
+            reject(e);
+          }
+        });
       }
     );
   };
