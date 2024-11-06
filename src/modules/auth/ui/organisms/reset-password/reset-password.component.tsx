@@ -1,7 +1,7 @@
 import React from 'react';
 import { hoc } from '@utils';
 import { AuthLayout } from '../../moleculars';
-import { useResetPasswordProps } from './reset-password.props.ts';
+import { useResetPasswordProps } from './reset-password.props';
 import styles from './reset-password.module.scss';
 
 /**

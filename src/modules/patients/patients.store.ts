@@ -4,7 +4,7 @@ import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { GetPatientsParams, PatientContract } from '@api';
 import { filterOutFalsyValuesFromObject } from '@utils';
-import { PatientForm } from './patients.types.ts';
+import { PatientForm } from './patients.types';
 import { PatientsAdapter } from './lib';
 
 /**

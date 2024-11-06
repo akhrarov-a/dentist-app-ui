@@ -2,7 +2,7 @@ import { hoc } from '@utils';
 import { Tables } from '@components';
 import { listLib } from '../../../lib';
 import { PatientTableFilters } from '../../moleculars';
-import { usePatientsListProps } from './patients.props.ts';
+import { usePatientsListProps } from './patients.props';
 
 /**
  * <PatientsList />

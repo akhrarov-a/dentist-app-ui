@@ -1,1 +1,1 @@
-export * from './patients.component.tsx';
+export * from './patients.component';

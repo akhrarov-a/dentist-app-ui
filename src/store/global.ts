@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import cookie from 'react-cookies';
 import { ApiService } from '@api';
 import { AuthStore } from '@auth/auth.store';
-import { PatientsStore } from '@patients/patients.store.ts';
+import { PatientsStore } from '@patients/patients.store';
 
 /**
  * Global store

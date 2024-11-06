@@ -1,1 +1,1 @@
-export * from './reset-password.component.tsx';
+export * from './reset-password.component';

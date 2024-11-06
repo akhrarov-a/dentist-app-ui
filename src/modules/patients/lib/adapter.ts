@@ -1,5 +1,5 @@
 import { CreatePatientDto, PatientContract, UpdatePatientDto } from '@api';
-import { PatientForm } from '../patients.types.ts';
+import { PatientForm } from '../patients.types';
 
 /**
  * Patients adapter

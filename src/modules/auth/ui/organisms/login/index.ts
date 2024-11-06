@@ -1,1 +1,1 @@
-export * from './login.component.tsx';
+export * from './login.component';

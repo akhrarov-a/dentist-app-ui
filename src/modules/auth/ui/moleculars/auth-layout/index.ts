@@ -1,1 +1,1 @@
-export * from './auth-layout.component.tsx';
+export * from './auth-layout.component';

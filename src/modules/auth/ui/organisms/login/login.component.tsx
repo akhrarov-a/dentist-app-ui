@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Form, Input } from 'antd';
 import { hoc } from '@utils';
 import { AuthLayout } from '../../moleculars';
-import { useLoginProps } from './login.props.ts';
+import { useLoginProps } from './login.props';
 import styles from './login.module.scss';
 
 /**
