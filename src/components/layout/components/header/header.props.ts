@@ -22,7 +22,7 @@ const useHeaderProps = () => {
   const profileText = useMemo(
     () =>
       !!Object.keys(user || {}).length
-        ? `${user.firstname?.[0] || ''}${user.lastname?.[0] || ''}`
+        ? `${user.firstname?.[0]?.toUpperCase() || ''}${user.lastname?.[0]?.toUpperCase() || ''}`
         : '',
     [user]
   );
