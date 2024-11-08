@@ -34,7 +34,9 @@
       "@patients": ["./src/modules/patients/index"],
       "@patients/*": ["./src/modules/patients/*"],
       "@profile": ["./src/modules/profile/index"],
-      "@profile/*": ["./src/modules/profile/*"]
+      "@profile/*": ["./src/modules/profile/*"],
+      "@schedule": ["./src/modules/schedule/index"],
+      "@schedule/*": ["./src/modules/schedule/*"]
     }
   },
   "include": [

@@ -3,6 +3,7 @@ import { Login, ResetPassword } from '@auth';
 import { Redirect } from '@components';
 import { CreatePatient, PatientsList, UpdatePatient } from '@patients';
 import { Profile } from '@profile';
+import { Schedule } from '@schedule';
 import { App } from './app';
 
 /**
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
           },
           {
             path: '',
-            element: <div>Appointments</div>
+            element: <Schedule />
           }
         ]
       },
