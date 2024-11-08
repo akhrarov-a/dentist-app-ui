@@ -14,9 +14,7 @@ const Header = hoc.observer(
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.logo}>
-          {
-            // TODO: replace logo with chatgpt
-          }
+          {/* TODO: replace logo with chatgpt by regenerating another logo */}
           <img src="/img/logo.webp" alt="Logo" />
         </div>
         <div className={styles.profile}>

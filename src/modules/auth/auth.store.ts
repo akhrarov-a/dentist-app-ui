@@ -1,5 +1,5 @@
-import { makeAutoObservable } from 'mobx';
 import { NavigateFunction } from 'react-router-dom';
+import { makeAutoObservable } from 'mobx';
 import { message } from 'antd';
 import { AuthCredentials } from '@api';
 import { GlobalStore } from '@store';

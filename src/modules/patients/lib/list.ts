@@ -1,7 +1,7 @@
 import { ColumnsType } from 'antd/es/table';
 import { PatientContract } from '@api';
 
-const List = (patients: any[]) =>
+const List = (patients: PatientContract[]) =>
   patients?.map(patient => ({
     ...patient,
     key: patient?.id
@@ -30,7 +30,7 @@ const Columns: ColumnsType<PatientContract> = [
   }
 ];
 
-const MoreColumns: ColumnsType = [
+const MoreColumns: ColumnsType<PatientContract> = [
   {
     title: 'Created At',
     dataIndex: 'createdAt'

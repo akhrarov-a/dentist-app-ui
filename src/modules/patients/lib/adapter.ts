@@ -35,9 +35,9 @@ class PatientsAdapter {
     };
   }
 
-  static patientsContractToOptionsList(patients: any[]) {
+  static patientContractToOptionsList(patients: PatientContract[]) {
     return patients.map(patient => ({
-      label: patient.name,
+      label: `${patient.firstname || ''} ${patient.lastname || ''}`,
       value: patient.id
     }));
   }

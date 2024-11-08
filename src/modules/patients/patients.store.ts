@@ -1,5 +1,5 @@
-import { makeAutoObservable } from 'mobx';
 import { NavigateFunction } from 'react-router-dom';
+import { makeAutoObservable } from 'mobx';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { GetPatientsParams, PatientContract } from '@api';

@@ -1,5 +1,5 @@
-import { Button, Form as AntdForm, Input } from 'antd';
 import { observer } from 'mobx-react-lite';
+import { Button, Form as AntdForm, Input } from 'antd';
 import { rules } from '@utils';
 import { useStore } from '@store';
 import { ProfileForm } from '../../../profile.types';
