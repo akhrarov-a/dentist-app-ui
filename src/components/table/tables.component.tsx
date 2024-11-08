@@ -104,7 +104,10 @@ const Tables = hoc.observer(
                 position: ['bottomCenter'],
                 showSizeChanger: true,
                 pageSizeOptions: ['20', '50', '100'],
-                defaultPageSize: 20
+                defaultPageSize: 20,
+                locale: {
+                  items_per_page: `/ ${t('table.page')}`
+                }
               }
         }
         scroll={{ x: true }}
