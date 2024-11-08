@@ -1,5 +1,5 @@
 import { Button, Form, Input } from 'antd';
-import { hoc } from '@utils';
+import { hoc, rules } from '@utils';
 import { AuthLayout } from '../../moleculars';
 import { useLoginProps } from './login.props';
 import styles from './login.module.scss';
@@ -23,7 +23,7 @@ const Login = hoc.observer(useLoginProps, ({ t, form, onLogin }) => (
         className={styles.row_input}
         label={t('auth.login.email.label')}
         name="email"
-        rules={[{ required: true }]}
+        rules={[rules.required(t('validations.required'))]}
         validateTrigger="onBlur"
       >
         <Input type="email" placeholder={t('auth.login.email.placeholder')} />
@@ -33,7 +33,7 @@ const Login = hoc.observer(useLoginProps, ({ t, form, onLogin }) => (
         className={styles.row_input}
         label={t('auth.login.password.label')}
         name="password"
-        rules={[{ required: true }]}
+        rules={[rules.required(t('validations.required'))]}
         validateTrigger="onBlur"
       >
         <Input

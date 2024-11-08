@@ -1,11 +1,14 @@
 import { useSearchParams } from 'react-router-dom';
 import { useStore } from '@store';
+import { useLocales } from '@locales';
 
 /**
  * <PatientsTableFilters /> props
  */
 const usePatientsTableFiltersProps = () => {
   const [search] = useSearchParams();
+
+  const { t } = useLocales();
 
   const {
     patients: { patientsFilters, setPatientsFilters, getPatients }
@@ -30,6 +33,7 @@ const usePatientsTableFiltersProps = () => {
   };
 
   return {
+    t,
     patientsFilters,
     onFilterChange,
     onSearch

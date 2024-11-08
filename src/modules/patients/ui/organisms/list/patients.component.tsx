@@ -9,10 +9,10 @@ import { usePatientsListProps } from './patients.props';
  */
 const PatientsList = hoc.observer(
   usePatientsListProps,
-  ({ items, tableProps }) => (
+  ({ t, items, tableProps }) => (
     <Tables
       {...tableProps}
-      addText="Add patient"
+      addText={t('patients.table.addPatient')}
       dataSource={listLib.List(items)}
       filters={<PatientsTableFilters />}
     />

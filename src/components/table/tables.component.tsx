@@ -10,6 +10,7 @@ import styles from './tables.module.scss';
 const Tables = hoc.observer(
   useTablesProps,
   ({
+    t,
     onCreate,
     addText,
     rowSelection,
@@ -41,7 +42,7 @@ const Tables = hoc.observer(
             disabled={deleteDisabled}
             type="primary"
           >
-            Delete
+            {t('table.delete')}
           </Button>
 
           {addText && (
@@ -60,7 +61,7 @@ const Tables = hoc.observer(
             onClick={popoverModel.open}
             type="primary"
           >
-            Manage columns
+            {t('table.manageColumns')}
           </Button>
 
           {popoverModel.isOpen && (
@@ -68,9 +69,7 @@ const Tables = hoc.observer(
               ref={popoverModel.popoverRef}
               className={styles['more-columns-dropdown']}
             >
-              <p className={styles.option}>
-                Select column, which you want to add
-              </p>
+              <p className={styles.option}>{t('table.selectColumns')}</p>
               {allColumns.map((column, index) => (
                 <Checkbox
                   key={index}

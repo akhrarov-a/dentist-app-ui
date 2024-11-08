@@ -1,5 +1,6 @@
 import { ColumnsType } from 'antd/es/table';
 import { PatientContract } from '@api';
+import { TranslationFunctionType } from '@locales';
 
 const List = (patients: PatientContract[]) =>
   patients?.map(patient => ({
@@ -7,36 +8,38 @@ const List = (patients: PatientContract[]) =>
     key: patient?.id
   }));
 
-const Columns: ColumnsType<PatientContract> = [
+const Columns = (t: TranslationFunctionType): ColumnsType<PatientContract> => [
   {
-    title: 'ID',
+    title: t('table.ID'),
     dataIndex: 'id'
   },
   {
-    title: 'Name',
+    title: `${t('patients.form.firstname.label')} ${t('patients.form.lastname.label')}`,
     render: (_, record) => `${record?.firstname} ${record?.lastname}`
   },
   {
-    title: 'Phone',
+    title: t('patients.form.phone.label'),
     dataIndex: 'phone'
   },
   {
-    title: 'Email',
+    title: t('patients.form.email.label'),
     dataIndex: 'email'
   },
   {
-    title: 'Description',
+    title: t('patients.form.description.label'),
     dataIndex: 'description'
   }
 ];
 
-const MoreColumns: ColumnsType<PatientContract> = [
+const MoreColumns = (
+  t: TranslationFunctionType
+): ColumnsType<PatientContract> => [
   {
-    title: 'Created At',
+    title: t('table.createdAt'),
     dataIndex: 'createdAt'
   },
   {
-    title: 'Updated At',
+    title: t('table.updatedAt'),
     dataIndex: 'updatedAt'
   }
 ];

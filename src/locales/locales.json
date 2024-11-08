@@ -1,4 +1,18 @@
 {
+  "validations": {
+    "required": {
+      "en": "This field is required",
+      "ru": "Это поле обязательно"
+    },
+    "email": {
+      "en": "Invalid email",
+      "ru": "Неверный э-майл"
+    },
+    "shouldNotStartOrEndWithWhitespace": {
+      "en": "Should not start or end with whitespace",
+      "ru": "Не должно начинаться или заканчиваться пробелом"
+    }
+  },
   "auth": {
     "login": {
       "email": {
@@ -19,10 +33,148 @@
         "placeholder": {
           "en": "Enter your password",
           "ru": "Введите ваш пароль"
+        }
+      },
+      "submit": {
+        "en": "Login",
+        "ru": "Войти"
+      }
+    },
+    "logout": {
+      "en": "Logout",
+      "ru": "Выйти"
+    }
+  },
+  "table": {
+    "ID": {
+      "en": "ID",
+      "ru": "ИД"
+    },
+    "delete": {
+      "en": "Delete",
+      "ru": "Удалить"
+    },
+    "manageColumns": {
+      "en": "Manage columns",
+      "ru": "Настроить колонки"
+    },
+    "selectColumns": {
+      "en": "Select column, which you want to add",
+      "ru": "Выберите колонку, которую хотите добавить"
+    },
+    "createdAt": {
+      "en": "Created at",
+      "ru": "Создано"
+    },
+    "updatedAt": {
+      "en": "Updated at",
+      "ru": "Обновлено"
+    }
+  },
+  "form": {
+    "cancel": {
+      "en": "Cancel",
+      "ru": "Отмена"
+    },
+    "save": {
+      "en": "Save",
+      "ru": "Сохранить"
+    },
+    "create": {
+      "en": "Create",
+      "ru": "Создать"
+    },
+    "edit": {
+      "en": "Edit",
+      "ru": "Редактировать"
+    }
+  },
+  "links": {
+    "schedule": {
+      "en": "Schedule",
+      "ru": "Расписание"
+    },
+    "patients": {
+      "en": "Patients",
+      "ru": "Пациенты"
+    },
+    "users": {
+      "en": "Users",
+      "ru": "Пользователи"
+    }
+  },
+  "patients": {
+    "table": {
+      "search": {
+        "en": "Search",
+        "ru": "Поиск"
+      },
+      "addPatient": {
+        "en": "Add patient",
+        "ru": "Добавить пациента"
+      }
+    },
+    "form": {
+      "patient": {
+        "en": "Patient",
+        "ru": "Пациент"
+      },
+      "editLabel": {
+        "en": "Edit patient",
+        "ru": "Редактирование пациента"
+      },
+      "createLabel": {
+        "en": "Create patient",
+        "ru": "Создание пациента"
+      },
+      "firstname": {
+        "label": {
+          "en": "Firstname",
+          "ru": "Имя"
         },
-        "submit": {
-          "en": "Login",
-          "ru": "Войти"
+        "placeholder": {
+          "en": "Enter firstname",
+          "ru": "Введите имя"
+        }
+      },
+      "lastname": {
+        "label": {
+          "en": "Lastname",
+          "ru": "Фамилия"
+        },
+        "placeholder": {
+          "en": "Enter lastname",
+          "ru": "Введите фамилию"
+        }
+      },
+      "phone": {
+        "label": {
+          "en": "Phone",
+          "ru": "Номер телефона"
+        },
+        "placeholder": {
+          "en": "Enter phone",
+          "ru": "Введите номер телефона"
+        }
+      },
+      "email": {
+        "label": {
+          "en": "Email",
+          "ru": "Э-майл"
+        },
+        "placeholder": {
+          "en": "Enter email",
+          "ru": "Введите э-майл"
+        }
+      },
+      "description": {
+        "label": {
+          "en": "Description",
+          "ru": "Описания"
+        },
+        "placeholder": {
+          "en": "Enter description",
+          "ru": "Введите описания"
         }
       }
     }

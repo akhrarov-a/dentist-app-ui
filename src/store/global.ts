@@ -25,7 +25,7 @@ class GlobalStore {
   }
 
   public loading = false;
-  public language: Languages = Languages.EN;
+  public language: Languages = Languages.RU;
 
   public setLanguage = (language: Languages) => {
     runInAction(() => {

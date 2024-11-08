@@ -39,14 +39,14 @@ const router = createBrowserRouter([
         ]
       },
       {
-        path: '/appointments',
+        path: '/schedule',
         children: [
           {
-            path: '/appointments/create',
+            path: '/schedule/create',
             element: <div>Create appointment</div>
           },
           {
-            path: '/appointments/:id',
+            path: '/schedule/:id',
             element: <div>Update appointment</div>
           },
           {

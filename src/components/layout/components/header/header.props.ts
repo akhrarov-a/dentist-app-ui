@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLocales } from '@locales';
 import { useStore } from '@store';
 import { links } from './header.constants';
 
@@ -14,9 +15,11 @@ const useHeaderProps = () => {
     auth: { logout }
   } = useStore();
 
+  const { t } = useLocales();
+
   const _links = useMemo(
-    () => links.filter(link => link.role === user.role),
-    [user]
+    () => links(t).filter(link => link.role === user.role),
+    [t, user]
   );
 
   const profileText = useMemo(
@@ -32,6 +35,7 @@ const useHeaderProps = () => {
   };
 
   return {
+    t,
     profileText,
     _links,
     logout,

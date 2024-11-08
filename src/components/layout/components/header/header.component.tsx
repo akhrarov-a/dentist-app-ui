@@ -10,7 +10,7 @@ import styles from './header.module.scss';
  */
 const Header = hoc.observer(
   useHeaderProps,
-  ({ profileText, _links, logout, onProfileClick }) => (
+  ({ t, profileText, _links, logout, onProfileClick }) => (
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.logo}>
@@ -21,7 +21,7 @@ const Header = hoc.observer(
           <div className={styles.profile_content} onClick={onProfileClick}>
             {profileText}
           </div>
-          <Button onClick={logout}>Log out</Button>
+          <Button onClick={logout}>{t('auth.logout')}</Button>
         </div>
       </div>
       <div className={styles.content_links}>

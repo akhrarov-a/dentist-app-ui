@@ -19,8 +19,8 @@ export type TranslationFunctionType = (
  * Languages
  */
 export enum Languages {
-  EN = 'EN',
-  RU = 'RU'
+  EN = 'en',
+  RU = 'ru'
 }
 
 /**
@@ -63,7 +63,7 @@ const useLocales = () => {
 
   const t = useCallback<TranslationFunctionType>(
     (key, value) => {
-      const translation = []
+      const translation: any = [translations]
         .concat(key.split('.') as any)
         .reduce((a, b) => a?.[b as never]);
 

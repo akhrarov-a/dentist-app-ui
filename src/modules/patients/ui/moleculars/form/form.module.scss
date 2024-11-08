@@ -16,8 +16,14 @@
     font-weight: 500;
   }
 
-  button {
-    min-width: 100px;
+  &_buttons {
+    @include flex($align: center);
+
+    gap: 10px;
+
+    button {
+      min-width: 100px;
+    }
   }
 }
 

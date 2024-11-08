@@ -7,30 +7,30 @@ import { usePatientsTableFiltersProps } from './filters.props';
  */
 const PatientsTableFilters = hoc.observer(
   usePatientsTableFiltersProps,
-  ({ patientsFilters, onFilterChange, onSearch }) => (
+  ({ t, patientsFilters, onFilterChange, onSearch }) => (
     <div className="filter-container">
       <Input
-        placeholder="firstname"
+        placeholder={t('patients.form.firstname.placeholder')}
         value={patientsFilters.firstname}
         onChange={event => onFilterChange('firstname', event.target.value)}
       />
       <Input
-        placeholder="lastname"
+        placeholder={t('patients.form.lastname.placeholder')}
         value={patientsFilters.lastname}
         onChange={event => onFilterChange('lastname', event.target.value)}
       />
       <Input
-        placeholder="phone"
+        placeholder={t('patients.form.phone.placeholder')}
         value={patientsFilters.phone}
         onChange={event => onFilterChange('phone', event.target.value)}
       />
       <Input
-        placeholder="email"
+        placeholder={t('patients.form.email.placeholder')}
         value={patientsFilters.email}
         onChange={event => onFilterChange('email', event.target.value)}
       />
       <Input
-        placeholder="description"
+        placeholder={t('patients.form.description.placeholder')}
         value={patientsFilters.description}
         onChange={event => onFilterChange('description', event.target.value)}
       />
@@ -45,7 +45,7 @@ const PatientsTableFilters = hoc.observer(
         }
         onClick={onSearch}
       >
-        Search
+        {t('patients.table.search')}
       </Button>
     </div>
   )
