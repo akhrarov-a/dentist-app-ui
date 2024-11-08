@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { links } from './header.constants.ts';
 import { useStore } from '@store';
+import { links } from './header.constants';
 
 /**
  * <Header /> props

@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import cookie from 'react-cookies';
 import { HttpService } from './http.service';
-import { UserRole } from '../models';
 
 /**
  * Auth service
@@ -161,14 +160,6 @@ class AuthService {
     });
 
   /**
-   * Get current user
-   */
-  public getCurrentUser = () =>
-    this.http.request<User>({
-      url: '/users/current'
-    });
-
-  /**
    * Logout
    */
   public logout = async () => {
@@ -201,20 +192,5 @@ type AuthCredentials = {
   password: string;
 };
 
-/**
- * User
- */
-type User = CreateAndUpdateFields<{
-  id: number;
-  firstname: string;
-  lastname: string;
-  description: string;
-  phone: string;
-  email: string;
-  password: string;
-  salt: string;
-  role: UserRole;
-}>;
-
 export { AuthService };
-export type { User, AuthCredentials };
+export type { AuthCredentials };

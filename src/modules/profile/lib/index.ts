@@ -1,0 +1,1 @@
+export { ProfileAdapter } from './adapter';

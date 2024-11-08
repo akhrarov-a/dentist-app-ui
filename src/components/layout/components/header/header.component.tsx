@@ -1,6 +1,6 @@
-import { Button } from 'antd';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
+import { Button } from 'antd';
 import { hoc } from '@utils';
 import { useHeaderProps } from './header.props';
 import styles from './header.module.scss';

@@ -1,5 +1,5 @@
-import * as uuid from 'uuid';
 import { Button, Checkbox, Table } from 'antd';
+import * as uuid from 'uuid';
 import { hoc } from '@utils';
 import { useTablesProps } from './tables.props';
 import styles from './tables.module.scss';
