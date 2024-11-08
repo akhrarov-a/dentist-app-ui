@@ -41,90 +41,90 @@ const Form = observer<FormProps>(
             <div className={styles.header_buttons}>
               {isEdit && (
                 <Button htmlType="button" onClick={toggleEditing}>
-                  {t('form.cancel')}
+                  {t('form.actions.cancel')}
                 </Button>
               )}
 
               <Button type="primary" htmlType="submit">
-                {isEdit ? t('form.save') : t('form.create')}
+                {isEdit ? t('form.actions.save') : t('form.actions.create')}
               </Button>
             </div>
           </div>
 
           <div className={styles.content}>
             <AntdForm.Item
-              label={t('patients.form.firstname.label')}
+              label={t('form.fields.firstname.label')}
               name="firstname"
               rules={[
                 rules.whitespace(
-                  t('validations.shouldNotStartOrEndWithWhitespace')
+                  t('form.validations.shouldNotStartOrEndWithWhitespace')
                 ),
-                rules.required(t('validations.required'))
+                rules.required(t('form.validations.required'))
               ]}
               validateTrigger="onBlur"
             >
-              <Input placeholder={t('patients.form.firstname.placeholder')} />
+              <Input placeholder={t('form.fields.firstname.placeholder')} />
             </AntdForm.Item>
 
             <AntdForm.Item
-              label={t('patients.form.phone.label')}
+              label={t('form.fields.phone.label')}
               name="phone"
               rules={[
                 rules.whitespace(
-                  t('validations.shouldNotStartOrEndWithWhitespace')
+                  t('form.validations.shouldNotStartOrEndWithWhitespace')
                 ),
-                rules.required(t('validations.required'))
+                rules.required(t('form.validations.required'))
               ]}
               validateTrigger="onBlur"
             >
-              <Input placeholder={t('patients.form.phone.placeholder')} />
+              <Input placeholder={t('form.fields.phone.placeholder')} />
             </AntdForm.Item>
 
             <AntdForm.Item
-              label={t('patients.form.lastname.label')}
+              label={t('form.fields.lastname.label')}
               name="lastname"
               rules={[
                 rules.whitespace(
-                  t('validations.shouldNotStartOrEndWithWhitespace')
+                  t('form.validations.shouldNotStartOrEndWithWhitespace')
                 ),
-                rules.required(t('validations.required'))
+                rules.required(t('form.validations.required'))
               ]}
               validateTrigger="onBlur"
             >
-              <Input placeholder={t('patients.form.lastname.placeholder')} />
+              <Input placeholder={t('form.fields.lastname.placeholder')} />
             </AntdForm.Item>
 
             <AntdForm.Item
-              label={t('patients.form.email.label')}
+              label={t('form.fields.email.label')}
               name="email"
               rules={[
-                rules.email(t('validations.email')),
+                rules.email(t('form.validations.email')),
                 rules.whitespace(
-                  t('validations.shouldNotStartOrEndWithWhitespace')
+                  t('form.validations.shouldNotStartOrEndWithWhitespace')
                 ),
-                rules.required(t('validations.required'))
+                rules.required(t('form.validations.required'))
               ]}
               validateTrigger="onBlur"
             >
               <Input
                 type="email"
-                placeholder={t('patients.form.email.placeholder')}
+                placeholder={t('form.fields.email.placeholder')}
               />
             </AntdForm.Item>
           </div>
 
           <AntdForm.Item
-            label={t('patients.form.description.label')}
+            label={t('form.fields.description.label')}
             name="description"
             rules={[
               rules.whitespace(
-                t('validations.shouldNotStartOrEndWithWhitespace')
+                t('form.validations.shouldNotStartOrEndWithWhitespace')
               )
             ]}
             validateTrigger="onBlur"
           >
             <Input.TextArea
-              placeholder={t('patients.form.description.placeholder')}
+              placeholder={t('form.fields.description.placeholder')}
             />
           </AntdForm.Item>
         </AntdForm>

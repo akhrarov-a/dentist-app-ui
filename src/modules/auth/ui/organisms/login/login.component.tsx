@@ -23,7 +23,7 @@ const Login = hoc.observer(useLoginProps, ({ t, form, onLogin }) => (
         className={styles.row_input}
         label={t('auth.login.email.label')}
         name="email"
-        rules={[rules.required(t('validations.required'))]}
+        rules={[rules.required(t('form.validations.required'))]}
         validateTrigger="onBlur"
       >
         <Input type="email" placeholder={t('auth.login.email.placeholder')} />
@@ -33,7 +33,7 @@ const Login = hoc.observer(useLoginProps, ({ t, form, onLogin }) => (
         className={styles.row_input}
         label={t('auth.login.password.label')}
         name="password"
-        rules={[rules.required(t('validations.required'))]}
+        rules={[rules.required(t('form.validations.required'))]}
         validateTrigger="onBlur"
       >
         <Input

@@ -4,6 +4,7 @@ import { rules } from '@utils';
 import { useStore } from '@store';
 import { ProfileForm } from '../../../profile.types';
 import styles from './form.module.scss';
+import { useLocales } from '@locales';
 
 /**
  * <Form />
@@ -12,6 +13,8 @@ const Form = observer(({ toggleEditing }: { toggleEditing?: () => void }) => {
   const {
     profile: { initialValues, updateProfile }
   } = useStore();
+
+  const { t } = useLocales();
 
   const [form] = AntdForm.useForm();
 
@@ -29,52 +32,77 @@ const Form = observer(({ toggleEditing }: { toggleEditing?: () => void }) => {
         scrollToFirstError
       >
         <div className={styles.header}>
-          <p>Profile</p>
+          <p>{t('profile.title')}</p>
           <div className={styles.header_buttons}>
             <Button htmlType="button" onClick={toggleEditing}>
-              Cancel
+              {t('form.actions.cancel')}
             </Button>
             <Button type="primary" htmlType="submit">
-              Save
+              {t('form.actions.save')}
             </Button>
           </div>
         </div>
 
         <div className={styles.content}>
           <AntdForm.Item
-            label="Firstname"
+            label={t('form.fields.firstname.label')}
             name="firstname"
-            rules={[rules.whitespace(), rules.required()]}
+            rules={[
+              rules.whitespace(
+                t('form.validations.shouldNotStartOrEndWithWhitespace')
+              ),
+              rules.required(t('form.validations.required'))
+            ]}
             validateTrigger="onBlur"
           >
-            <Input placeholder="firstname" />
+            <Input placeholder={t('form.fields.firstname.placeholder')} />
           </AntdForm.Item>
 
           <AntdForm.Item
-            label="Phone"
+            label={t('form.fields.phone.label')}
             name="phone"
-            rules={[rules.whitespace(), rules.required()]}
+            rules={[
+              rules.whitespace(
+                t('form.validations.shouldNotStartOrEndWithWhitespace')
+              ),
+              rules.required(t('form.validations.required'))
+            ]}
             validateTrigger="onBlur"
           >
-            <Input placeholder="phone" />
+            <Input placeholder={t('form.fields.phone.placeholder')} />
           </AntdForm.Item>
 
           <AntdForm.Item
-            label="Lastname"
+            label={t('form.fields.lastname.label')}
             name="lastname"
-            rules={[rules.whitespace(), rules.required()]}
+            rules={[
+              rules.whitespace(
+                t('form.validations.shouldNotStartOrEndWithWhitespace')
+              ),
+              rules.required(t('form.validations.required'))
+            ]}
             validateTrigger="onBlur"
           >
-            <Input placeholder="lastname" />
+            <Input placeholder={t('form.fields.lastname.placeholder')} />
           </AntdForm.Item>
 
           <AntdForm.Item
-            label="Email"
+            label={t('form.fields.email.label')}
             name="email"
-            rules={[rules.email(), rules.whitespace(), rules.required()]}
+            rules={[
+              rules.email(t('form.validations.email')),
+              rules.whitespace(
+                t('form.validations.shouldNotStartOrEndWithWhitespace')
+              ),
+              rules.required(t('form.validations.required'))
+            ]}
             validateTrigger="onBlur"
           >
-            <Input disabled type="email" placeholder="email" />
+            <Input
+              disabled
+              type="email"
+              placeholder={t('form.fields.email.placeholder')}
+            />
           </AntdForm.Item>
         </div>
       </AntdForm>

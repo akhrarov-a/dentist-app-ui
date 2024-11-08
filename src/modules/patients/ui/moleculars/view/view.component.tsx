@@ -29,30 +29,30 @@ const View = observer(
           <div className={styles.header_buttons}>
             <Button onClick={onDelete}>{t('table.delete')}</Button>
             <Button type="primary" onClick={toggleEditing}>
-              {t('form.edit')}
+              {t('form.actions.edit')}
             </Button>
           </div>
         </div>
         <div className={styles.content}>
           <div className={styles.content_field}>
-            <p>{t('patients.form.firstname.label')}</p>
+            <p>{t('form.fields.firstname.label')}</p>
             <p>{initialValues.firstname}</p>
           </div>
           <div className={styles.content_field}>
-            <p>{t('patients.form.phone.label')}</p>
+            <p>{t('form.fields.phone.label')}</p>
             <p>{initialValues.phone}</p>
           </div>
           <div className={styles.content_field}>
-            <p>{t('patients.form.lastname.label')}</p>
+            <p>{t('form.fields.lastname.label')}</p>
             <p>{initialValues.lastname}</p>
           </div>
           <div className={styles.content_field}>
-            <p>{t('patients.form.email.label')}</p>
+            <p>{t('form.fields.email.label')}</p>
             <p>{initialValues.email}</p>
           </div>
         </div>
         <div className={styles.content_field}>
-          <p>{t('patients.form.description.label')}</p>
+          <p>{t('form.fields.description.label')}</p>
           <p>{initialValues.description}</p>
         </div>
       </div>

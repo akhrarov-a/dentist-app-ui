@@ -1,18 +1,4 @@
 {
-  "validations": {
-    "required": {
-      "en": "This field is required",
-      "ru": "Это поле обязательно"
-    },
-    "email": {
-      "en": "Invalid email",
-      "ru": "Неверный э-майл"
-    },
-    "shouldNotStartOrEndWithWhitespace": {
-      "en": "Should not start or end with whitespace",
-      "ru": "Не должно начинаться или заканчиваться пробелом"
-    }
-  },
   "auth": {
     "login": {
       "email": {
@@ -50,6 +36,10 @@
       "en": "ID",
       "ru": "ИД"
     },
+    "search": {
+      "en": "Search",
+      "ru": "Поиск"
+    },
     "delete": {
       "en": "Delete",
       "ru": "Удалить"
@@ -72,61 +62,29 @@
     }
   },
   "form": {
-    "cancel": {
-      "en": "Cancel",
-      "ru": "Отмена"
-    },
-    "save": {
-      "en": "Save",
-      "ru": "Сохранить"
-    },
-    "create": {
-      "en": "Create",
-      "ru": "Создать"
-    },
-    "edit": {
-      "en": "Edit",
-      "ru": "Редактировать"
-    }
-  },
-  "links": {
-    "schedule": {
-      "en": "Schedule",
-      "ru": "Расписание"
-    },
-    "patients": {
-      "en": "Patients",
-      "ru": "Пациенты"
-    },
-    "users": {
-      "en": "Users",
-      "ru": "Пользователи"
-    }
-  },
-  "patients": {
-    "table": {
-      "search": {
-        "en": "Search",
-        "ru": "Поиск"
+    "actions": {
+      "cancel": {
+        "en": "Cancel",
+        "ru": "Отмена"
       },
-      "addPatient": {
-        "en": "Add patient",
-        "ru": "Добавить пациента"
+      "save": {
+        "en": "Save",
+        "ru": "Сохранить"
+      },
+      "create": {
+        "en": "Create",
+        "ru": "Создать"
+      },
+      "edit": {
+        "en": "Edit",
+        "ru": "Редактировать"
+      },
+      "changePassword": {
+        "en": "Change password",
+        "ru": "Изменить пароль"
       }
     },
-    "form": {
-      "patient": {
-        "en": "Patient",
-        "ru": "Пациент"
-      },
-      "editLabel": {
-        "en": "Edit patient",
-        "ru": "Редактирование пациента"
-      },
-      "createLabel": {
-        "en": "Create patient",
-        "ru": "Создание пациента"
-      },
+    "fields": {
       "firstname": {
         "label": {
           "en": "Firstname",
@@ -177,6 +135,62 @@
           "ru": "Введите описания"
         }
       }
+    },
+    "validations": {
+      "required": {
+        "en": "This field is required",
+        "ru": "Это поле обязательно"
+      },
+      "email": {
+        "en": "Invalid email",
+        "ru": "Неверный э-майл"
+      },
+      "shouldNotStartOrEndWithWhitespace": {
+        "en": "Should not start or end with whitespace",
+        "ru": "Не должно начинаться или заканчиваться пробелом"
+      }
+    }
+  },
+  "links": {
+    "schedule": {
+      "en": "Schedule",
+      "ru": "Расписание"
+    },
+    "patients": {
+      "en": "Patients",
+      "ru": "Пациенты"
+    },
+    "users": {
+      "en": "Users",
+      "ru": "Пользователи"
+    }
+  },
+  "patients": {
+    "table": {
+      "addPatient": {
+        "en": "Add patient",
+        "ru": "Добавить пациента"
+      }
+    },
+    "form": {
+      "patient": {
+        "en": "Patient",
+        "ru": "Пациент"
+      },
+      "editLabel": {
+        "en": "Edit patient",
+        "ru": "Редактирование пациента"
+      },
+      "createLabel": {
+        "en": "Create patient",
+        "ru": "Создание пациента"
+      }
+    }
+  },
+  "profile": {
+    "title": {
+      "en": "Profile",
+      "ru": "Профиль"
     }
   }
 }

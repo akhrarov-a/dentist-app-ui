@@ -14,19 +14,19 @@ const Columns = (t: TranslationFunctionType): ColumnsType<PatientContract> => [
     dataIndex: 'id'
   },
   {
-    title: `${t('patients.form.firstname.label')} ${t('patients.form.lastname.label')}`,
+    title: `${t('form.fields.firstname.label')} ${t('form.fields.lastname.label')}`,
     render: (_, record) => `${record?.firstname} ${record?.lastname}`
   },
   {
-    title: t('patients.form.phone.label'),
+    title: t('form.fields.phone.label'),
     dataIndex: 'phone'
   },
   {
-    title: t('patients.form.email.label'),
+    title: t('form.fields.email.label'),
     dataIndex: 'email'
   },
   {
-    title: t('patients.form.description.label'),
+    title: t('form.fields.description.label'),
     dataIndex: 'description'
   }
 ];
