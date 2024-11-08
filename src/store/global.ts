@@ -26,7 +26,11 @@ class GlobalStore {
     const accessToken = cookie.load('accessToken');
     const refreshToken = cookie.load('refreshToken');
 
-    if (!accessToken && !refreshToken) return;
+    if (!accessToken && !refreshToken) {
+      window.location.href = '/login';
+
+      return;
+    }
 
     try {
       // TODO: call get user

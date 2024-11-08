@@ -100,7 +100,7 @@ class AuthService {
             cookie.remove('accessToken');
             cookie.remove('refreshToken');
 
-            window.location.reload();
+            window.location.href = '/login';
           }
 
           try {
