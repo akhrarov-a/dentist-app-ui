@@ -36,8 +36,9 @@ class GlobalStore {
     }
 
     try {
-      await this.profile.getUser();
       this.auth.isAuthorized = true;
+
+      await this.profile.getUser();
     } catch (error) {
       console.log(error);
     }

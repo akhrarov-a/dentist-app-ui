@@ -20,14 +20,6 @@ class ProfileStore {
   public user: ProfileContract = {} as ProfileContract;
   public initialValues: ProfileForm = {} as ProfileForm;
 
-  public clearUser = () => {
-    this.user = {} as ProfileContract;
-  };
-
-  public clearInitialValues = () => {
-    this.initialValues = {} as ProfileForm;
-  };
-
   public getUser = async () => {
     this.global.showLoader();
 

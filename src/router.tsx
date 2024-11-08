@@ -1,5 +1,6 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import { Login, ResetPassword } from '@auth';
+import { Redirect } from '@components';
 import { PatientsList } from '@patients';
 import { App } from './app';
 
@@ -54,8 +55,25 @@ const router = createBrowserRouter([
         ]
       },
       {
+        path: '/users',
+        children: [
+          {
+            path: '/users/create',
+            element: <div>Create user</div>
+          },
+          {
+            path: '/users/:id',
+            element: <div>Update user</div>
+          },
+          {
+            path: '',
+            element: <div>Users</div>
+          }
+        ]
+      },
+      {
         path: '',
-        element: <Navigate to="/patients" />
+        element: <Redirect />
       }
     ]
   }

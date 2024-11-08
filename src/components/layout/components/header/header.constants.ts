@@ -1,23 +1,27 @@
+import { UserRole } from '@api';
+
 /**
  * Links
  */
 const links: {
   label: string;
   href: string;
-  isAdministrator?: boolean;
+  role: UserRole;
 }[] = [
   {
     label: 'Appointments',
-    href: '/appointments?page=1&perPage=20'
+    href: '/appointments?page=1&perPage=20',
+    role: UserRole.DENTIST
   },
   {
     label: 'Patients',
-    href: '/patients?page=1&perPage=20'
+    href: '/patients?page=1&perPage=20',
+    role: UserRole.DENTIST
   },
   {
-    label: 'Doctors',
-    href: '/doctors',
-    isAdministrator: true
+    label: 'Users',
+    href: '/users',
+    role: UserRole.ADMIN
   }
 ];
 

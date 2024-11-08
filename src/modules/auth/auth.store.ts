@@ -27,6 +27,8 @@ class AuthStore {
 
       this.isAuthorized = true;
 
+      await this.global.profile.getUser();
+
       navigate('/');
     } catch (error) {
       message.error('Invalid credentials');

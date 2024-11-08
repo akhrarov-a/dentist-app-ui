@@ -7,17 +7,14 @@ import { links } from './header.constants';
  */
 const useHeaderProps = () => {
   const {
-    auth: { logout }
+    auth: { logout },
+    profile: { user }
   } = useStore();
 
-  const _links = useMemo(() => {
-    // TODO: check for user is admin
-    // if (false) {
-    //   return links;
-    // }
-
-    return links.filter(link => !link.isAdministrator);
-  }, []);
+  const _links = useMemo(
+    () => links.filter(link => link.role === user.role),
+    [user]
+  );
 
   return {
     _links,
