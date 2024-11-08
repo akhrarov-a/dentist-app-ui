@@ -10,13 +10,7 @@ class PatientsService {
    * Get patients
    */
   public getPatients = (params: GetPatientsParams) =>
-    this.http.request<{
-      data: PatientContract[];
-      totalPatients: number;
-      totalPages: number;
-      page?: number;
-      perPage?: number;
-    }>({
+    this.http.request<ApiResponseList<PatientContract>>({
       url: '/patients',
       method: 'GET',
       params
@@ -74,7 +68,7 @@ class PatientsService {
 /**
  * Patient contract
  */
-type PatientContract = {
+type PatientContract = CreateAndUpdateFields<{
   id: number;
   firstname: string;
   lastname: string;
@@ -82,9 +76,7 @@ type PatientContract = {
   email: string;
   description: string;
   userId: number;
-  createdAt: string;
-  updatedAt: string;
-};
+}>;
 
 /**
  * Get patients params

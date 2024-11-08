@@ -90,7 +90,7 @@ type _Column = {
 /**
  * <Tables /> props
  */
-const useTablesProps = ({ columns, moreColumn }: TablesProps) => {
+const useTablesProps = ({ columns, moreColumn = [] }: TablesProps) => {
   const popoverModel = usePopover();
 
   const [allColumns, setAllColumns] = useState<_Column[]>([]);

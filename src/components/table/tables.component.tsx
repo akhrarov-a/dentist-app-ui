@@ -118,11 +118,4 @@ const Tables = hoc.observer(
   )
 );
 
-/**
- * <Tables /> default props
- */
-Tables.defaultProps = {
-  moreColumn: []
-};
-
 export { Tables };

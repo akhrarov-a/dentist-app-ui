@@ -204,7 +204,7 @@ type AuthCredentials = {
 /**
  * User
  */
-type User = {
+type User = CreateAndUpdateFields<{
   id: number;
   firstname: string;
   lastname: string;
@@ -214,9 +214,7 @@ type User = {
   password: string;
   salt: string;
   role: UserRole;
-  createdAt: string;
-  updatedAt: string;
-};
+}>;
 
 export { AuthService };
 export type { User, AuthCredentials };

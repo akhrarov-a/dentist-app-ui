@@ -45,7 +45,7 @@ class PatientsStore {
       });
 
       this.patients = response.data.data;
-      this.totalPatients = response.data.totalPatients;
+      this.totalPatients = response.data.totalAmount;
     } catch (error) {
       message.error('Something went wrong');
     } finally {
