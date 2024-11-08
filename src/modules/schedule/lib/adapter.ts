@@ -1,5 +1,5 @@
 import { CreateScheduleDto, ScheduleContract, UpdateScheduleDto } from '@api';
-import { ScheduleForm } from '../schedule.types.ts';
+import { ScheduleForm } from '../schedule.types';
 
 /**
  * Schedule adapter

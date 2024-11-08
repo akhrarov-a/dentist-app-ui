@@ -1,5 +1,5 @@
 import { hoc } from '@utils';
-import { useScheduleProps } from './schedule.props.ts';
+import { useScheduleProps } from './schedule.props';
 
 /**
  * <Schedule />

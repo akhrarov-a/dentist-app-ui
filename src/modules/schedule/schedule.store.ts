@@ -3,7 +3,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { ScheduleContract } from '@api';
-import { ScheduleForm } from './schedule.types.ts';
+import { ScheduleForm } from './schedule.types';
 import { ScheduleAdapter } from './lib';
 
 /**

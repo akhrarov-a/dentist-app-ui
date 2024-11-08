@@ -5,7 +5,7 @@ import { Languages } from '@locales';
 import { AuthStore } from '@auth/auth.store';
 import { PatientsStore } from '@patients/patients.store';
 import { ProfileStore } from '@profile/profile.store';
-import { ScheduleStore } from '@schedule/schedule.store.ts';
+import { ScheduleStore } from '@schedule/schedule.store';
 
 /**
  * Global store

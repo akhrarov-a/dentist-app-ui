@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { Button } from 'antd';
 import { useLocales } from '@locales';
-import { PatientForm } from '../../../patients.types.ts';
+import { PatientForm } from '../../../patients.types';
 import styles from './view.module.scss';
 
 /**

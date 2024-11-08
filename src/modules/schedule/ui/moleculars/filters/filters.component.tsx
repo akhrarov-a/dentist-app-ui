@@ -1,6 +1,6 @@
 import { Input } from 'antd';
 import { hoc } from '@utils';
-import { useScheduleTableFiltersProps } from './filters.props.ts';
+import { useScheduleTableFiltersProps } from './filters.props';
 
 /**
  * <ScheduleTableFilters />

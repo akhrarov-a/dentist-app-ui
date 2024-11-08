@@ -1,1 +1,1 @@
-export * from './form.component.tsx';
+export * from './form.component';

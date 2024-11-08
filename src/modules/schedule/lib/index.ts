@@ -1,1 +1,1 @@
-export { ScheduleAdapter } from './adapter.ts';
+export { ScheduleAdapter } from './adapter';

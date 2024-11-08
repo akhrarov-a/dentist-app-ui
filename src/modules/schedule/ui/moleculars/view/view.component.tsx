@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { Button } from 'antd';
 import { useLocales } from '@locales';
-import { ScheduleForm } from '../../../schedule.types.ts';
+import { ScheduleForm } from '../../../schedule.types';
 import styles from './view.module.scss';
 
 /**

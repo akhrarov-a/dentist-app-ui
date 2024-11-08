@@ -1,1 +1,1 @@
-export * from './filters.component.tsx';
+export * from './filters.component';

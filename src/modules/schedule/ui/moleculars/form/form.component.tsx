@@ -3,8 +3,8 @@ import { observer } from 'mobx-react-lite';
 import { Button, Form as AntdForm, Input } from 'antd';
 import { rules } from '@utils';
 import { useLocales } from '@locales';
-import { ScheduleForm } from '../../../schedule.types.ts';
-import { FormProps } from './form.props.ts';
+import { ScheduleForm } from '../../../schedule.types';
+import { FormProps } from './form.props';
 import styles from './form.module.scss';
 
 /**
