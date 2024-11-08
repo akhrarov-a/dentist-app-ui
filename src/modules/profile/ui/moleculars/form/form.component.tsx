@@ -74,7 +74,7 @@ const Form = observer(({ toggleEditing }: { toggleEditing?: () => void }) => {
             rules={[rules.email(), rules.whitespace(), rules.required()]}
             validateTrigger="onBlur"
           >
-            <Input type="email" placeholder="email" />
+            <Input disabled type="email" placeholder="email" />
           </AntdForm.Item>
         </div>
       </AntdForm>
