@@ -1,12 +1,12 @@
-import { PatientForm } from '../../../schedule.types.ts';
+import { ScheduleForm } from '../../../schedule.types.ts';
 
 /**
  * <Form /> props
  */
 type FormProps = {
   isEdit?: boolean;
-  initialValues: PatientForm;
-  onSubmit: (values: PatientForm) => void;
+  initialValues: ScheduleForm;
+  onSubmit: (values: ScheduleForm) => void;
   toggleEditing?: () => void;
 };
 

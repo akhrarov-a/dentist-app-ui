@@ -1,43 +1,43 @@
-import { useSearchParams } from 'react-router-dom';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useStore } from '@store';
 import { useLocales } from '@locales';
 
 /**
- * <PatientsTableFilters /> props
+ * <ScheduleTableFilters /> props
  */
-const usePatientsTableFiltersProps = () => {
+const useScheduleTableFiltersProps = () => {
   const [search] = useSearchParams();
+  const navigate = useNavigate();
 
   const { t } = useLocales();
 
   const {
-    patients: { patientsFilters, setPatientsFilters, getPatients }
+    schedule: { getSchedules }
   } = useStore();
 
-  const onFilterChange = (key: keyof typeof patientsFilters, value: any) => {
-    setPatientsFilters({ [key]: value });
+  const [selectedDate, setSelectedDate] = useState<MomentDateTimeString>();
 
-    const keys: any[] = Object.keys(patientsFilters).filter(k => key !== k);
+  const onSelectedDateChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
 
-    if (
-      !!value ||
-      keys.some(key => !!patientsFilters[key as keyof typeof patientsFilters])
-    )
-      return;
-
-    onSearch();
+    navigate(`/schedules?date=${value}`);
   };
 
-  const onSearch = () => {
-    getPatients(+search.get('page'), +search.get('perPage'));
-  };
+  useEffect(() => {
+    const date = search.get('date');
+
+    if (!date) return;
+
+    setSelectedDate(date);
+    getSchedules(selectedDate);
+  }, [search]);
 
   return {
     t,
-    patientsFilters,
-    onFilterChange,
-    onSearch
+    selectedDate,
+    onSelectedDateChange
   };
 };
 
-export { usePatientsTableFiltersProps };
+export { useScheduleTableFiltersProps };

@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Button, Form as AntdForm, Input } from 'antd';
 import { rules } from '@utils';
 import { useLocales } from '@locales';
-import { PatientForm } from '../../../schedule.types.ts';
+import { ScheduleForm } from '../../../schedule.types.ts';
 import { FormProps } from './form.props.ts';
 import styles from './form.module.scss';
 
@@ -24,7 +24,7 @@ const Form = observer<FormProps>(
 
     return (
       <div className={styles.container}>
-        <AntdForm<PatientForm>
+        <AntdForm<ScheduleForm>
           form={form}
           layout="vertical"
           initialValues={initialValues}
@@ -34,7 +34,7 @@ const Form = observer<FormProps>(
           <div className={styles.header}>
             <p>
               {isEdit
-                ? `${t('patients.form.editLabel')}: ${initialValues.firstname || ''} ${initialValues.firstname || ''}`
+                ? `${t('patients.form.editLabel')}: ${initialValues.startTime || ''} ${initialValues.endTime || ''}`
                 : t('patients.form.createLabel')}
             </p>
 
