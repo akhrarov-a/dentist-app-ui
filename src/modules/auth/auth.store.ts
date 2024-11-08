@@ -32,6 +32,18 @@ class AuthStore {
       message.error('Invalid credentials');
     }
   };
+
+  public logout = async () => {
+    try {
+      await this.global.api.auth.logout();
+
+      this.isAuthorized = false;
+
+      window.location.href = '/login';
+    } catch (error) {
+      message.error('Something went wrong');
+    }
+  };
 }
 
 export { AuthStore };

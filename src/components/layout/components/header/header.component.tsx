@@ -8,7 +8,7 @@ import styles from './header.module.scss';
 /**
  * <Header />
  */
-const Header = hoc.observer(useHeaderProps, ({ _links }) => (
+const Header = hoc.observer(useHeaderProps, ({ _links, logout }) => (
   <div className={styles.container}>
     <div className={styles.header}>
       <div className={styles.logo}>
@@ -19,7 +19,7 @@ const Header = hoc.observer(useHeaderProps, ({ _links }) => (
       </div>
       <div className={styles.profile}>
         <div className={styles.profile_content}>A</div>
-        <Button>Log out</Button>
+        <Button onClick={logout}>Log out</Button>
       </div>
     </div>
     <div className={styles.content_links}>

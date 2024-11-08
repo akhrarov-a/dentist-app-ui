@@ -1,10 +1,14 @@
 import { useMemo } from 'react';
 import { links } from './header.constants.ts';
+import { useStore } from '@store';
 
 /**
  * <Header /> props
  */
 const useHeaderProps = () => {
+  const {
+    auth: { logout }
+  } = useStore();
 
   const _links = useMemo(() => {
     // TODO: check for user is admin
@@ -16,7 +20,8 @@ const useHeaderProps = () => {
   }, []);
 
   return {
-    _links
+    _links,
+    logout
   };
 };
 
