@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { Login, ResetPassword } from '@auth';
 import { Redirect } from '@components';
 import { PatientsList } from '@patients';
+import { Profile } from '@profile';
 import { App } from './app';
 
 /**
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
             element: <div>Users</div>
           }
         ]
+      },
+      {
+        path: '/profile',
+        element: <Profile />
       },
       {
         path: '',

@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useStore } from '@store';
 import { links } from './header.constants';
 
@@ -6,9 +7,11 @@ import { links } from './header.constants';
  * <Header /> props
  */
 const useHeaderProps = () => {
+  const navigate = useNavigate();
+
   const {
-    auth: { logout },
-    profile: { user }
+    profile: { user },
+    auth: { logout }
   } = useStore();
 
   const _links = useMemo(
@@ -16,9 +19,20 @@ const useHeaderProps = () => {
     [user]
   );
 
+  const profileText = useMemo(
+    () => (user ? `${user.firstname?.[0]}${user.lastname?.[0]}` : ''),
+    [user]
+  );
+
+  const onProfileClick = () => {
+    navigate('/profile');
+  };
+
   return {
+    profileText,
     _links,
-    logout
+    logout,
+    onProfileClick
   };
 };
 
