@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Login, ResetPassword } from '@auth';
 import { Redirect } from '@components';
-import { PatientsList } from '@patients';
+import { CreatePatient, PatientsList, UpdatePatient } from '@patients';
 import { Profile } from '@profile';
 import { App } from './app';
 
@@ -26,11 +26,11 @@ const router = createBrowserRouter([
         children: [
           {
             path: '/patients/create',
-            element: <div>Create patient</div>
+            element: <CreatePatient />
           },
           {
             path: '/patients/:id',
-            element: <div>Update patient</div>
+            element: <UpdatePatient />
           },
           {
             path: '',

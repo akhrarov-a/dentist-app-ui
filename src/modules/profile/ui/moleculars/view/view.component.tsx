@@ -16,7 +16,8 @@ const View = observer(({ toggleEditing }: { toggleEditing?: () => void }) => {
       <div className={styles.header}>
         <p>Profile</p>
         <div className={styles.header_buttons}>
-          <Button>Reset password</Button>
+          {/*TODO: implement reset password logic*/}
+          <Button disabled>Reset password</Button>
           <Button type="primary" onClick={toggleEditing}>
             Edit
           </Button>
