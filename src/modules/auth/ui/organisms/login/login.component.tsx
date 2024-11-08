@@ -7,7 +7,7 @@ import styles from './login.module.scss';
 /**
  * <Login />
  */
-const Login = hoc.observer(useLoginProps, ({ form, onLogin }) => (
+const Login = hoc.observer(useLoginProps, ({ t, form, onLogin }) => (
   <AuthLayout>
     <Form
       form={form}
@@ -17,31 +17,33 @@ const Login = hoc.observer(useLoginProps, ({ form, onLogin }) => (
         password: ''
       }}
       onFinish={onLogin}
-      validateMessages={{ required: 'Required' }}
       scrollToFirstError
     >
       <Form.Item
         className={styles.row_input}
-        label="Email"
+        label={t('auth.login.email.label')}
         name="email"
         rules={[{ required: true }]}
         validateTrigger="onBlur"
       >
-        <Input type="email" placeholder="email" />
+        <Input type="email" placeholder={t('auth.login.email.placeholder')} />
       </Form.Item>
 
       <Form.Item
         className={styles.row_input}
-        label="Password"
+        label={t('auth.login.password.label')}
         name="password"
         rules={[{ required: true }]}
         validateTrigger="onBlur"
       >
-        <Input type="password" placeholder="password" />
+        <Input
+          type="password"
+          placeholder={t('auth.login.password.placeholder')}
+        />
       </Form.Item>
 
       <Button className={styles.button} type="primary" htmlType="submit">
-        Submit
+        {t('auth.login.submit')}
       </Button>
     </Form>
   </AuthLayout>

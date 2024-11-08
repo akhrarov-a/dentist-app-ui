@@ -1,6 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import cookie from 'react-cookies';
 import { ApiService } from '@api';
+import { Languages } from '@locales';
 import { AuthStore } from '@auth/auth.store';
 import { PatientsStore } from '@patients/patients.store';
 import { ProfileStore } from '@profile/profile.store';
@@ -24,6 +25,13 @@ class GlobalStore {
   }
 
   public loading = false;
+  public language: Languages = Languages.EN;
+
+  public setLanguage = (language: Languages) => {
+    runInAction(() => {
+      this.language = language;
+    });
+  };
 
   public autoLogin = async () => {
     const accessToken = cookie.load('accessToken');
