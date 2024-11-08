@@ -1,12 +1,12 @@
 import { Button, Input } from 'antd';
 import { hoc } from '@utils';
-import { usePatientTableFiltersProps } from './filters.props';
+import { usePatientsTableFiltersProps } from './filters.props';
 
 /**
- * <PatientTableFilters />
+ * <PatientsTableFilters />
  */
-const PatientTableFilters = hoc.observer(
-  usePatientTableFiltersProps,
+const PatientsTableFilters = hoc.observer(
+  usePatientsTableFiltersProps,
   ({ patientsFilters, onFilterChange, onSearch }) => (
     <div className="filter-container">
       <Input
@@ -51,4 +51,4 @@ const PatientTableFilters = hoc.observer(
   )
 );
 
-export { PatientTableFilters };
+export { PatientsTableFilters };

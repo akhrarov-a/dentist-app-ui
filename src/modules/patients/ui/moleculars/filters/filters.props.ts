@@ -2,9 +2,9 @@ import { useSearchParams } from 'react-router-dom';
 import { useStore } from '@store';
 
 /**
- * <PatientTableFilters /> props
+ * <PatientsTableFilters /> props
  */
-const usePatientTableFiltersProps = () => {
+const usePatientsTableFiltersProps = () => {
   const [search] = useSearchParams();
 
   const {
@@ -36,4 +36,4 @@ const usePatientTableFiltersProps = () => {
   };
 };
 
-export { usePatientTableFiltersProps };
+export { usePatientsTableFiltersProps };

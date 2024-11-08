@@ -1,4 +1,35 @@
 @import '@styles/common.scss';
 
 .container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header {
+  @include flex(space-between, center);
+
+  margin: 10px 0 20px;
+
+  p {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  &_buttons {
+    @include flex($align: center);
+
+    gap: 10px;
+
+    button {
+      min-width: 100px;
+    }
+  }
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 15px;
 }

@@ -6,8 +6,17 @@ import { useProfileProps } from './profile.props';
 /**
  * <Profile />
  */
-const Profile = hoc.observer(useProfileProps, ({ isEditing }) => (
-  <Fragment>{isEditing ? <Form /> : <View />}</Fragment>
-));
+const Profile = hoc.observer(
+  useProfileProps,
+  ({ isEditing, toggleEditing }) => (
+    <Fragment>
+      {isEditing ? (
+        <Form toggleEditing={toggleEditing} />
+      ) : (
+        <View toggleEditing={toggleEditing} />
+      )}
+    </Fragment>
+  )
+);
 
 export { Profile };

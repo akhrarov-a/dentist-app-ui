@@ -19,7 +19,7 @@ class ProfileService {
    * Update current user
    */
   public updateCurrentUser = (data: UpdateProfileDto) =>
-    this.http.request<ProfileContract>({
+    this.http.request<void>({
       method: 'PATCH',
       url: '/users/current',
       data

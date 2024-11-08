@@ -37,7 +37,7 @@ class ProfileStore {
     }
   };
 
-  public updatePatient = async (data: ProfileForm) => {
+  public updateProfile = async (data: ProfileForm, callback: () => void) => {
     this.global.showLoader();
 
     try {
@@ -48,6 +48,8 @@ class ProfileStore {
       message.success('Successfully updated');
 
       await this.getUser();
+
+      callback();
     } catch (error) {
       message.error('Something went wrong');
     } finally {

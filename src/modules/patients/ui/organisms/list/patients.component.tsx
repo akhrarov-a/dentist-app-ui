@@ -1,7 +1,7 @@
 import { hoc } from '@utils';
 import { Tables } from '@components';
 import { listLib } from '../../../lib';
-import { PatientTableFilters } from '../../moleculars';
+import { PatientsTableFilters } from '../../moleculars';
 import { usePatientsListProps } from './patients.props';
 
 /**
@@ -14,7 +14,7 @@ const PatientsList = hoc.observer(
       {...tableProps}
       addText="Add patient"
       dataSource={listLib.List(items)}
-      filters={<PatientTableFilters />}
+      filters={<PatientsTableFilters />}
     />
   )
 );
