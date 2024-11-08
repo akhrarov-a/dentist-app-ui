@@ -1,6 +1,7 @@
 import { Fragment, PropsWithChildren, useLayoutEffect } from 'react';
 import { GlobalStore, useStore } from '@store';
 import { hoc } from '@utils';
+import { Header } from './components';
 import styles from './layout.module.scss';
 
 /**
@@ -17,6 +18,8 @@ const Layout = hoc.observer<PropsWithChildren, GlobalStore>(
       <div className={styles.container}>
         {isAuthorized && (
           <Fragment>
+            <Header />
+
             <div className={styles.content}>{children}</div>
           </Fragment>
         )}

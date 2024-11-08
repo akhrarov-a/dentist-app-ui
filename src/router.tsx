@@ -21,7 +21,37 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/patients',
-        element: <PatientsList />
+        children: [
+          {
+            path: '/patients/create',
+            element: <div>Create patient</div>
+          },
+          {
+            path: '/patients/:id',
+            element: <div>Update patient</div>
+          },
+          {
+            path: '',
+            element: <PatientsList />
+          }
+        ]
+      },
+      {
+        path: '/appointments',
+        children: [
+          {
+            path: '/appointments/create',
+            element: <div>Create appointment</div>
+          },
+          {
+            path: '/appointments/:id',
+            element: <div>Update appointment</div>
+          },
+          {
+            path: '',
+            element: <div>Appointments</div>
+          }
+        ]
       },
       {
         path: '',

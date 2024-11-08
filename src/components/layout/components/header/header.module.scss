@@ -1,0 +1,58 @@
+@import '@styles/common.scss';
+
+.container {
+  padding: 10px 16px;
+}
+
+.header {
+  @include flex(space-between, center);
+}
+
+.logo {
+  height: 50px;
+
+  img {
+    height: 100%;
+  }
+}
+
+.profile {
+  @include flex($align: center);
+
+  position: relative;
+  gap: 20px;
+
+  &_content {
+    @include flex(center, center);
+    @include size(50px);
+
+    cursor: pointer;
+    border-radius: 100px;
+    background: $primary-blue;
+    color: $white;
+  }
+}
+
+.content {
+  &_links {
+    @include flex($align: center);
+
+    margin-top: 10px;
+    padding: 5px 0;
+    border-top: 1px solid $light-grey;
+    border-bottom: 1px solid $light-grey;
+    gap: 10px;
+  }
+
+  &_link {
+    padding: 10px;
+    transition: all 0.2s;
+    border-radius: 5px;
+
+    &:hover,
+    &_active {
+      color: $white;
+      background: $primary-blue;
+    }
+  }
+}

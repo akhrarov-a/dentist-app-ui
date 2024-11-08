@@ -1,4 +1,3 @@
-import React from 'react';
 import { hoc } from '@utils';
 import { AuthLayout } from '../../moleculars';
 import { useResetPasswordProps } from './reset-password.props';

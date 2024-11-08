@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, Input } from 'antd';
 import { hoc } from '@utils';
 import { usePatientTableFiltersProps } from './filters.props';
