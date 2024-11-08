@@ -30,13 +30,19 @@ class GlobalStore {
     const refreshToken = cookie.load('refreshToken');
 
     if (!accessToken && !refreshToken) {
+      runInAction(() => {
+        this.auth.isAuthorized = false;
+      });
+
       window.location.href = '/login';
 
       return;
     }
 
     try {
-      this.auth.isAuthorized = true;
+      runInAction(() => {
+        this.auth.isAuthorized = true;
+      });
 
       await this.profile.getUser();
     } catch (error) {

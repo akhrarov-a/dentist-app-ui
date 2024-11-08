@@ -1,5 +1,6 @@
-import { Button, Form as AntdForm, Input } from 'antd';
+import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
+import { Button, Form as AntdForm, Input } from 'antd';
 import { rules } from '@utils';
 import { PatientForm } from '../../../patients.types';
 import { FormProps } from './form.props';
@@ -10,6 +11,12 @@ import styles from './form.module.scss';
  */
 const Form = observer<FormProps>(({ isEdit, initialValues, onSubmit }) => {
   const [form] = AntdForm.useForm();
+
+  useEffect(() => {
+    if (!Object.keys(initialValues || {}).length) return;
+
+    form.setFieldsValue(initialValues);
+  }, [initialValues]);
 
   return (
     <div className={styles.container}>

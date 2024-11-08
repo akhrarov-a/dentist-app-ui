@@ -1,5 +1,5 @@
 import { NavigateFunction } from 'react-router-dom';
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import { message } from 'antd';
 import { AuthCredentials } from '@api';
 import { GlobalStore } from '@store';
@@ -25,7 +25,9 @@ class AuthStore {
     try {
       await this.global.api.auth.login(authCredentials);
 
-      this.isAuthorized = true;
+      runInAction(() => {
+        this.isAuthorized = true;
+      });
 
       await this.global.profile.getUser();
 
@@ -39,7 +41,9 @@ class AuthStore {
     try {
       await this.global.api.auth.logout();
 
-      this.isAuthorized = false;
+      runInAction(() => {
+        this.isAuthorized = false;
+      });
 
       window.location.href = '/login';
     } catch (error) {

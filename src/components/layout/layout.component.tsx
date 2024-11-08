@@ -1,4 +1,4 @@
-import { Fragment, PropsWithChildren, useLayoutEffect } from 'react';
+import { Fragment, PropsWithChildren, useEffect } from 'react';
 import { GlobalStore, useStore } from '@store';
 import { hoc } from '@utils';
 import { Header } from './components';
@@ -10,7 +10,7 @@ import styles from './layout.module.scss';
 const Layout = hoc.observer<PropsWithChildren, GlobalStore>(
   useStore,
   ({ autoLogin, auth: { isAuthorized }, children }) => {
-    useLayoutEffect(() => {
+    useEffect(() => {
       autoLogin();
     }, []);
 

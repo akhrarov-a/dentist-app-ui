@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { ProfileContract } from '@api';
@@ -26,10 +26,12 @@ class ProfileStore {
     try {
       const response = await this.global.api.profile.getCurrentUser();
 
-      this.user = response.data;
-      this.initialValues = ProfileAdapter.profileContractToProfileForm(
-        response.data
-      );
+      runInAction(() => {
+        this.user = response.data;
+        this.initialValues = ProfileAdapter.profileContractToProfileForm(
+          response.data
+        );
+      });
     } catch (error) {
       message.error('Something went wrong');
     } finally {

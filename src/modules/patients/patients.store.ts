@@ -1,5 +1,5 @@
 import { NavigateFunction } from 'react-router-dom';
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { GetPatientsParams, PatientContract } from '@api';
@@ -27,11 +27,15 @@ class PatientsStore {
   public initialValues: PatientForm = {} as PatientForm;
 
   public setPatientsFilters = (filters: GetPatientsParams) => {
-    this.patientsFilters = { ...this.patientsFilters, ...filters };
+    runInAction(() => {
+      this.patientsFilters = { ...this.patientsFilters, ...filters };
+    });
   };
 
   public clearInitialValues = () => {
-    this.initialValues = {} as PatientForm;
+    runInAction(() => {
+      this.initialValues = {} as PatientForm;
+    });
   };
 
   public getPatients = async (page: number, perPage: number) => {
@@ -44,8 +48,10 @@ class PatientsStore {
         ...filterOutFalsyValuesFromObject(this.patientsFilters)
       });
 
-      this.patients = response.data.data;
-      this.totalPatients = response.data.totalAmount;
+      runInAction(() => {
+        this.patients = response.data.data;
+        this.totalPatients = response.data.totalAmount;
+      });
     } catch (error) {
       message.error('Something went wrong');
     } finally {
@@ -59,10 +65,12 @@ class PatientsStore {
     try {
       const response = await this.global.api.patients.getPatientById(id);
 
-      this.currentPatientId = response.data.id;
-      this.initialValues = PatientsAdapter.patientContractToPatientForm(
-        response.data
-      );
+      runInAction(() => {
+        this.currentPatientId = response.data.id;
+        this.initialValues = PatientsAdapter.patientContractToPatientForm(
+          response.data
+        );
+      });
     } catch (error) {
       message.error('Something went wrong');
     } finally {
