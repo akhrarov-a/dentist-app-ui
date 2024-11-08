@@ -13,7 +13,8 @@ const usePatientsListProps = () => {
     total: store.totalPatients,
     columns: listLib.Columns,
     moreColumns: listLib.MoreColumns,
-    getData: store.getPatients
+    getData: store.getPatients,
+    deleteMany: store.deletePatients
   });
 
   return {

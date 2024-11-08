@@ -9,85 +9,93 @@ import styles from './form.module.scss';
 /**
  * <Form />
  */
-const Form = observer<FormProps>(({ isEdit, initialValues, onSubmit }) => {
-  const [form] = AntdForm.useForm();
+const Form = observer<FormProps>(
+  ({ isEdit, initialValues, onSubmit, toggleEditing }) => {
+    const [form] = AntdForm.useForm();
 
-  useEffect(() => {
-    if (!Object.keys(initialValues || {}).length) return;
+    useEffect(() => {
+      if (!Object.keys(initialValues || {}).length) return;
 
-    form.setFieldsValue(initialValues);
-  }, [initialValues]);
+      form.setFieldsValue(initialValues);
+    }, [initialValues]);
 
-  return (
-    <div className={styles.container}>
-      <AntdForm<PatientForm>
-        form={form}
-        layout="vertical"
-        initialValues={initialValues}
-        onFinish={onSubmit}
-        scrollToFirstError
-      >
-        <div className={styles.header}>
-          <p>
-            {isEdit
-              ? `Edit patient ${initialValues.firstname || ''} ${initialValues.firstname || ''}`
-              : 'Create patient'}
-          </p>
-
-          <Button type="primary" htmlType="submit">
-            {isEdit ? 'Save' : 'Create'}
-          </Button>
-        </div>
-
-        <div className={styles.content}>
-          <AntdForm.Item
-            label="Firstname"
-            name="firstname"
-            rules={[rules.whitespace(), rules.required()]}
-            validateTrigger="onBlur"
-          >
-            <Input placeholder="firstname" />
-          </AntdForm.Item>
-
-          <AntdForm.Item
-            label="Phone"
-            name="phone"
-            rules={[rules.whitespace(), rules.required()]}
-            validateTrigger="onBlur"
-          >
-            <Input placeholder="phone" />
-          </AntdForm.Item>
-
-          <AntdForm.Item
-            label="Lastname"
-            name="lastname"
-            rules={[rules.whitespace(), rules.required()]}
-            validateTrigger="onBlur"
-          >
-            <Input placeholder="lastname" />
-          </AntdForm.Item>
-
-          <AntdForm.Item
-            label="Email"
-            name="email"
-            rules={[rules.email(), rules.whitespace(), rules.required()]}
-            validateTrigger="onBlur"
-          >
-            <Input type="email" placeholder="email" />
-          </AntdForm.Item>
-        </div>
-
-        <AntdForm.Item
-          label="Description"
-          name="description"
-          rules={[rules.whitespace()]}
-          validateTrigger="onBlur"
+    return (
+      <div className={styles.container}>
+        <AntdForm<PatientForm>
+          form={form}
+          layout="vertical"
+          initialValues={initialValues}
+          onFinish={onSubmit}
+          scrollToFirstError
         >
-          <Input.TextArea placeholder="description" />
-        </AntdForm.Item>
-      </AntdForm>
-    </div>
-  );
-});
+          <div className={styles.header}>
+            <p>
+              {isEdit
+                ? `Edit patient: ${initialValues.firstname || ''} ${initialValues.firstname || ''}`
+                : 'Create patient'}
+            </p>
+
+            {isEdit && (
+              <Button htmlType="button" onClick={toggleEditing}>
+                Cancel
+              </Button>
+            )}
+
+            <Button type="primary" htmlType="submit">
+              {isEdit ? 'Save' : 'Create'}
+            </Button>
+          </div>
+
+          <div className={styles.content}>
+            <AntdForm.Item
+              label="Firstname"
+              name="firstname"
+              rules={[rules.whitespace(), rules.required()]}
+              validateTrigger="onBlur"
+            >
+              <Input placeholder="firstname" />
+            </AntdForm.Item>
+
+            <AntdForm.Item
+              label="Phone"
+              name="phone"
+              rules={[rules.whitespace(), rules.required()]}
+              validateTrigger="onBlur"
+            >
+              <Input placeholder="phone" />
+            </AntdForm.Item>
+
+            <AntdForm.Item
+              label="Lastname"
+              name="lastname"
+              rules={[rules.whitespace(), rules.required()]}
+              validateTrigger="onBlur"
+            >
+              <Input placeholder="lastname" />
+            </AntdForm.Item>
+
+            <AntdForm.Item
+              label="Email"
+              name="email"
+              rules={[rules.email(), rules.whitespace(), rules.required()]}
+              validateTrigger="onBlur"
+            >
+              <Input type="email" placeholder="email" />
+            </AntdForm.Item>
+          </div>
+
+          <AntdForm.Item
+            label="Description"
+            name="description"
+            rules={[rules.whitespace()]}
+            validateTrigger="onBlur"
+          >
+            <Input.TextArea placeholder="description" />
+          </AntdForm.Item>
+        </AntdForm>
+      </div>
+    );
+  }
+);
 
 export { Form };

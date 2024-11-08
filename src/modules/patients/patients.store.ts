@@ -98,7 +98,7 @@ class PatientsStore {
     }
   };
 
-  public updatePatient = async (data: PatientForm) => {
+  public updatePatient = async (data: PatientForm, callback: () => void) => {
     this.global.showLoader();
 
     try {
@@ -112,6 +112,8 @@ class PatientsStore {
       this.clearInitialValues();
 
       await this.getPatientById(this.currentPatientId);
+
+      callback();
     } catch (error) {
       message.error('Something went wrong');
     } finally {
@@ -119,13 +121,18 @@ class PatientsStore {
     }
   };
 
-  public deletePatient = async (id: PatientContract['id']) => {
+  public deletePatient = async (
+    id: PatientContract['id'],
+    navigate: NavigateFunction
+  ) => {
     this.global.showLoader();
 
     try {
       await this.global.api.patients.deletePatientById(id);
 
       message.success('Successfully deleted');
+
+      navigate('/patients');
     } catch (error) {
       message.error('Something went wrong');
     } finally {
