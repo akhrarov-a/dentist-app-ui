@@ -12,7 +12,7 @@ class ScheduleService {
    */
   public getScheduleForToday = (params: GetScheduleParams) =>
     this.http.request<ApiResponseList<ScheduleContract>>({
-      url: '/patients',
+      url: '/appointments',
       method: 'GET',
       params
     });
@@ -22,7 +22,7 @@ class ScheduleService {
    */
   public getScheduleById = (id: ScheduleContract['id']) =>
     this.http.request<ScheduleContract>({
-      url: `/patients/${id}`,
+      url: `/appointments/${id}`,
       method: 'GET'
     });
 
@@ -31,7 +31,7 @@ class ScheduleService {
    */
   public createSchedule = (data: CreateScheduleDto) =>
     this.http.request<Pick<ScheduleContract, 'id'>>({
-      url: '/patients',
+      url: '/appointments',
       method: 'POST',
       data
     });
@@ -41,7 +41,7 @@ class ScheduleService {
    */
   public updateSchedule = ({ id, ...data }: UpdateScheduleDto) =>
     this.http.request<void>({
-      url: `/patients/${id}`,
+      url: `/appointments/${id}`,
       method: 'PATCH',
       data
     });
@@ -51,7 +51,7 @@ class ScheduleService {
    */
   public deleteScheduleById = (id: ScheduleContract['id']) =>
     this.http.request<void>({
-      url: `/patients/${id}`,
+      url: `/appointments/${id}`,
       method: 'DELETE'
     });
 }
