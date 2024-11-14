@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 /**
  * Hook that alerts clicks outside of the passed ref
  */
-const useClickOutside = (ref: any, handleClickOutside: () => void) => {
+const useClickOutside = (ref: any, handleClickOutside: (event:any) => void) => {
   useEffect(() => {
     /**
      * Handle passed click outside
@@ -11,7 +11,7 @@ const useClickOutside = (ref: any, handleClickOutside: () => void) => {
     const handleClick = (event: any) => {
       if (!(ref.current && !ref.current.contains(event.target))) return;
 
-      handleClickOutside();
+      handleClickOutside(event);
     };
 
     // Bind the event listener

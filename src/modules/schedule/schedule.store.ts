@@ -23,6 +23,12 @@ class ScheduleStore {
   public currentScheduleId: ScheduleContract['id'] = 0;
   public initialValues: ScheduleForm = {} as ScheduleForm;
 
+  public clearSchedules = () => {
+    runInAction(() => {
+      this.schedules = [];
+    });
+  };
+
   public clearInitialValues = () => {
     runInAction(() => {
       this.initialValues = {} as ScheduleForm;

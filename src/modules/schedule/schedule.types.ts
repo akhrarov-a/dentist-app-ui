@@ -6,6 +6,7 @@ import { Dayjs } from 'dayjs';
 type ScheduleForm = {
   patientId: number;
   description: string;
+  date: Dayjs;
   startTime: Dayjs;
   endTime: Dayjs;
 };

@@ -1,8 +1,13 @@
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
+import moment from 'moment';
 import { CreateScheduleDto, ScheduleContract, UpdateScheduleDto } from '@api';
 import { ScheduleForm } from '../schedule.types';
 
-const format = 'HH:mm';
+const getIsoString = (time: Dayjs, date: Dayjs) =>
+  moment(
+    `${time.format('HH:mm')} ${date.format('YYYY-MM-DD')}`,
+    'HH:mm YYYY-MM-DD'
+  ).toISOString();
 
 /**
  * Schedule adapter
@@ -13,6 +18,7 @@ class ScheduleAdapter {
   ): ScheduleForm {
     return {
       patientId: schedule.patient.id,
+      date: dayjs(schedule.startTime),
       startTime: dayjs(schedule.startTime),
       endTime: dayjs(schedule.endTime),
       description: schedule.description
@@ -24,8 +30,8 @@ class ScheduleAdapter {
   ): CreateScheduleDto {
     return {
       patientId: schedule.patientId,
-      startTime: schedule.startTime.format(format),
-      endTime: schedule.endTime.format(format),
+      startTime: getIsoString(schedule.startTime, schedule.date),
+      endTime: getIsoString(schedule.endTime, schedule.date),
       description: schedule.description
     };
   }
@@ -35,8 +41,8 @@ class ScheduleAdapter {
   ): UpdateScheduleDto {
     return {
       patientId: schedule.patientId,
-      startTime: schedule.startTime.format(format),
-      endTime: schedule.endTime.format(format),
+      startTime: getIsoString(schedule.startTime, schedule.date),
+      endTime: getIsoString(schedule.endTime, schedule.date),
       description: schedule.description
     };
   }

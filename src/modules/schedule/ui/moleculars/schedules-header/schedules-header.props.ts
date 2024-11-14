@@ -60,8 +60,9 @@ const useSchedulesHeaderProps = () => {
     getSchedules(selectedDate.format(format));
   }, [selectedDate]);
 
-  useClickOutside(divRef, () => {
-    if (showCalendar) setShowCalendar(false);
+  useClickOutside(divRef, event => {
+    if (showCalendar && !event?.target?.className?.includes('calendar'))
+      setShowCalendar(false);
   });
 
   return {

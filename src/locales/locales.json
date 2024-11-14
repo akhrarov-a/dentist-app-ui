@@ -139,6 +139,16 @@
           "ru": "Выберите пациента"
         }
       },
+      "date": {
+        "label": {
+          "en": "Date",
+          "ru": "Дата"
+        },
+        "placeholder": {
+          "en": "Select date",
+          "ru": "Выберите дату"
+        }
+      },
       "timeStartFrom": {
         "label": {
           "en": "Time start from",

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Button, Form as AntdForm, Input, Select, TimePicker } from 'antd';
+import { Button, DatePicker, Form as AntdForm, Input, Select, TimePicker } from 'antd';
 import { rules } from '@utils';
 import { useStore } from '@store';
 import { useLocales } from '@locales';
@@ -77,6 +77,15 @@ const Form = observer<FormProps>(
               filterOption={false}
               showSearch
             />
+          </AntdForm.Item>
+
+          <AntdForm.Item
+            label={t('form.fields.date.label')}
+            name="date"
+            rules={[rules.required(t('form.validations.required'))]}
+            validateTrigger="onBlur"
+          >
+            <DatePicker style={{ width: '100%' }} />
           </AntdForm.Item>
 
           <div className={styles.content}>
