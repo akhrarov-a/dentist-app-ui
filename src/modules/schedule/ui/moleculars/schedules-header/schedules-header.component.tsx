@@ -1,5 +1,5 @@
-import { hoc } from '@utils';
 import classNames from 'classnames';
+import { hoc } from '@utils';
 import { useSchedulesHeaderProps } from './schedules-header.props';
 import styles from './schedules-header.module.scss';
 
