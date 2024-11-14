@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import moment from 'moment';
 import { useStore } from '@store';
-import { months, weekdays } from './schedules-header.constants.ts';
+import { months, weekdays } from './schedules-header.constants';
 
 /**
  * <SchedulesHeader /> props

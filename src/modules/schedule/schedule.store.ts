@@ -19,7 +19,6 @@ class ScheduleStore {
   public global: GlobalStore;
 
   public schedules: ScheduleContract[] = [];
-  public totalSchedules: number = 0;
 
   public currentScheduleId: ScheduleContract['id'] = 0;
   public initialValues: ScheduleForm = {} as ScheduleForm;
@@ -39,8 +38,7 @@ class ScheduleStore {
       });
 
       runInAction(() => {
-        this.schedules = response.data.data;
-        this.totalSchedules = response.data.totalAmount;
+        this.schedules = response.data.appointments;
       });
     } catch (error) {
       message.error('Something went wrong');

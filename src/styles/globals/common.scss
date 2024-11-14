@@ -23,6 +23,7 @@ ol {
 html,
 body {
   scroll-behavior: smooth;
+  color: $dark-blue;
 }
 
 body {
@@ -74,7 +75,7 @@ button, input {
     margin-top: -0.4rem;
     padding: 0;
     background: transparent;
-    border: 0.1rem solid $primary-blue;
+    border: 0.1rem solid $dark-blue;
     border-right-color: transparent;
     border-top-color: transparent;
     border-radius: 50%;

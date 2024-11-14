@@ -11,7 +11,7 @@ class ScheduleService {
    * Get schedule for today
    */
   public getScheduleForToday = (params: GetScheduleParams) =>
-    this.http.request<ApiResponseList<ScheduleContract>>({
+    this.http.request<{ date: string; appointments: ScheduleContract[] }>({
       url: '/appointments',
       method: 'GET',
       params

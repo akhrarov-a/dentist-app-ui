@@ -1,5 +1,4 @@
 import { useStore } from '@store';
-import { useLocales } from '@locales';
 
 /**
  * <Schedule /> props
@@ -9,10 +8,7 @@ const useScheduleProps = () => {
     schedule: { schedules }
   } = useStore();
 
-  const { t } = useLocales();
-
   return {
-    t,
     schedules
   };
 };

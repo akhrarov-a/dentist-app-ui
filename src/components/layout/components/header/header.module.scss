@@ -28,7 +28,7 @@
 
     cursor: pointer;
     border-radius: 100px;
-    background: $primary-blue;
+    background: $dark-blue;
     color: $white;
   }
 }
@@ -52,7 +52,7 @@
     &:hover,
     &_active {
       color: $white;
-      background: $primary-blue;
+      background: $dark-blue;
     }
   }
 }
