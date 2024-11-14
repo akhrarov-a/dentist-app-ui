@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { SelectInfo } from 'antd/es/calendar/generateCalendar';
 import moment from 'moment';
 import { useStore } from '@store';
+import { useClickOutside } from '@hooks';
 import { months, weekdays } from './schedules-header.constants';
 
 const format = 'YYYY-MM-DD';
@@ -10,6 +11,8 @@ const format = 'YYYY-MM-DD';
  * <SchedulesHeader /> props
  */
 const useSchedulesHeaderProps = () => {
+  const divRef = useRef(null);
+
   const {
     schedule: { getSchedules }
   } = useStore();
@@ -47,7 +50,12 @@ const useSchedulesHeaderProps = () => {
     getSchedules(selectedDate.format(format));
   }, [selectedDate]);
 
+  useClickOutside(divRef, () => {
+    if (showCalendar) setShowCalendar(false);
+  });
+
   return {
+    divRef,
     showCalendar,
     headerText,
     toggleShowCalendar,

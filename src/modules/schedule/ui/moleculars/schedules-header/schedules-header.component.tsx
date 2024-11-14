@@ -10,6 +10,7 @@ import styles from './schedules-header.module.scss';
 const SchedulesHeader = hoc.observer(
   useSchedulesHeaderProps,
   ({
+    divRef,
     headerText,
     showCalendar,
     toggleShowCalendar,
@@ -23,7 +24,7 @@ const SchedulesHeader = hoc.observer(
         src="/img/arrow.svg"
         onClick={onPreviousDayClick}
       />
-      <p className={styles.day} onClick={toggleShowCalendar}>
+      <p ref={divRef} className={styles.day} onClick={toggleShowCalendar}>
         {headerText}
       </p>
       <img
