@@ -2,7 +2,9 @@ import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Button, Form as AntdForm, Input, Select, TimePicker } from 'antd';
 import { rules } from '@utils';
+import { useStore } from '@store';
 import { useLocales } from '@locales';
+import { PatientsAdapter } from '@patients/lib';
 import { ScheduleForm } from '../../../schedule.types';
 import { FormProps } from './form.props';
 import styles from './form.module.scss';
@@ -12,6 +14,10 @@ import styles from './form.module.scss';
  */
 const Form = observer<FormProps>(
   ({ isEdit, initialValues, onSubmit, onDelete }) => {
+    const {
+      patients: { loading, patients, debounceFindPatients }
+    } = useStore();
+
     const [form] = AntdForm.useForm();
 
     const { t } = useLocales();
@@ -29,22 +35,25 @@ const Form = observer<FormProps>(
           layout="vertical"
           initialValues={initialValues}
           onFinish={onSubmit}
-          onValuesChange={(changedValues, allValues) => {
-            console.log(allValues);
-          }}
           scrollToFirstError
         >
           <div className={styles.header}>
             <p>
-              {isEdit
-                ? `${t('schedule.form.editLabel')}: ${initialValues.startTime || ''} ${initialValues.endTime || ''}`
-                : t('schedule.form.createLabel')}
+              {isEdit ? (
+                <>
+                  {t('schedule.form.editLabel')}:<br />
+                  {initialValues.startTime?.format('HH:mm') || ''} -{' '}
+                  {initialValues.endTime?.format('HH:mm') || ''}
+                </>
+              ) : (
+                t('schedule.form.createLabel')
+              )}
             </p>
 
             <div className={styles.header_buttons}>
               {isEdit && (
                 <Button htmlType="button" onClick={onDelete}>
-                  {t('form.actions.delete')}
+                  {t('table.delete')}
                 </Button>
               )}
 
@@ -56,22 +65,24 @@ const Form = observer<FormProps>(
 
           <AntdForm.Item
             label={t('form.fields.patient.label')}
-            name="patient"
+            name="patientId"
             rules={[rules.required(t('form.validations.required'))]}
             validateTrigger="onBlur"
           >
             <Select
-              loading={false}
+              loading={loading.patients}
               placeholder={t('form.fields.patient.placeholder')}
-              options={[]}
-              optionFilterProp="label"
+              options={PatientsAdapter.patientContractToOptionsList(patients)}
+              onSearch={debounceFindPatients}
+              filterOption={false}
+              showSearch
             />
           </AntdForm.Item>
 
           <div className={styles.content}>
             <AntdForm.Item
               label={t('form.fields.timeStartFrom.label')}
-              name="timeStartFrom"
+              name="startTime"
               rules={[rules.required(t('form.validations.required'))]}
               validateTrigger="onBlur"
             >
@@ -84,7 +95,7 @@ const Form = observer<FormProps>(
 
             <AntdForm.Item
               label={t('form.fields.timeEndTo.label')}
-              name="timeEndTo"
+              name="endTime"
               rules={[rules.required(t('form.validations.required'))]}
               validateTrigger="onBlur"
             >

@@ -59,6 +59,8 @@ class ScheduleStore {
           response.data
         );
       });
+
+      this.global.patients.findPatients(response.data.patient.firstname);
     } catch (error) {
       message.error('Something went wrong');
     } finally {
@@ -90,7 +92,7 @@ class ScheduleStore {
     this.global.showLoader();
 
     try {
-      await this.global.api.patients.updatePatient({
+      await this.global.api.schedule.updateSchedule({
         id: this.currentScheduleId,
         ...ScheduleAdapter.scheduleFormToUpdateScheduleDto(data)
       });

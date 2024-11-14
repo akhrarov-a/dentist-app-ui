@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SelectInfo } from 'antd/es/calendar/generateCalendar';
 import moment from 'moment';
+import { Dayjs } from 'dayjs';
 import { useStore } from '@store';
 import { useClickOutside } from '@hooks';
 import { useLocales } from '@locales';
@@ -48,7 +49,7 @@ const useSchedulesHeaderProps = () => {
     setShowCalendar(!showCalendar);
   };
 
-  const onCalendarChange = (date: any, selectInfo: SelectInfo) => {
+  const onCalendarChange = (date: Dayjs, selectInfo: SelectInfo) => {
     if (selectInfo.source !== 'date') return;
 
     toggleShowCalendar();

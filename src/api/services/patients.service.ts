@@ -17,6 +17,16 @@ class PatientsService {
     });
 
   /**
+   * Find patients by firstname or lastname
+   */
+  public findPatientsByFirstnameOrLastname = (search: string) =>
+    this.http.request<PatientContract[]>({
+      url: '/patients/by/firstname-or-lastname',
+      method: 'GET',
+      params: { search }
+    });
+
+  /**
    * Get patient by id
    */
   public getPatientById = (id: PatientContract['id']) =>

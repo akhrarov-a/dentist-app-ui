@@ -1,5 +1,8 @@
+import dayjs from 'dayjs';
 import { CreateScheduleDto, ScheduleContract, UpdateScheduleDto } from '@api';
 import { ScheduleForm } from '../schedule.types';
+
+const format = 'HH:mm';
 
 /**
  * Schedule adapter
@@ -10,8 +13,8 @@ class ScheduleAdapter {
   ): ScheduleForm {
     return {
       patientId: schedule.patient.id,
-      startTime: schedule.startTime,
-      endTime: schedule.endTime,
+      startTime: dayjs(schedule.startTime),
+      endTime: dayjs(schedule.endTime),
       description: schedule.description
     };
   }
@@ -21,8 +24,8 @@ class ScheduleAdapter {
   ): CreateScheduleDto {
     return {
       patientId: schedule.patientId,
-      startTime: schedule.startTime,
-      endTime: schedule.endTime,
+      startTime: schedule.startTime.format(format),
+      endTime: schedule.endTime.format(format),
       description: schedule.description
     };
   }
@@ -32,8 +35,8 @@ class ScheduleAdapter {
   ): UpdateScheduleDto {
     return {
       patientId: schedule.patientId,
-      startTime: schedule.startTime,
-      endTime: schedule.endTime,
+      startTime: schedule.startTime.format(format),
+      endTime: schedule.endTime.format(format),
       description: schedule.description
     };
   }

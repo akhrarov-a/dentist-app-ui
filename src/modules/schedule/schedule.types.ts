@@ -1,11 +1,13 @@
+import { Dayjs } from 'dayjs';
+
 /**
  * Schedule form
  */
 type ScheduleForm = {
   patientId: number;
   description: string;
-  startTime: DateTimeString;
-  endTime: DateTimeString;
+  startTime: Dayjs;
+  endTime: Dayjs;
 };
 
 export type { ScheduleForm };

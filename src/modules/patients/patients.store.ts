@@ -3,7 +3,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { GetPatientsParams, PatientContract } from '@api';
-import { filterOutFalsyValuesFromObject } from '@utils';
+import { debounce, filterOutFalsyValuesFromObject } from '@utils';
 import { PatientForm } from './patients.types';
 import { PatientsAdapter } from './lib';
 
@@ -25,6 +25,10 @@ class PatientsStore {
 
   public currentPatientId: PatientContract['id'] = 0;
   public initialValues: PatientForm = {} as PatientForm;
+
+  public loading = {
+    patients: false
+  };
 
   public setPatientsFilters = (filters: GetPatientsParams) => {
     runInAction(() => {
@@ -153,6 +157,37 @@ class PatientsStore {
       this.global.hideLoader();
     }
   };
+
+  public findPatients = async (search: string) => {
+    const _search = search?.trim();
+
+    if (!_search) return;
+
+    this.loading = {
+      ...this.loading,
+      patients: true
+    };
+
+    try {
+      const response =
+        await this.global.api.patients.findPatientsByFirstnameOrLastname(
+          _search
+        );
+
+      runInAction(() => {
+        this.patients = response.data;
+      });
+    } catch (error) {
+      message.error('Something went wrong');
+    } finally {
+      this.loading = {
+        ...this.loading,
+        patients: false
+      };
+    }
+  };
+
+  public debounceFindPatients = debounce(this.findPatients, 500);
 }
 
 export { PatientsStore };

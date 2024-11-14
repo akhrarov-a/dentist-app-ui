@@ -1,4 +1,4 @@
-import { ScheduleForm } from '../../../schedule.types.ts';
+import { ScheduleForm } from '../../../schedule.types';
 
 /**
  * Initial values
