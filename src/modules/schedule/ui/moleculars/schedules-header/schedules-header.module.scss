@@ -3,10 +3,12 @@
 .container {
   @include flex(center, center);
 
+  position: relative;
   margin-top: 20px;
 }
 
 .day {
+  cursor: pointer;
   width: 380px;
   text-align: center;
   margin: 0 15px;
@@ -21,4 +23,13 @@
   &_right {
     transform: rotateY(180deg);
   }
+}
+
+.calendar {
+  width: 400px;
+  position: absolute;
+  z-index: 111;
+  top: 50px;
+  left: 50%;
+  border: 1px solid $grey;
 }

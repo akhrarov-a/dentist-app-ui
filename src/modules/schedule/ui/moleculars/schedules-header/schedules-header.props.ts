@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
+import { SelectInfo } from 'antd/es/calendar/generateCalendar';
 import moment from 'moment';
 import { useStore } from '@store';
 import { months, weekdays } from './schedules-header.constants';
+
+const format = 'YYYY-MM-DD';
 
 /**
  * <SchedulesHeader /> props
@@ -12,6 +15,7 @@ const useSchedulesHeaderProps = () => {
   } = useStore();
 
   const [selectedDate, setSelectedDate] = useState(moment());
+  const [showCalendar, setShowCalendar] = useState(false);
 
   const headerText = useMemo(() => {
     const weekday = weekdays[selectedDate.weekday()];
@@ -28,14 +32,28 @@ const useSchedulesHeaderProps = () => {
     setSelectedDate(selectedDate.clone().add(1, 'day'));
   };
 
+  const toggleShowCalendar = () => {
+    setShowCalendar(!showCalendar);
+  };
+
+  const onCalendarChange = (date: any, selectInfo: SelectInfo) => {
+    if (selectInfo.source !== 'date') return;
+
+    toggleShowCalendar();
+    setSelectedDate(moment(date.format(format)));
+  };
+
   useEffect(() => {
-    getSchedules(selectedDate.format('YYYY-MM-DD'));
+    getSchedules(selectedDate.format(format));
   }, [selectedDate]);
 
   return {
+    showCalendar,
     headerText,
+    toggleShowCalendar,
     onPreviousDayClick,
-    onNextDayClick
+    onNextDayClick,
+    onCalendarChange
   };
 };
 
