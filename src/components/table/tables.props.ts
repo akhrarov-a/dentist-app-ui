@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { TablePaginationConfig, TableProps } from 'antd';
-import { useClickOutside } from '@hooks';
+import { useClickOutside, useModal } from '@hooks';
 import { useLocales } from '@locales';
 
 /**
@@ -95,6 +95,7 @@ const useTablesProps = ({ columns, moreColumn = [] }: TablesProps) => {
   const popoverModel = usePopover();
 
   const { t } = useLocales();
+  const modal = useModal();
 
   const [allColumns, setAllColumns] = useState<_Column[]>([]);
   const [_columns, setColumns] = useState<any[]>([]);
@@ -143,6 +144,7 @@ const useTablesProps = ({ columns, moreColumn = [] }: TablesProps) => {
 
   return {
     t,
+    modal,
     popoverModel,
     moreColumn,
     allColumns,

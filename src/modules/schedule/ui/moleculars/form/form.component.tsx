@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Button, DatePicker, Form as AntdForm, Input, Select, TimePicker } from 'antd';
+import { Button, DatePicker, Form as AntdForm, Input, Modal, Select, TimePicker } from 'antd';
 import { rules } from '@utils';
 import { useStore } from '@store';
 import { useLocales } from '@locales';
+import { useModal } from '@hooks';
 import { PatientsAdapter } from '@patients/lib';
 import { ScheduleForm } from '../../../schedule.types';
 import { FormProps } from './form.props';
@@ -18,6 +19,8 @@ const Form = observer<FormProps>(
       patients: { loading, patients, debounceFindPatients }
     } = useStore();
 
+    const modal = useModal();
+
     const [form] = AntdForm.useForm();
 
     const { t } = useLocales();
@@ -30,6 +33,20 @@ const Form = observer<FormProps>(
 
     return (
       <div className={styles.container}>
+        <Modal
+          okText={t('form.actions.yes')}
+          cancelText={t('form.actions.no')}
+          visible={modal.isOpen}
+          onOk={() => {
+            onDelete();
+            modal.close();
+          }}
+          onCancel={modal.close}
+          centered
+        >
+          {t('form.areYouSureToDelete')}
+        </Modal>
+
         <AntdForm<ScheduleForm>
           form={form}
           layout="vertical"
@@ -52,7 +69,7 @@ const Form = observer<FormProps>(
 
             <div className={styles.header_buttons}>
               {isEdit && (
-                <Button htmlType="button" onClick={onDelete}>
+                <Button htmlType="button" onClick={modal.open}>
                   {t('table.delete')}
                 </Button>
               )}

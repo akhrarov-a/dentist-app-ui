@@ -1,4 +1,4 @@
-import { Button, Checkbox, Table } from 'antd';
+import { Button, Checkbox, Modal, Table } from 'antd';
 import * as uuid from 'uuid';
 import { hoc } from '@utils';
 import { useTablesProps } from './tables.props';
@@ -11,6 +11,7 @@ const Tables = hoc.observer(
   useTablesProps,
   ({
     t,
+    modal,
     onCreate,
     addText,
     rowSelection,
@@ -35,10 +36,25 @@ const Tables = hoc.observer(
     <div className={styles.tables}>
       <div className={styles.tables_header}>
         {filters ?? <div />}
+
+        <Modal
+          okText={t('form.actions.yes')}
+          cancelText={t('form.actions.no')}
+          visible={modal.isOpen}
+          onOk={() => {
+            onDelete();
+            modal.close();
+          }}
+          onCancel={modal.close}
+          centered
+        >
+          {t('form.areYouSureToDelete')}
+        </Modal>
+
         <div className={styles.tables_buttonContainer}>
           <Button
             className={styles.tables_buttonContainer_button}
-            onClick={onDelete}
+            onClick={modal.open}
             disabled={deleteDisabled}
             type="primary"
           >

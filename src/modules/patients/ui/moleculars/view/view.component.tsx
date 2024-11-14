@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import { useLocales } from '@locales';
+import { useModal } from '@hooks';
 import { PatientForm } from '../../../patients.types';
 import styles from './view.module.scss';
 
@@ -19,15 +20,31 @@ const View = observer(
   }) => {
     const { t } = useLocales();
 
+    const modal = useModal();
+
     return (
       <div className={styles.container}>
+        <Modal
+          okText={t('form.actions.yes')}
+          cancelText={t('form.actions.no')}
+          visible={modal.isOpen}
+          onOk={() => {
+            onDelete();
+            modal.close();
+          }}
+          onCancel={modal.close}
+          centered
+        >
+          {t('form.areYouSureToDelete')}
+        </Modal>
+
         <div className={styles.header}>
           <p>
             {t('patients.form.patient')}: {initialValues.firstname || ''}{' '}
             {initialValues.lastname || ''}
           </p>
           <div className={styles.header_buttons}>
-            <Button onClick={onDelete}>{t('table.delete')}</Button>
+            <Button onClick={modal.open}>{t('table.delete')}</Button>
             <Button type="primary" onClick={toggleEditing}>
               {t('form.actions.edit')}
             </Button>
