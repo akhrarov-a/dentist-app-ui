@@ -129,6 +129,36 @@
           "ru": "Введите э-майл"
         }
       },
+      "patient": {
+        "label": {
+          "en": "Patient",
+          "ru": "Пациент"
+        },
+        "placeholder": {
+          "en": "Select a patient",
+          "ru": "Выберите пациента"
+        }
+      },
+      "timeStartFrom": {
+        "label": {
+          "en": "Time start from",
+          "ru": "Время начала"
+        },
+        "placeholder": {
+          "en": "Select time start from",
+          "ru": "Выберите время начала"
+        }
+      },
+      "timeEndTo": {
+        "label": {
+          "en": "Time end to",
+          "ru": "Время окончания"
+        },
+        "placeholder": {
+          "en": "Select time end to",
+          "ru": "Выберите время окончания"
+        }
+      },
       "description": {
         "label": {
           "en": "Description",

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Button, Form as AntdForm, Input } from 'antd';
+import { Button, Form as AntdForm, Input, Select, TimePicker } from 'antd';
 import { rules } from '@utils';
 import { useLocales } from '@locales';
 import { ScheduleForm } from '../../../schedule.types';
@@ -11,7 +11,7 @@ import styles from './form.module.scss';
  * <Form />
  */
 const Form = observer<FormProps>(
-  ({ isEdit, initialValues, onSubmit, toggleEditing }) => {
+  ({ isEdit, initialValues, onSubmit, onDelete }) => {
     const [form] = AntdForm.useForm();
 
     const { t } = useLocales();
@@ -29,6 +29,9 @@ const Form = observer<FormProps>(
           layout="vertical"
           initialValues={initialValues}
           onFinish={onSubmit}
+          onValuesChange={(changedValues, allValues) => {
+            console.log(allValues);
+          }}
           scrollToFirstError
         >
           <div className={styles.header}>
@@ -40,8 +43,8 @@ const Form = observer<FormProps>(
 
             <div className={styles.header_buttons}>
               {isEdit && (
-                <Button htmlType="button" onClick={toggleEditing}>
-                  {t('form.actions.cancel')}
+                <Button htmlType="button" onClick={onDelete}>
+                  {t('form.actions.delete')}
                 </Button>
               )}
 
@@ -51,64 +54,44 @@ const Form = observer<FormProps>(
             </div>
           </div>
 
+          <AntdForm.Item
+            label={t('form.fields.patient.label')}
+            name="patient"
+            rules={[rules.required(t('form.validations.required'))]}
+            validateTrigger="onBlur"
+          >
+            <Select
+              loading={false}
+              placeholder={t('form.fields.patient.placeholder')}
+              options={[]}
+              optionFilterProp="label"
+            />
+          </AntdForm.Item>
+
           <div className={styles.content}>
             <AntdForm.Item
-              label={t('form.fields.firstname.label')}
-              name="firstname"
-              rules={[
-                rules.whitespace(
-                  t('form.validations.shouldNotStartOrEndWithWhitespace')
-                ),
-                rules.required(t('form.validations.required'))
-              ]}
+              label={t('form.fields.timeStartFrom.label')}
+              name="timeStartFrom"
+              rules={[rules.required(t('form.validations.required'))]}
               validateTrigger="onBlur"
             >
-              <Input placeholder={t('form.fields.firstname.placeholder')} />
+              <TimePicker
+                placeholder={t('form.fields.timeStartFrom.placeholder')}
+                style={{ width: '100%' }}
+                showSecond={false}
+              />
             </AntdForm.Item>
 
             <AntdForm.Item
-              label={t('form.fields.phone.label')}
-              name="phone"
-              rules={[
-                rules.whitespace(
-                  t('form.validations.shouldNotStartOrEndWithWhitespace')
-                ),
-                rules.required(t('form.validations.required'))
-              ]}
+              label={t('form.fields.timeEndTo.label')}
+              name="timeEndTo"
+              rules={[rules.required(t('form.validations.required'))]}
               validateTrigger="onBlur"
             >
-              <Input placeholder={t('form.fields.phone.placeholder')} />
-            </AntdForm.Item>
-
-            <AntdForm.Item
-              label={t('form.fields.lastname.label')}
-              name="lastname"
-              rules={[
-                rules.whitespace(
-                  t('form.validations.shouldNotStartOrEndWithWhitespace')
-                ),
-                rules.required(t('form.validations.required'))
-              ]}
-              validateTrigger="onBlur"
-            >
-              <Input placeholder={t('form.fields.lastname.placeholder')} />
-            </AntdForm.Item>
-
-            <AntdForm.Item
-              label={t('form.fields.email.label')}
-              name="email"
-              rules={[
-                rules.email(t('form.validations.email')),
-                rules.whitespace(
-                  t('form.validations.shouldNotStartOrEndWithWhitespace')
-                ),
-                rules.required(t('form.validations.required'))
-              ]}
-              validateTrigger="onBlur"
-            >
-              <Input
-                type="email"
-                placeholder={t('form.fields.email.placeholder')}
+              <TimePicker
+                placeholder={t('form.fields.timeEndTo.placeholder')}
+                style={{ width: '100%' }}
+                showSecond={false}
               />
             </AntdForm.Item>
           </div>
@@ -119,7 +102,8 @@ const Form = observer<FormProps>(
             rules={[
               rules.whitespace(
                 t('form.validations.shouldNotStartOrEndWithWhitespace')
-              )
+              ),
+              rules.required(t('form.validations.required'))
             ]}
             validateTrigger="onBlur"
           >

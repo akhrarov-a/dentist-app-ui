@@ -7,7 +7,7 @@ type FormProps = {
   isEdit?: boolean;
   initialValues: ScheduleForm;
   onSubmit: (values: ScheduleForm) => void;
-  toggleEditing?: () => void;
+  onDelete?: () => void;
 };
 
 export type { FormProps };

@@ -78,7 +78,7 @@ class ScheduleStore {
       );
 
       message.success('Successfully created');
-      navigate(`/schedules/${response.data.id}`);
+      navigate(`/schedule/${response.data.id}`);
     } catch (error) {
       message.error('Something went wrong');
     } finally {
@@ -86,7 +86,7 @@ class ScheduleStore {
     }
   };
 
-  public updateSchedule = async (data: ScheduleForm, callback: () => void) => {
+  public updateSchedule = async (data: ScheduleForm) => {
     this.global.showLoader();
 
     try {
@@ -100,8 +100,6 @@ class ScheduleStore {
       this.clearInitialValues();
 
       await this.getScheduleById(this.currentScheduleId);
-
-      callback();
     } catch (error) {
       message.error('Something went wrong');
     } finally {

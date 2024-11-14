@@ -3,7 +3,7 @@ import { Login, ResetPassword } from '@auth';
 import { Redirect } from '@components';
 import { CreatePatient, PatientsList, UpdatePatient } from '@patients';
 import { Profile } from '@profile';
-import { Schedule } from '@schedule';
+import { CreateAppointment, Schedule, UpdateAppointment } from '@schedule';
 import { App } from './app';
 
 /**
@@ -44,11 +44,11 @@ const router = createBrowserRouter([
         children: [
           {
             path: '/schedule/create',
-            element: <div>Create appointment</div>
+            element: <CreateAppointment />
           },
           {
             path: '/schedule/:id',
-            element: <div>Update appointment</div>
+            element: <UpdateAppointment />
           },
           {
             path: '',

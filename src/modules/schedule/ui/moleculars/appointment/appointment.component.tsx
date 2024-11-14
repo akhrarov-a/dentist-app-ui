@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { ScheduleContract } from '@api';
 import { slots } from '../slots/slots.constants';
@@ -9,6 +10,8 @@ const format = 'HH:mm';
  * <Appointment />
  */
 const Appointment = ({ appointment }: { appointment: ScheduleContract }) => {
+  const navigate = useNavigate();
+
   const top = useMemo(() => {
     const startTime = moment(appointment.startTime).format('HH:00');
     const startTimeMinutes = parseInt(
@@ -35,7 +38,11 @@ const Appointment = ({ appointment }: { appointment: ScheduleContract }) => {
   }, [appointment]);
 
   return (
-    <div className={styles.container} style={{ top, height }}>
+    <div
+      className={styles.container}
+      style={{ top, height }}
+      onClick={() => navigate(`/schedule/${appointment.id}`)}
+    >
       <div className={styles.content}>
         <div className={styles.content_left}>
           <p>
