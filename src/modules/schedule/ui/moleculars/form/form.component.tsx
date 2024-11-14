@@ -34,8 +34,8 @@ const Form = observer<FormProps>(
           <div className={styles.header}>
             <p>
               {isEdit
-                ? `${t('patients.form.editLabel')}: ${initialValues.startTime || ''} ${initialValues.endTime || ''}`
-                : t('patients.form.createLabel')}
+                ? `${t('schedule.form.editLabel')}: ${initialValues.startTime || ''} ${initialValues.endTime || ''}`
+                : t('schedule.form.createLabel')}
             </p>
 
             <div className={styles.header_buttons}>

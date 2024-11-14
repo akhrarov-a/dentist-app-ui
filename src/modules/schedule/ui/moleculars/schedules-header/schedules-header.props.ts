@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SelectInfo } from 'antd/es/calendar/generateCalendar';
 import moment from 'moment';
 import { useStore } from '@store';
 import { useClickOutside } from '@hooks';
+import { useLocales } from '@locales';
 import { months, weekdays } from './schedules-header.constants';
 
 const format = 'YYYY-MM-DD';
@@ -12,6 +14,9 @@ const format = 'YYYY-MM-DD';
  */
 const useSchedulesHeaderProps = () => {
   const divRef = useRef(null);
+  const navigate = useNavigate();
+
+  const { t } = useLocales();
 
   const {
     schedule: { getSchedules }
@@ -26,6 +31,10 @@ const useSchedulesHeaderProps = () => {
 
     return `${weekday} ${selectedDate.date()} ${month} ${selectedDate.year()}`;
   }, [selectedDate]);
+
+  const onAddAppointmentClick = () => {
+    navigate('/schedule/create');
+  };
 
   const onPreviousDayClick = () => {
     setSelectedDate(selectedDate.clone().subtract(1, 'day'));
@@ -55,9 +64,11 @@ const useSchedulesHeaderProps = () => {
   });
 
   return {
+    t,
     divRef,
     showCalendar,
     headerText,
+    onAddAppointmentClick,
     toggleShowCalendar,
     onPreviousDayClick,
     onNextDayClick,

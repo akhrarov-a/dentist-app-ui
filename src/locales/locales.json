@@ -191,6 +191,28 @@
       }
     }
   },
+  "schedule": {
+    "table": {
+      "addAppointment": {
+        "en": "Add appointment",
+        "ru": "Добавить запись"
+      }
+    },
+    "form": {
+      "appointment": {
+        "en": "Appointment",
+        "ru": "Запись"
+      },
+      "editLabel": {
+        "en": "Edit appointment",
+        "ru": "Редактирование записи"
+      },
+      "createLabel": {
+        "en": "Create appointment",
+        "ru": "Создание записи"
+      }
+    }
+  },
   "profile": {
     "title": {
       "en": "Profile",

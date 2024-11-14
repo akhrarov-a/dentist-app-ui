@@ -1,10 +1,16 @@
 @import '@styles/common.scss';
 
 .container {
-  @include flex(center, center);
-
+  display: grid;
+  grid-template-columns: 1fr 180px;
   position: relative;
   margin-top: 20px;
+}
+
+.content {
+  @include flex(center, center);
+
+  width: calc(100% + 180px);
 }
 
 .day {
