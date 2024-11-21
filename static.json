@@ -1,4 +1,4 @@
 {
-  "root": "build/",
+  "root": "dist/",
   "https_only": true
 }
