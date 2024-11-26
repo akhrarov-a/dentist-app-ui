@@ -86,8 +86,7 @@ const Form = observer<FormProps>(
               rules={[
                 rules.whitespace(
                   t('form.validations.shouldNotStartOrEndWithWhitespace')
-                ),
-                rules.required(t('form.validations.required'))
+                )
               ]}
               validateTrigger="onBlur"
             >
@@ -101,8 +100,7 @@ const Form = observer<FormProps>(
                 rules.email(t('form.validations.email')),
                 rules.whitespace(
                   t('form.validations.shouldNotStartOrEndWithWhitespace')
-                ),
-                rules.required(t('form.validations.required'))
+                )
               ]}
               validateTrigger="onBlur"
             >

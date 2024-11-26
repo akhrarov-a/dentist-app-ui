@@ -20,8 +20,13 @@ const required = (message = 'Required'): RuleObject => ({
 });
 
 const email = (message = 'Must be valid email'): RuleObject => ({
-  validator: async (rule, value) =>
-    !string().email().isValidSync(value) ? Promise.reject() : Promise.resolve(),
+  validator: async (rule, value) => {
+    if (!value?.length) return Promise.resolve();
+
+    return !string().email().isValidSync(value)
+      ? Promise.reject()
+      : Promise.resolve();
+  },
   message
 });
 

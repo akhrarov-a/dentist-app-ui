@@ -103,9 +103,15 @@ type GetPatientsParams = Partial<
  */
 type CreatePatientDto = Omit<
   PatientContract,
-  'id' | 'userId' | 'email' | 'description' | 'createdAt' | 'updatedAt'
+  | 'id'
+  | 'userId'
+  | 'lastname'
+  | 'email'
+  | 'description'
+  | 'createdAt'
+  | 'updatedAt'
 > &
-  Partial<Pick<PatientContract, 'email' | 'description'>>;
+  Partial<Pick<PatientContract, 'email' | 'description' | 'lastname'>>;
 
 /**
  * Update patient DTO
