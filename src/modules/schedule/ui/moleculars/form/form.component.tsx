@@ -110,12 +110,13 @@ const Form = observer<FormProps>(
               label={t('form.fields.timeStartFrom.label')}
               name="startTime"
               rules={[rules.required(t('form.validations.required'))]}
-              validateTrigger="onBlur"
+              validateDebounce={500}
             >
               <TimePicker
                 placeholder={t('form.fields.timeStartFrom.placeholder')}
                 style={{ width: '100%' }}
                 showSecond={false}
+                needConfirm={false}
               />
             </AntdForm.Item>
 
@@ -123,12 +124,13 @@ const Form = observer<FormProps>(
               label={t('form.fields.timeEndTo.label')}
               name="endTime"
               rules={[rules.required(t('form.validations.required'))]}
-              validateTrigger="onBlur"
+              validateDebounce={500}
             >
               <TimePicker
                 placeholder={t('form.fields.timeEndTo.placeholder')}
                 style={{ width: '100%' }}
                 showSecond={false}
+                needConfirm={false}
               />
             </AntdForm.Item>
           </div>
