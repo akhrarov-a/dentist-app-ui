@@ -18,6 +18,16 @@ class ScheduleService {
     });
 
   /**
+   * Get schedule by service
+   */
+  public getScheduleByService = (params: GetAppointmentsByServiceParams) =>
+    this.http.request<ApiResponseList<ScheduleContract>>({
+      url: '/appointments/by/service',
+      method: 'GET',
+      params
+    });
+
+  /**
    * Get schedule by date
    */
   public getScheduleByDate = (date: string) =>
@@ -88,6 +98,15 @@ type GetAppointmentsByPatientParams = {
 };
 
 /**
+ * Get appointments by service params
+ */
+type GetAppointmentsByServiceParams = {
+  page: number;
+  perPage: number;
+  service: number;
+};
+
+/**
  * Create schedule DTO
  */
 type CreateScheduleDto = Omit<
@@ -112,5 +131,6 @@ export type {
   ScheduleContract,
   CreateScheduleDto,
   UpdateScheduleDto,
-  GetAppointmentsByPatientParams
+  GetAppointmentsByPatientParams,
+  GetAppointmentsByServiceParams
 };

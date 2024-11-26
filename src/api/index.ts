@@ -1,4 +1,11 @@
-import { AuthService, HttpService, PatientsService, ProfileService, ScheduleService } from './services';
+import {
+  AuthService,
+  HttpService,
+  PatientsService,
+  ProfileService,
+  ScheduleService,
+  ServicesService
+} from './services';
 
 /**
  * Api service
@@ -8,6 +15,7 @@ class ApiService {
 
   public auth = new AuthService(this.http);
   public patients = new PatientsService(this.http);
+  public services = new ServicesService(this.http);
   public profile = new ProfileService(this.http);
   public schedule = new ScheduleService(this.http);
 }

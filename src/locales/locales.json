@@ -97,6 +97,36 @@
       }
     },
     "fields": {
+      "name": {
+        "label": {
+          "en": "Name",
+          "ru": "Имя"
+        },
+        "placeholder": {
+          "en": "Enter name",
+          "ru": "Введите имя"
+        }
+      },
+      "status": {
+        "label": {
+          "en": "Status",
+          "ru": "Статус"
+        },
+        "placeholder": {
+          "en": "Select status",
+          "ru": "Выберите статус"
+        },
+        "options": {
+          "active": {
+            "en": "Active",
+            "ru": "Активный"
+          },
+          "disabled": {
+            "en": "Disabled",
+            "ru": "Отключенный"
+          }
+        }
+      },
       "firstname": {
         "label": {
           "en": "Firstname",
@@ -226,6 +256,10 @@
       "en": "Patients",
       "ru": "Пациенты"
     },
+    "services": {
+      "en": "Services",
+      "ru": "Услуги"
+    },
     "users": {
       "en": "Users",
       "ru": "Пользователи"
@@ -257,9 +291,39 @@
           "ru": "Дата и время"
         },
         "services": {
-            "en": "Services",
-            "ru": "Услуги"
+          "en": "Services",
+          "ru": "Услуги"
+        },
+        "patient": {
+          "en": "Patient",
+          "ru": "Пациент"
+        },
+        "servicesDescription": {
+          "en": "Services description",
+          "ru": "Описание услуг"
         }
+      }
+    }
+  },
+  "services": {
+    "table": {
+      "addService": {
+        "en": "Add service",
+        "ru": "Добавить услугу"
+      }
+    },
+    "form": {
+      "service": {
+        "en": "Service",
+        "ru": "Услуга"
+      },
+      "editLabel": {
+        "en": "Edit service",
+        "ru": "Редактирование услуги"
+      },
+      "createLabel": {
+        "en": "Create service",
+        "ru": "Создание услуги"
       }
     }
   },

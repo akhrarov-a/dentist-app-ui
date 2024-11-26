@@ -1,13 +1,13 @@
 import { Fragment } from 'react';
 import { hoc } from '@utils';
 import { Form, View } from '../../moleculars';
-import { useUpdatePatientProps } from './update.props';
+import { useUpdateServiceProps } from './update.props';
 
 /**
- * <UpdatePatient />
+ * <UpdateService />
  */
-const UpdatePatient = hoc.observer(
-  useUpdatePatientProps,
+const UpdateService = hoc.observer(
+  useUpdateServiceProps,
   ({ isEditing, initialValues, onSubmit, onDelete, toggleEditing }) => (
     <Fragment>
       {isEditing ? (
@@ -28,4 +28,4 @@ const UpdatePatient = hoc.observer(
   )
 );
 
-export { UpdatePatient };
+export { UpdateService };

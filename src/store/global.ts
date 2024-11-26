@@ -6,6 +6,7 @@ import { AuthStore } from '@auth/auth.store';
 import { PatientsStore } from '@patients/patients.store';
 import { ProfileStore } from '@profile/profile.store';
 import { ScheduleStore } from '@schedule/schedule.store';
+import { ServicesStore } from '@services/services.store.ts';
 
 /**
  * Global store
@@ -16,6 +17,7 @@ class GlobalStore {
   public patients: PatientsStore;
   public profile: ProfileStore;
   public schedule: ScheduleStore;
+  public services: ServicesStore;
 
   constructor() {
     this.api = new ApiService();
@@ -23,6 +25,7 @@ class GlobalStore {
     this.patients = new PatientsStore(this);
     this.profile = new ProfileStore(this);
     this.schedule = new ScheduleStore(this);
+    this.services = new ServicesStore(this);
 
     makeAutoObservable(this, {}, { autoBind: true });
   }

@@ -22,6 +22,11 @@ const links = (
     role: UserRole.DENTIST
   },
   {
+    label: t('links.services'),
+    href: '/services',
+    role: UserRole.DENTIST
+  },
+  {
     label: t('links.users'),
     href: '/users',
     role: UserRole.ADMIN

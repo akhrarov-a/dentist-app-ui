@@ -1,8 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { Login, ResetPassword } from '@auth';
 import { Redirect } from '@components';
-import { CreatePatient, PatientsList, UpdatePatient } from '@patients';
 import { Profile } from '@profile';
+import { Login, ResetPassword } from '@auth';
+import { CreatePatient, PatientsList, UpdatePatient } from '@patients';
+import { CreateService, ServicesList, UpdateService } from '@services';
 import { CreateAppointment, Schedule, UpdateAppointment } from '@schedule';
 import { App } from './app';
 
@@ -36,6 +37,23 @@ const router = createBrowserRouter([
           {
             path: '',
             element: <PatientsList />
+          }
+        ]
+      },
+      {
+        path: '/services',
+        children: [
+          {
+            path: '/services/create',
+            element: <CreateService />
+          },
+          {
+            path: '/services/:id',
+            element: <UpdateService />
+          },
+          {
+            path: '',
+            element: <ServicesList />
           }
         ]
       },
