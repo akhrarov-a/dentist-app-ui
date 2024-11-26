@@ -5,6 +5,7 @@ import { ScheduleForm } from '../../../schedule.types';
  */
 const initialValues: ScheduleForm = {
   patientId: null,
+  services: [],
   description: null,
   date: null,
   startTime: null,
