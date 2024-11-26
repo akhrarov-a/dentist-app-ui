@@ -8,6 +8,10 @@
   background: $dark-blue;
   color: $white;
   border-radius: 5px;
+
+  &:hover {
+    background: lighten($dark-blue, 8%);
+  }
 }
 
 .content {

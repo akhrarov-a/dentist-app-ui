@@ -3,6 +3,7 @@ import { Button, Modal } from 'antd';
 import { useLocales } from '@locales';
 import { useModal } from '@hooks';
 import { PatientForm } from '../../../patients.types';
+import { AppointmentsHistoryTable } from '../appointments-history-table';
 import styles from './view.module.scss';
 
 /**
@@ -61,17 +62,19 @@ const View = observer(
           </div>
           <div className={styles.content_field}>
             <p>{t('form.fields.lastname.label')}</p>
-            <p>{initialValues.lastname}</p>
+            <p>{initialValues.lastname || '-'}</p>
           </div>
           <div className={styles.content_field}>
             <p>{t('form.fields.email.label')}</p>
-            <p>{initialValues.email}</p>
+            <p>{initialValues.email || '-'}</p>
           </div>
         </div>
         <div className={styles.content_field}>
           <p>{t('form.fields.description.label')}</p>
-          <p>{initialValues.description}</p>
+          <p>{initialValues.description || '-'}</p>
         </div>
+
+        <AppointmentsHistoryTable />
       </div>
     );
   }

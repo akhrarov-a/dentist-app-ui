@@ -11,7 +11,8 @@ const List = (patients: PatientContract[]) =>
 const Columns = (t: TranslationFunctionType): ColumnsType<PatientContract> => [
   {
     title: `${t('form.fields.firstname.label')} ${t('form.fields.lastname.label')}`,
-    render: (_, record) => `${record?.firstname} ${record?.lastname}`
+    render: (_, record) =>
+      `${record?.firstname || ''} ${record?.lastname || ''}`
   },
   {
     title: t('form.fields.phone.label'),

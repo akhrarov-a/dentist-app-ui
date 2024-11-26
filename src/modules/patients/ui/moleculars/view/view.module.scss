@@ -35,12 +35,16 @@
 
   &_field {
     p {
+      margin: 0;
+
       &:first-of-type {
+        margin-bottom: 10px;
         font-size: 13px;
         color: $grey;
       }
 
       &:last-of-type {
+        margin-bottom: 30px;
         font-size: 15px;
       }
     }

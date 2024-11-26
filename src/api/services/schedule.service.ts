@@ -8,13 +8,23 @@ class ScheduleService {
   public constructor(private http: HttpService) {}
 
   /**
-   * Get schedule for today
+   * Get schedule by patient
    */
-  public getScheduleForToday = (params: GetScheduleParams) =>
-    this.http.request<{ date: string; appointments: ScheduleContract[] }>({
-      url: '/appointments',
+  public getScheduleByPatient = (params: GetAppointmentsByPatientParams) =>
+    this.http.request<ApiResponseList<ScheduleContract>>({
+      url: '/appointments/by/patient',
       method: 'GET',
       params
+    });
+
+  /**
+   * Get schedule by date
+   */
+  public getScheduleByDate = (date: string) =>
+    this.http.request<{ date: string; appointments: ScheduleContract[] }>({
+      url: '/appointments/by/date',
+      method: 'GET',
+      params: { date }
     });
 
   /**
@@ -69,10 +79,12 @@ type ScheduleContract = CreateAndUpdateFields<{
 }>;
 
 /**
- * Get schedule params
+ * Get appointments by patient params
  */
-type GetScheduleParams = {
-  date: MomentDateTimeString;
+type GetAppointmentsByPatientParams = {
+  page: number;
+  perPage: number;
+  patient: number;
 };
 
 /**
@@ -98,7 +110,7 @@ type UpdateScheduleDto = Partial<
 export { ScheduleService };
 export type {
   ScheduleContract,
-  GetScheduleParams,
   CreateScheduleDto,
-  UpdateScheduleDto
+  UpdateScheduleDto,
+  GetAppointmentsByPatientParams
 };

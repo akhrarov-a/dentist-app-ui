@@ -157,6 +157,16 @@
           "ru": "Выберите дату"
         }
       },
+      "time": {
+        "label": {
+          "en": "Time",
+          "ru": "Время"
+        },
+        "placeholder": {
+          "en": "Select time",
+          "ru": "Выберите время"
+        }
+      },
       "timeStartFrom": {
         "label": {
           "en": "Time start from",
@@ -240,6 +250,16 @@
       "createLabel": {
         "en": "Create patient",
         "ru": "Создание пациента"
+      },
+      "appointmentHistoryTable": {
+        "dateAndTime": {
+          "en": "Date and time",
+          "ru": "Дата и время"
+        },
+        "services": {
+            "en": "Services",
+            "ru": "Услуги"
+        }
       }
     }
   },

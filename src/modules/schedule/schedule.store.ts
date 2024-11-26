@@ -2,7 +2,7 @@ import { NavigateFunction } from 'react-router-dom';
 import { makeAutoObservable, runInAction } from 'mobx';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
-import { ScheduleContract } from '@api';
+import { GetAppointmentsByPatientParams, ScheduleContract } from '@api';
 import { ScheduleForm } from './schedule.types';
 import { ScheduleAdapter } from './lib';
 
@@ -18,10 +18,17 @@ class ScheduleStore {
 
   public global: GlobalStore;
 
+  public schedulesForPatient: ScheduleContract[] = [];
+  public schedulesForPatientTotalAmount: number = 0;
+
   public schedules: ScheduleContract[] = [];
 
   public currentScheduleId: ScheduleContract['id'] = 0;
   public initialValues: ScheduleForm = {} as ScheduleForm;
+
+  public loading = {
+    schedulesForPatient: false
+  };
 
   public clearSchedules = () => {
     runInAction(() => {
@@ -39,9 +46,7 @@ class ScheduleStore {
     this.global.showLoader();
 
     try {
-      const response = await this.global.api.schedule.getScheduleForToday({
-        date
-      });
+      const response = await this.global.api.schedule.getScheduleByDate(date);
 
       runInAction(() => {
         this.schedules = response.data.appointments;
@@ -131,6 +136,30 @@ class ScheduleStore {
       message.error('Something went wrong');
     } finally {
       this.global.hideLoader();
+    }
+  };
+
+  public getScheduleForPatient = async (
+    params: GetAppointmentsByPatientParams
+  ) => {
+    runInAction(() => {
+      this.loading.schedulesForPatient = true;
+    });
+
+    try {
+      const response =
+        await this.global.api.schedule.getScheduleByPatient(params);
+
+      runInAction(() => {
+        this.schedulesForPatient = response.data.data;
+        this.schedulesForPatientTotalAmount = response.data.totalAmount;
+      });
+    } catch (error) {
+      message.error('Something went wrong');
+    } finally {
+      runInAction(() => {
+        this.loading.schedulesForPatient = false;
+      });
     }
   };
 }
