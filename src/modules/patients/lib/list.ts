@@ -10,20 +10,12 @@ const List = (patients: PatientContract[]) =>
 
 const Columns = (t: TranslationFunctionType): ColumnsType<PatientContract> => [
   {
-    title: t('table.ID'),
-    dataIndex: 'id'
-  },
-  {
     title: `${t('form.fields.firstname.label')} ${t('form.fields.lastname.label')}`,
     render: (_, record) => `${record?.firstname} ${record?.lastname}`
   },
   {
     title: t('form.fields.phone.label'),
     dataIndex: 'phone'
-  },
-  {
-    title: t('form.fields.email.label'),
-    dataIndex: 'email'
   },
   {
     title: t('form.fields.description.label'),
@@ -34,6 +26,10 @@ const Columns = (t: TranslationFunctionType): ColumnsType<PatientContract> => [
 const MoreColumns = (
   t: TranslationFunctionType
 ): ColumnsType<PatientContract> => [
+  {
+    title: t('form.fields.email.label'),
+    dataIndex: 'email'
+  },
   {
     title: t('table.createdAt'),
     dataIndex: 'createdAt'
