@@ -16,7 +16,8 @@ const useUpdateServiceProps = () => {
       initialValues,
       getServiceById,
       updateService,
-      deleteService
+      deleteService,
+      clearInitialValues
     }
   } = useStore();
 
@@ -29,6 +30,13 @@ const useUpdateServiceProps = () => {
   const onDelete = () => {
     deleteService(currentServiceId, navigate);
   };
+
+  useEffect(
+    () => () => {
+      clearInitialValues();
+    },
+    []
+  );
 
   useEffect(() => {
     if (!params?.id) return;

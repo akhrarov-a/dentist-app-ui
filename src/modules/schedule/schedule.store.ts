@@ -42,6 +42,7 @@ class ScheduleStore {
 
   public clearInitialValues = () => {
     runInAction(() => {
+      this.currentScheduleId = 0;
       this.initialValues = {} as ScheduleForm;
     });
   };
@@ -143,6 +144,13 @@ class ScheduleStore {
     }
   };
 
+  public clearSchedulesForPatient = () => {
+    runInAction(() => {
+      this.schedulesForPatient = [];
+      this.schedulesForPatientTotalAmount = 0;
+    });
+  };
+
   public getScheduleForPatient = async (
     params: GetAppointmentsByPatientParams
   ) => {
@@ -165,6 +173,13 @@ class ScheduleStore {
         this.loading.schedulesForPatient = false;
       });
     }
+  };
+
+  public clearSchedulesForService = () => {
+    runInAction(() => {
+      this.schedulesForService = [];
+      this.schedulesForServiceTotalAmount = 0;
+    });
   };
 
   public getScheduleForService = async (

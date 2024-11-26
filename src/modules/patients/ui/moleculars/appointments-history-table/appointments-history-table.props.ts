@@ -14,7 +14,8 @@ const useAppointmentsHistoryTableProps = () => {
       loading,
       schedulesForPatient,
       schedulesForPatientTotalAmount,
-      getScheduleForPatient
+      getScheduleForPatient,
+      clearSchedulesForPatient
     },
     patients: { currentPatientId, initialValues }
   } = useStore();
@@ -24,6 +25,13 @@ const useAppointmentsHistoryTableProps = () => {
   const currentPatientName = useMemo(
     () => `${initialValues?.firstname || ''} ${initialValues?.lastname || ''}`,
     [initialValues]
+  );
+
+  useEffect(
+    () => () => {
+      clearSchedulesForPatient();
+    },
+    []
   );
 
   useEffect(() => {

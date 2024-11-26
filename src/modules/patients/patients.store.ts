@@ -38,6 +38,7 @@ class PatientsStore {
 
   public clearInitialValues = () => {
     runInAction(() => {
+      this.currentPatientId = 0;
       this.initialValues = {} as PatientForm;
     });
   };

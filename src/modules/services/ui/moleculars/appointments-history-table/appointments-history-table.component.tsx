@@ -16,6 +16,7 @@ const AppointmentsHistoryTable = hoc.observer(
     t,
     loading,
     name,
+    currentServiceId,
     pagination,
     schedulesForService,
     schedulesForServiceTotalAmount
@@ -48,8 +49,11 @@ const AppointmentsHistoryTable = hoc.observer(
         render: (_, record) => (
           <div className={styles.column}>
             <p>
-              {record.description}
-              {/* TODO: set correct description from appointment contract */}
+              {
+                record.services.find(
+                  service => service.service.id === currentServiceId
+                )?.description
+              }
             </p>
           </div>
         )

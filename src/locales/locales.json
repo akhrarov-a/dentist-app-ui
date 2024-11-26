@@ -177,6 +177,26 @@
           "ru": "Выберите пациента"
         }
       },
+      "services": {
+        "label": {
+          "en": "Services",
+          "ru": "Услуги"
+        },
+        "placeholder": {
+          "en": "Select services",
+          "ru": "Выберите услуги"
+        },
+        "description": {
+          "label": {
+            "en": "Description",
+            "ru": "Описание"
+          },
+          "placeholder": {
+            "en": "Enter description",
+            "ru": "Введите описание"
+          }
+        }
+      },
       "date": {
         "label": {
           "en": "Date",

@@ -16,7 +16,8 @@ const useUpdatePatientProps = () => {
       initialValues,
       getPatientById,
       updatePatient,
-      deletePatient
+      deletePatient,
+      clearInitialValues
     }
   } = useStore();
 
@@ -29,6 +30,13 @@ const useUpdatePatientProps = () => {
   const onDelete = () => {
     deletePatient(currentPatientId, navigate);
   };
+
+  useEffect(
+    () => () => {
+      clearInitialValues();
+    },
+    []
+  );
 
   useEffect(() => {
     if (!params?.id) return;

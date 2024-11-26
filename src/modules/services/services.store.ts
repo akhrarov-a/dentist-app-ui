@@ -38,6 +38,7 @@ class ServicesStore {
 
   public clearInitialValues = () => {
     runInAction(() => {
+      this.currentServiceId = 0;
       this.initialValues = {} as ServiceForm;
     });
   };

@@ -14,12 +14,20 @@ const useAppointmentsHistoryTableProps = () => {
       loading,
       schedulesForService,
       schedulesForServiceTotalAmount,
-      getScheduleForService
+      getScheduleForService,
+      clearSchedulesForService
     },
     services: { currentServiceId, initialValues }
   } = useStore();
 
   const pagination = usePagination();
+
+  useEffect(
+    () => () => {
+      clearSchedulesForService();
+    },
+    []
+  );
 
   useEffect(() => {
     if (!currentServiceId) return;
@@ -33,6 +41,7 @@ const useAppointmentsHistoryTableProps = () => {
 
   return {
     t,
+    currentServiceId,
     name: initialValues.name,
     loading: loading.schedulesForService,
     pagination,

@@ -37,10 +37,11 @@ const AppointmentsHistoryTable = hoc.observer(
         title: t('patients.form.appointmentHistoryTable.services'),
         render: (_, record) => (
           <div className={styles.column}>
-            <p>
-              {record.description}
-              {/* TODO: set correct description from appointment contract */}
-            </p>
+            {record.services.map(service => (
+              <p>
+                {service.service.name} - {service.description}
+              </p>
+            ))}
           </div>
         )
       }

@@ -15,13 +15,23 @@ const useUpdatePatientProps = () => {
       initialValues,
       getScheduleById,
       updateSchedule,
-      deleteSchedule
-    }
+      deleteSchedule,
+      clearInitialValues
+    },
+    services: { getServices }
   } = useStore();
 
   const onDelete = () => {
     deleteSchedule(currentScheduleId, navigate);
   };
+
+  useEffect(() => {
+    getServices(1, 100000);
+
+    return () => {
+      clearInitialValues();
+    };
+  }, []);
 
   useEffect(() => {
     if (!params?.id) return;

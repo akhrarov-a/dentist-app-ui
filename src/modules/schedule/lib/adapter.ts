@@ -19,6 +19,10 @@ class ScheduleAdapter {
     return {
       patientId: schedule.patient.id,
       date: dayjs(schedule.startTime),
+      services: schedule.services.map(service => ({
+        id: service.service.id,
+        description: service.description
+      })),
       startTime: dayjs(schedule.startTime),
       endTime: dayjs(schedule.endTime),
       description: schedule.description
@@ -30,6 +34,7 @@ class ScheduleAdapter {
   ): CreateScheduleDto {
     return {
       patientId: schedule.patientId,
+      services: schedule.services,
       startTime: getIsoString(schedule.startTime, schedule.date),
       endTime: getIsoString(schedule.endTime, schedule.date),
       description: schedule.description
@@ -41,6 +46,7 @@ class ScheduleAdapter {
   ): UpdateScheduleDto {
     return {
       patientId: schedule.patientId,
+      services: schedule.services,
       startTime: getIsoString(schedule.startTime, schedule.date),
       endTime: getIsoString(schedule.endTime, schedule.date),
       description: schedule.description

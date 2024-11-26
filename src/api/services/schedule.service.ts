@@ -1,5 +1,6 @@
 import { HttpService } from './http.service';
 import { PatientContract } from './patients.service';
+import { ServiceContract } from './services.service.ts';
 
 /**
  * Schedule service
@@ -82,6 +83,10 @@ class ScheduleService {
 type ScheduleContract = CreateAndUpdateFields<{
   id: number;
   patient: PatientContract;
+  services: {
+    service: ServiceContract;
+    description: string;
+  }[];
   startTime: DateTimeString;
   endTime: DateTimeString;
   description: string;
@@ -111,19 +116,36 @@ type GetAppointmentsByServiceParams = {
  */
 type CreateScheduleDto = Omit<
   ScheduleContract,
-  'id' | 'userId' | 'description' | 'createdAt' | 'updatedAt' | 'patient'
+  | 'id'
+  | 'userId'
+  | 'description'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'patient'
+  | 'services'
 > &
   Partial<Pick<ScheduleContract, 'description'>> & {
     patientId: PatientContract['id'];
+    services: {
+      id: ServiceContract['id'];
+      description: string;
+    }[];
   };
 
 /**
  * Update schedule DTO
  */
 type UpdateScheduleDto = Partial<
-  Omit<ScheduleContract, 'userId' | 'createdAt' | 'updatedAt' | 'patient'>
+  Omit<
+    ScheduleContract,
+    'userId' | 'createdAt' | 'updatedAt' | 'patient' | 'services'
+  >
 > & {
   patientId: PatientContract['id'];
+  services: {
+    id: ServiceContract['id'];
+    description: string;
+  }[];
 };
 
 export { ScheduleService };

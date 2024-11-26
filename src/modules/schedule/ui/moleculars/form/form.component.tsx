@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Button, DatePicker, Form as AntdForm, Input, Modal, Select, TimePicker } from 'antd';
 import { rules } from '@utils';
 import { useStore } from '@store';
 import { useLocales } from '@locales';
 import { useModal } from '@hooks';
+import { ServicesAdapter } from '@services/lib';
 import { PatientsAdapter } from '@patients/lib';
 import { ScheduleForm } from '../../../schedule.types';
 import { FormProps } from './form.props';
@@ -16,7 +17,8 @@ import styles from './form.module.scss';
 const Form = observer<FormProps>(
   ({ isEdit, initialValues, onSubmit, onDelete }) => {
     const {
-      patients: { loading, patients, debounceFindPatients }
+      patients: { loading, patients, debounceFindPatients },
+      services
     } = useStore();
 
     const modal = useModal();
@@ -25,10 +27,50 @@ const Form = observer<FormProps>(
 
     const { t } = useLocales();
 
+    const [servicesDescriptions, setServicesDescriptions] = useState<
+      ScheduleForm['services']
+    >([]);
+
+    const onServicesDescriptionsChange = (
+      serviceId: number,
+      description: string
+    ) => {
+      if (
+        servicesDescriptions.some(
+          serviceDescription => serviceDescription.id === serviceId
+        )
+      ) {
+        setServicesDescriptions(
+          servicesDescriptions.map(serviceDescription =>
+            serviceDescription.id === serviceId
+              ? {
+                  ...serviceDescription,
+                  description
+                }
+              : serviceDescription
+          )
+        );
+
+        return;
+      }
+
+      setServicesDescriptions([
+        ...servicesDescriptions,
+        {
+          id: serviceId,
+          description
+        }
+      ]);
+    };
+
     useEffect(() => {
       if (!Object.keys(initialValues || {}).length) return;
 
-      form.setFieldsValue(initialValues);
+      form.setFieldsValue({
+        ...initialValues,
+        services: initialValues.services?.map(service => service.id) || []
+      });
+      setServicesDescriptions(initialValues.services || []);
     }, [initialValues]);
 
     return (
@@ -51,7 +93,9 @@ const Form = observer<FormProps>(
           form={form}
           layout="vertical"
           initialValues={initialValues}
-          onFinish={onSubmit}
+          onFinish={values =>
+            onSubmit({ ...values, services: servicesDescriptions })
+          }
           scrollToFirstError
         >
           <div className={styles.header}>
@@ -94,6 +138,48 @@ const Form = observer<FormProps>(
               filterOption={false}
               showSearch
             />
+          </AntdForm.Item>
+
+          <AntdForm.Item
+            label={t('form.fields.services.label')}
+            name="services"
+            rules={[rules.required(t('form.validations.required'))]}
+            validateTrigger="onBlur"
+          >
+            <Select
+              mode="multiple"
+              loading={services.loading.services}
+              placeholder={t('form.fields.services.placeholder')}
+              options={ServicesAdapter.serviceContractToOptionsList(
+                services.services
+              )}
+            />
+          </AntdForm.Item>
+
+          <AntdForm.Item noStyle shouldUpdate>
+            {formInstance => {
+              const servicesValues: number[] =
+                formInstance.getFieldValue('services');
+
+              return servicesValues?.map(service => (
+                <div className={styles.description}>
+                  <p>{services.services.find(s => s.id === service)?.name}:</p>
+                  <Input.TextArea
+                    placeholder={t(
+                      'form.fields.services.description.placeholder'
+                    )}
+                    value={
+                      servicesDescriptions.find(
+                        serviceDescription => serviceDescription.id === service
+                      )?.description
+                    }
+                    onChange={event =>
+                      onServicesDescriptionsChange(service, event.target.value)
+                    }
+                  />
+                </div>
+              ));
+            }}
           </AntdForm.Item>
 
           <AntdForm.Item
