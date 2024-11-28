@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { DateType } from '@api';
 import { hoc, weekdays } from '@utils';
 import { Appointment, ScheduleParams, Slots } from '../../moleculars';
@@ -51,8 +51,8 @@ const Schedule = hoc.observer(
             }}
           >
             {schedulesByDate.map(schedules => {
-              const date = moment(schedules.date);
-              const weekday = weekdays[date.weekday()];
+              const date = dayjs(schedules.date);
+              const weekday = weekdays[date.day()];
 
               return (
                 <div

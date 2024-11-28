@@ -2,8 +2,6 @@
 
 type DateTimeString = string;
 
-type MomentDateTimeString = string; //'1991-01-01'
-
 type ApiResponseList<T> = {
   data: T[];
   totalAmount: number;

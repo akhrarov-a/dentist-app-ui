@@ -52,7 +52,7 @@ class ScheduleStore {
     ...params
   }: GetAppointmentsParams & {
     t: TranslationFunctionType;
-    date?: MomentDateTimeString;
+    date?: DateTimeString;
     type?: DateType;
     showLoader?: boolean;
   }) => {

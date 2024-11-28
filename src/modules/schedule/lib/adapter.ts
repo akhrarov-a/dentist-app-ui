@@ -1,10 +1,9 @@
 import dayjs, { Dayjs } from 'dayjs';
-import moment from 'moment';
 import { CreateScheduleDto, ScheduleContract, UpdateScheduleDto } from '@api';
 import { ScheduleForm } from '../schedule.types';
 
 const getIsoString = (time: Dayjs, date: Dayjs) =>
-  moment(
+  dayjs(
     `${time.format('HH:mm')} ${date.format('YYYY-MM-DD')}`,
     'HH:mm YYYY-MM-DD'
   ).toISOString();
