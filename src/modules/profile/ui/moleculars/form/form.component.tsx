@@ -2,9 +2,9 @@ import { observer } from 'mobx-react-lite';
 import { Button, Form as AntdForm, Input } from 'antd';
 import { rules } from '@utils';
 import { useStore } from '@store';
+import { useLocales } from '@locales';
 import { ProfileForm } from '../../../profile.types';
 import styles from './form.module.scss';
-import { useLocales } from '@locales';
 
 /**
  * <Form />
@@ -19,7 +19,7 @@ const Form = observer(({ toggleEditing }: { toggleEditing?: () => void }) => {
   const [form] = AntdForm.useForm();
 
   const onSubmit = (values: ProfileForm) => {
-    updateProfile(values, toggleEditing);
+    updateProfile(t, values, toggleEditing);
   };
 
   return (

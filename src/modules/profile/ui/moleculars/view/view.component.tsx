@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import { Button } from 'antd';
 import { useStore } from '@store';
-import styles from './view.module.scss';
 import { useLocales } from '@locales';
+import styles from './view.module.scss';
 
 /**
  * <View />

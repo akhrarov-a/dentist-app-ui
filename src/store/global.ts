@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import cookie from 'react-cookies';
 import { ApiService } from '@api';
-import { Languages } from '@locales';
+import { Languages, TranslationFunctionType } from '@locales';
 import { AuthStore } from '@auth/auth.store';
 import { PatientsStore } from '@patients/patients.store';
 import { ProfileStore } from '@profile/profile.store';
@@ -39,7 +39,7 @@ class GlobalStore {
     });
   };
 
-  public autoLogin = async () => {
+  public autoLogin = async (t: TranslationFunctionType) => {
     const accessToken = cookie.load('accessToken');
     const refreshToken = cookie.load('refreshToken');
 
@@ -58,7 +58,7 @@ class GlobalStore {
         this.auth.isAuthorized = true;
       });
 
-      await this.profile.getUser();
+      await this.profile.getUser(t);
     } catch (error) {
       console.log(error);
     }
