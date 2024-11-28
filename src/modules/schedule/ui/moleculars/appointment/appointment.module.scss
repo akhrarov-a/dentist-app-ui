@@ -15,6 +15,14 @@
   &:hover {
     background: lighten($dark-blue, 10%);
   }
+
+  &_past {
+    background: $grey;
+
+    &:hover {
+      background: lighten($grey, 10%);
+    }
+  }
 }
 
 .content {

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { DateType, ScheduleContract } from '@api';
 import { slots } from '../slots/slots.constants';
 import styles from './appointment.module.scss';
@@ -21,9 +21,9 @@ const Appointment = ({
   const navigate = useNavigate();
 
   const top = useMemo(() => {
-    const startTime = moment(appointment.startTime).format('HH:00');
+    const startTime = dayjs(appointment.startTime).format('HH:00');
     const startTimeMinutes = parseInt(
-      moment(appointment.startTime).format('mm')
+      dayjs(appointment.startTime).format('mm')
     );
     const percentage = startTimeMinutes / 60;
 
@@ -31,13 +31,13 @@ const Appointment = ({
   }, [appointment]);
 
   const height = useMemo(() => {
-    const startTime = moment(appointment.startTime).format('HH:00');
-    const endTime = moment(appointment.endTime).format('HH:00');
+    const startTime = dayjs(appointment.startTime).format('HH:00');
+    const endTime = dayjs(appointment.endTime).format('HH:00');
 
     const startTimeMinutes = parseInt(
-      moment(appointment.startTime).format('mm')
+      dayjs(appointment.startTime).format('mm')
     );
-    const endTimeMinutes = parseInt(moment(appointment.endTime).format('mm'));
+    const endTimeMinutes = parseInt(dayjs(appointment.endTime).format('mm'));
 
     const startIndex = slots.indexOf(startTime);
     const endIndex = slots.indexOf(endTime);
@@ -47,7 +47,12 @@ const Appointment = ({
 
   return (
     <div
-      className={styles.container}
+      className={classNames(styles.container, {
+        [styles.container_past]: dayjs(appointment.endTime).isBefore(
+          new Date(),
+          'day'
+        )
+      })}
       style={{ top, height }}
       onClick={() => navigate(`/schedule/${appointment.id}`)}
     >
@@ -61,8 +66,8 @@ const Appointment = ({
             {appointment.patient.firstname} {appointment.patient.lastname}
           </p>
           <p>
-            {moment(appointment.startTime).format(format)} -{' '}
-            {moment(appointment.endTime).format(format)}
+            {dayjs(appointment.startTime).format(format)} -{' '}
+            {dayjs(appointment.endTime).format(format)}
           </p>
         </div>
         <div>

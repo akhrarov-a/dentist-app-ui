@@ -1,6 +1,6 @@
 import * as uuid from 'uuid';
 import { Table } from 'antd';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { ColumnsType } from 'antd/es/table';
 import { hoc, months, weekdays } from '@utils';
 import { ScheduleContract } from '@api';
@@ -24,9 +24,9 @@ const AppointmentsHistoryTable = hoc.observer(
       {
         title: t('table.dateAndTime'),
         render: (_, record) => {
-          const date = moment(record.startTime);
+          const date = dayjs(record.startTime);
 
-          const weekday = weekdays[date.weekday()];
+          const weekday = weekdays[date.day()];
           const month = months[date.month()];
 
           return (
@@ -35,8 +35,8 @@ const AppointmentsHistoryTable = hoc.observer(
                 {date.date()} {month} {date.year()}
               </p>
               <p>
-                {weekday} - {moment(record.startTime).format('HH:mm')}-
-                {moment(record.endTime).format('HH:mm')}
+                {weekday} - {dayjs(record.startTime).format('HH:mm')}-
+                {dayjs(record.endTime).format('HH:mm')}
               </p>
             </div>
           );
@@ -65,6 +65,11 @@ const AppointmentsHistoryTable = hoc.observer(
         <Table
           key={uuid.v4()}
           className={styles.tables_table}
+          rowClassName={record =>
+            dayjs(record.endTime).isBefore(new Date(), 'day')
+              ? styles.row_past
+              : ''
+          }
           bordered
           columns={columns}
           dataSource={schedules}

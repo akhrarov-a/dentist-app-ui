@@ -9,3 +9,9 @@
     margin: 0;
   }
 }
+
+.row {
+  &_past {
+    background: $light-grey;
+  }
+}

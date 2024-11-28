@@ -24,6 +24,7 @@ const Form = observer<FormProps>(
 
     const { t } = useLocales();
 
+    const [isPastAppointment, setIsPastAppointment] = useState(false);
     const [servicesDescriptions, setServicesDescriptions] = useState<
       ScheduleForm['services']
     >([]);
@@ -67,7 +68,11 @@ const Form = observer<FormProps>(
         ...initialValues,
         services: initialValues.services?.map(service => service.id) || []
       });
+
+      if (!isEdit) return;
+
       setServicesDescriptions(initialValues.services || []);
+      setIsPastAppointment(initialValues.date.isBefore(new Date(), 'day'));
     }, [initialValues]);
 
     return (
@@ -91,7 +96,15 @@ const Form = observer<FormProps>(
           layout="vertical"
           initialValues={initialValues}
           onFinish={values =>
-            onSubmit({ ...values, services: servicesDescriptions })
+            onSubmit({
+              ...values,
+              services: values.services.map(service => ({
+                id: service as any,
+                description: servicesDescriptions.find(
+                  description => description.id === (service as any)
+                )?.description
+              }))
+            })
           }
           scrollToFirstError
         >
@@ -188,6 +201,7 @@ const Form = observer<FormProps>(
             validateTrigger="onBlur"
           >
             <DatePicker
+              disabled={isPastAppointment}
               placeholder={t('form.fields.date.placeholder')}
               style={{ width: '100%' }}
             />
