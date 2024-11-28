@@ -40,8 +40,8 @@ class AuthService {
     this.accessToken = accessToken;
     this.refreshToken = refreshToken;
 
-    cookie.save('accessToken', accessToken, {});
-    cookie.save('refreshToken', refreshToken, { maxAge: 604800 });
+    cookie.save('accessToken', accessToken, { path: '/' });
+    cookie.save('refreshToken', refreshToken, { path: '/', maxAge: 604800 });
   };
 
   /**
