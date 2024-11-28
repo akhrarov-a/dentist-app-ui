@@ -22,7 +22,7 @@ const useLoginProps = () => {
     t,
     form,
     onLogin: (authCredentials: AuthCredentials) =>
-      login(authCredentials, navigate)
+      login(t, authCredentials, navigate)
   };
 };
 

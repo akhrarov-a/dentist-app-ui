@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useStore } from '@store';
+import { useLocales } from '@locales';
+import { ScheduleForm } from '../../../schedule.types.ts';
 
 /**
  * <UpdatePatient /> props
@@ -8,6 +10,8 @@ import { useStore } from '@store';
 const useUpdatePatientProps = () => {
   const params = useParams();
   const navigate = useNavigate();
+
+  const { t } = useLocales();
 
   const {
     schedule: {
@@ -22,11 +26,11 @@ const useUpdatePatientProps = () => {
   } = useStore();
 
   const onDelete = () => {
-    deleteSchedule(currentScheduleId, navigate);
+    deleteSchedule(t, currentScheduleId, navigate);
   };
 
   useEffect(() => {
-    getServices(1, 100000);
+    getServices(t, 1, 100000);
 
     return () => {
       clearInitialValues();
@@ -36,12 +40,12 @@ const useUpdatePatientProps = () => {
   useEffect(() => {
     if (!params?.id) return;
 
-    getScheduleById(+params.id);
+    getScheduleById(t, +params.id);
   }, [params]);
 
   return {
     initialValues,
-    onSubmit: updateSchedule,
+    onSubmit: (values: ScheduleForm) => updateSchedule(t, values),
     onDelete
   };
 };

@@ -75,6 +75,14 @@
     "servicesDescription": {
       "en": "Services description",
       "ru": "Описание услуг"
+    },
+    "appointmentHistoryForPatient": {
+      "en": "Appointment history for patient",
+      "ru": "История записей пацента"
+    },
+    "appointmentHistoryForService": {
+      "en": "Appointment history for service",
+      "ru": "История записей услуги"
     }
   },
   "form": {
@@ -334,5 +342,27 @@
       "en": "Profile",
       "ru": "Профиль"
     }
+  },
+  "errors": {
+    "somethingWentWrong": {
+      "en": "Something went wrong",
+      "ru": "Что-то пошло не так"
+    },
+    "invalidCredentials": {
+      "en": "Invalid credentials",
+      "ru": "Неверный логин или пароль"
+    }
+  },
+  "successfullyCreated": {
+    "en": "Successfully created",
+    "ru": "Успешно создано"
+  },
+  "successfullyUpdated": {
+    "en": "Successfully updated",
+    "ru": "Успешно обновлено"
+  },
+  "successfullyDeleted": {
+    "en": "Successfully deleted",
+    "ru": "Успешно удалено"
   }
 }

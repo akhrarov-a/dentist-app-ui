@@ -4,6 +4,7 @@ import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { GetServicesParams, ServiceContract } from '@api';
 import { filterOutFalsyValuesFromObject } from '@utils';
+import { TranslationFunctionType } from '@locales';
 import { ServicesAdapter } from './lib';
 import { ServiceForm } from './services.types.ts';
 
@@ -43,7 +44,11 @@ class ServicesStore {
     });
   };
 
-  public getServices = async (page: number, perPage: number) => {
+  public getServices = async (
+    t: TranslationFunctionType,
+    page: number,
+    perPage: number
+  ) => {
     this.global.showLoader();
 
     try {
@@ -58,13 +63,16 @@ class ServicesStore {
         this.totalServices = response.data.totalAmount;
       });
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }
   };
 
-  public getServiceById = async (id: ServiceContract['id']) => {
+  public getServiceById = async (
+    t: TranslationFunctionType,
+    id: ServiceContract['id']
+  ) => {
     this.global.showLoader();
 
     try {
@@ -77,13 +85,14 @@ class ServicesStore {
         );
       });
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }
   };
 
   public createService = async (
+    t: TranslationFunctionType,
     data: ServiceForm,
     navigate: NavigateFunction
   ) => {
@@ -94,16 +103,20 @@ class ServicesStore {
         ServicesAdapter.serviceFormToCreateServiceDto(data)
       );
 
-      message.success('Successfully created');
+      message.success(t('successfullyCreated'));
       navigate(`/services/${response.data.id}`);
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }
   };
 
-  public updateService = async (data: ServiceForm, callback: () => void) => {
+  public updateService = async (
+    t: TranslationFunctionType,
+    data: ServiceForm,
+    callback: () => void
+  ) => {
     this.global.showLoader();
 
     try {
@@ -114,21 +127,22 @@ class ServicesStore {
         ...ServicesAdapter.serviceFormToUpdateServiceDto(data)
       });
 
-      message.success('Successfully updated');
+      message.success(t('successfullyUpdated'));
 
       this.clearInitialValues();
 
-      await this.getServiceById(currentServiceId);
+      await this.getServiceById(t, currentServiceId);
 
       callback();
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }
   };
 
   public deleteService = async (
+    t: TranslationFunctionType,
     id: ServiceContract['id'],
     navigate: NavigateFunction
   ) => {
@@ -137,25 +151,28 @@ class ServicesStore {
     try {
       await this.global.api.services.deleteServiceById(id);
 
-      message.success('Successfully deleted');
+      message.success(t('successfullyDeleted'));
 
       navigate('/services');
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }
   };
 
-  public deleteServices = async (ids: ServiceContract['id'][]) => {
+  public deleteServices = async (
+    t: TranslationFunctionType,
+    ids: ServiceContract['id'][]
+  ) => {
     this.global.showLoader();
 
     try {
       await this.global.api.services.deleteServicesByIds(ids);
 
-      message.success('Successfully deleted');
+      message.success(t('successfullyDeleted'));
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }

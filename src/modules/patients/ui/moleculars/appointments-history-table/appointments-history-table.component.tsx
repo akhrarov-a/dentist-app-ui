@@ -2,7 +2,7 @@ import * as uuid from 'uuid';
 import { Table } from 'antd';
 import moment from 'moment';
 import { ColumnsType } from 'antd/es/table';
-import { hoc } from '@utils';
+import { hoc, months, weekdays } from '@utils';
 import { ScheduleContract } from '@api';
 import { useAppointmentsHistoryTableProps } from './appointments-history-table.props.ts';
 import styles from './appointments-history-table.module.scss';
@@ -23,15 +23,24 @@ const AppointmentsHistoryTable = hoc.observer(
     const columns: ColumnsType<ScheduleContract> = [
       {
         title: t('table.dateAndTime'),
-        render: (_, record) => (
-          <div className={styles.column}>
-            <p>{moment(record.startTime).format('DD MMMM YYYY')}</p>
-            <p>
-              {moment(record.startTime).format('HH:mm')}-
-              {moment(record.endTime).format('HH:mm')}
-            </p>
-          </div>
-        )
+        render: (_, record) => {
+          const date = moment(record.startTime);
+
+          const weekday = weekdays[date.weekday()];
+          const month = months[date.month()];
+
+          return (
+            <div className={styles.column}>
+              <p>
+                {date.date()} {month} {date.year()}
+              </p>
+              <p>
+                {weekday} - {moment(record.startTime).format('HH:mm')}-
+                {moment(record.endTime).format('HH:mm')}
+              </p>
+            </div>
+          );
+        }
       },
       {
         title: t('table.services'),
@@ -50,7 +59,9 @@ const AppointmentsHistoryTable = hoc.observer(
 
     return (
       <div className={styles.container}>
-        <p>{currentPatientName} appointments history:</p>
+        <p>
+          {t('table.appointmentHistoryForPatient')} {currentPatientName}:
+        </p>
         <Table
           key={uuid.v4()}
           className={styles.tables_table}

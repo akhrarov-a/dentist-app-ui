@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { TableColumnsType, TablePaginationConfig } from 'antd';
+import { TranslationFunctionType, useLocales } from '@locales';
 
 /**
  * Table actions
@@ -8,8 +9,12 @@ import { TableColumnsType, TablePaginationConfig } from 'antd';
 type TableActions<T> = {
   moduleName: string;
   total: number;
-  deleteMany?: (ids: number[]) => Promise<any>;
-  getData: (page: number, perPage: number) => Promise<void>;
+  deleteMany?: (t: TranslationFunctionType, ids: number[]) => Promise<any>;
+  getData: (
+    t: TranslationFunctionType,
+    page: number,
+    perPage: number
+  ) => Promise<void>;
   columns?: TableColumnsType<any>;
   moreColumns?: TableColumnsType<any>;
   getCheckboxProps?: (value: T) => any;
@@ -24,6 +29,8 @@ const useTableActions = <T extends { id: number | string }>(
 ) => {
   const [search] = useSearchParams();
   const navigate = useNavigate();
+
+  const { t } = useLocales();
 
   const [loading, setLoading] = useState(false);
   const [selectedRowId, setSelectedRowId] = useState<number[]>([]);
@@ -53,7 +60,7 @@ const useTableActions = <T extends { id: number | string }>(
   ) => {
     setLoading(true);
 
-    await store.getData(paginationConfig.current, paginationConfig.pageSize);
+    await store.getData(t, paginationConfig.current, paginationConfig.pageSize);
 
     setLoading(false);
   };
@@ -73,7 +80,7 @@ const useTableActions = <T extends { id: number | string }>(
   const onDelete = async () => {
     if (!store.deleteMany) return;
 
-    await store.deleteMany(selectedRowId);
+    await store.deleteMany(t, selectedRowId);
     setSelectedRowId(null);
 
     await loadData();

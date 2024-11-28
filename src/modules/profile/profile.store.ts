@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { ProfileContract } from '@api';
+import { TranslationFunctionType } from '@locales';
 import { ProfileAdapter } from './lib';
 import { ProfileForm } from './profile.types';
 
@@ -20,7 +21,7 @@ class ProfileStore {
   public user: ProfileContract = {} as ProfileContract;
   public initialValues: ProfileForm = {} as ProfileForm;
 
-  public getUser = async () => {
+  public getUser = async (t: TranslationFunctionType) => {
     this.global.showLoader();
 
     try {
@@ -33,13 +34,17 @@ class ProfileStore {
         );
       });
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }
   };
 
-  public updateProfile = async (data: ProfileForm, callback: () => void) => {
+  public updateProfile = async (
+    t: TranslationFunctionType,
+    data: ProfileForm,
+    callback: () => void
+  ) => {
     this.global.showLoader();
 
     try {
@@ -47,13 +52,13 @@ class ProfileStore {
         ProfileAdapter.profileFormToUpdateProfileDto(data)
       );
 
-      message.success('Successfully updated');
+      message.success(t('successfullyUpdated'));
 
-      await this.getUser();
+      await this.getUser(t);
 
       callback();
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }

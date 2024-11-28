@@ -4,6 +4,7 @@ import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { GetPatientsParams, PatientContract } from '@api';
 import { debounce, filterOutFalsyValuesFromObject } from '@utils';
+import { TranslationFunctionType } from '@locales';
 import { PatientForm } from './patients.types';
 import { PatientsAdapter } from './lib';
 
@@ -43,7 +44,11 @@ class PatientsStore {
     });
   };
 
-  public getPatients = async (page: number, perPage: number) => {
+  public getPatients = async (
+    t: TranslationFunctionType,
+    page: number,
+    perPage: number
+  ) => {
     this.global.showLoader();
 
     try {
@@ -58,13 +63,16 @@ class PatientsStore {
         this.totalPatients = response.data.totalAmount;
       });
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }
   };
 
-  public getPatientById = async (id: PatientContract['id']) => {
+  public getPatientById = async (
+    t: TranslationFunctionType,
+    id: PatientContract['id']
+  ) => {
     this.global.showLoader();
 
     try {
@@ -77,13 +85,14 @@ class PatientsStore {
         );
       });
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }
   };
 
   public createPatient = async (
+    t: TranslationFunctionType,
     data: PatientForm,
     navigate: NavigateFunction
   ) => {
@@ -94,16 +103,20 @@ class PatientsStore {
         PatientsAdapter.patientFormToCreatePatientDto(data)
       );
 
-      message.success('Successfully created');
+      message.success(t('successfullyCreated'));
       navigate(`/patients/${response.data.id}`);
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }
   };
 
-  public updatePatient = async (data: PatientForm, callback: () => void) => {
+  public updatePatient = async (
+    t: TranslationFunctionType,
+    data: PatientForm,
+    callback: () => void
+  ) => {
     this.global.showLoader();
 
     try {
@@ -114,21 +127,22 @@ class PatientsStore {
         ...PatientsAdapter.patientFormToUpdatePatientDto(data)
       });
 
-      message.success('Successfully updated');
+      message.success(t('successfullyUpdated'));
 
       this.clearInitialValues();
 
-      await this.getPatientById(currentPatientId);
+      await this.getPatientById(t, currentPatientId);
 
       callback();
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }
   };
 
   public deletePatient = async (
+    t: TranslationFunctionType,
     id: PatientContract['id'],
     navigate: NavigateFunction
   ) => {
@@ -137,31 +151,34 @@ class PatientsStore {
     try {
       await this.global.api.patients.deletePatientById(id);
 
-      message.success('Successfully deleted');
+      message.success(t('successfullyDeleted'));
 
       navigate('/patients');
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }
   };
 
-  public deletePatients = async (ids: PatientContract['id'][]) => {
+  public deletePatients = async (
+    t: TranslationFunctionType,
+    ids: PatientContract['id'][]
+  ) => {
     this.global.showLoader();
 
     try {
       await this.global.api.patients.deletePatientsByIds(ids);
 
-      message.success('Successfully deleted');
+      message.success(t('successfullyDeleted'));
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }
   };
 
-  public findPatients = async (search: string) => {
+  public findPatients = async (t: TranslationFunctionType, search: string) => {
     const _search = search?.trim();
 
     if (!_search) return;
@@ -181,7 +198,7 @@ class PatientsStore {
         this.patients = response.data;
       });
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.loading = {
         ...this.loading,

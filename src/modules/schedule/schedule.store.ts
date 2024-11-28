@@ -3,6 +3,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { GetAppointmentsParams, ScheduleContract } from '@api';
+import { TranslationFunctionType } from '@locales';
 import { ScheduleForm } from './schedule.types';
 import { ScheduleAdapter } from './lib';
 
@@ -40,10 +41,12 @@ class ScheduleStore {
   };
 
   public getSchedules = async ({
+    t,
     date,
     showLoader = true,
     ...params
   }: GetAppointmentsParams & {
+    t: TranslationFunctionType;
     date?: MomentDateTimeString;
     showLoader?: boolean;
   }) => {
@@ -71,7 +74,7 @@ class ScheduleStore {
         });
       }
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       if (showLoader) {
         this.global.hideLoader();
@@ -83,7 +86,10 @@ class ScheduleStore {
     }
   };
 
-  public getScheduleById = async (id: ScheduleContract['id']) => {
+  public getScheduleById = async (
+    t: TranslationFunctionType,
+    id: ScheduleContract['id']
+  ) => {
     this.global.showLoader();
 
     try {
@@ -96,15 +102,16 @@ class ScheduleStore {
         );
       });
 
-      this.global.patients.findPatients(response.data.patient.firstname);
+      this.global.patients.findPatients(t, response.data.patient.firstname);
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }
   };
 
   public createSchedule = async (
+    t: TranslationFunctionType,
     data: ScheduleForm,
     navigate: NavigateFunction
   ) => {
@@ -115,39 +122,43 @@ class ScheduleStore {
         ScheduleAdapter.scheduleFormToCreateScheduleDto(data)
       );
 
-      message.success('Successfully created');
+      message.success(t('successfullyCreated'));
       navigate(`/schedule/${response.data.id}`);
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }
   };
 
-  public updateSchedule = async (data: ScheduleForm) => {
+  public updateSchedule = async (
+    t: TranslationFunctionType,
+    data: ScheduleForm
+  ) => {
     this.global.showLoader();
 
     try {
       const currentScheduleId = this.currentScheduleId;
-      
+
       await this.global.api.schedule.updateSchedule({
         id: currentScheduleId,
         ...ScheduleAdapter.scheduleFormToUpdateScheduleDto(data)
       });
 
-      message.success('Successfully updated');
+      message.success(t('successfullyUpdated'));
 
       this.clearInitialValues();
 
-      await this.getScheduleById(currentScheduleId);
+      await this.getScheduleById(t, currentScheduleId);
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }
   };
 
   public deleteSchedule = async (
+    t: TranslationFunctionType,
     id: ScheduleContract['id'],
     navigate: NavigateFunction
   ) => {
@@ -156,11 +167,11 @@ class ScheduleStore {
     try {
       await this.global.api.schedule.deleteScheduleById(id);
 
-      message.success('Successfully deleted');
+      message.success(t('successfullyDeleted'));
 
       navigate('/schedule');
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     } finally {
       this.global.hideLoader();
     }

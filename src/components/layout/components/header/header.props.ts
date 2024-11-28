@@ -38,7 +38,7 @@ const useHeaderProps = () => {
     t,
     profileText,
     _links,
-    logout,
+    logout: () => logout(t),
     onProfileClick
   };
 };

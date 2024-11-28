@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useStore } from '@store';
+import { useLocales } from '@locales';
 import { ServiceForm } from '../../../services.types.ts';
 
 /**
@@ -9,6 +10,8 @@ import { ServiceForm } from '../../../services.types.ts';
 const useUpdateServiceProps = () => {
   const params = useParams();
   const navigate = useNavigate();
+
+  const { t } = useLocales();
 
   const {
     services: {
@@ -28,7 +31,7 @@ const useUpdateServiceProps = () => {
   };
 
   const onDelete = () => {
-    deleteService(currentServiceId, navigate);
+    deleteService(t, currentServiceId, navigate);
   };
 
   useEffect(
@@ -41,13 +44,13 @@ const useUpdateServiceProps = () => {
   useEffect(() => {
     if (!params?.id) return;
 
-    getServiceById(+params.id);
+    getServiceById(t, +params.id);
   }, [params]);
 
   return {
     isEditing,
     initialValues,
-    onSubmit: (values: ServiceForm) => updateService(values, toggleEditing),
+    onSubmit: (values: ServiceForm) => updateService(t, values, toggleEditing),
     onDelete,
     toggleEditing
   };

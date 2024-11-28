@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useStore } from '@store';
+import { useLocales } from '@locales';
 import { PatientForm } from '../../../patients.types';
 
 /**
@@ -9,6 +10,8 @@ import { PatientForm } from '../../../patients.types';
 const useUpdatePatientProps = () => {
   const params = useParams();
   const navigate = useNavigate();
+
+  const { t } = useLocales();
 
   const {
     patients: {
@@ -28,7 +31,7 @@ const useUpdatePatientProps = () => {
   };
 
   const onDelete = () => {
-    deletePatient(currentPatientId, navigate);
+    deletePatient(t, currentPatientId, navigate);
   };
 
   useEffect(
@@ -41,13 +44,13 @@ const useUpdatePatientProps = () => {
   useEffect(() => {
     if (!params?.id) return;
 
-    getPatientById(+params.id);
+    getPatientById(t, +params.id);
   }, [params]);
 
   return {
     isEditing,
     initialValues,
-    onSubmit: (values: PatientForm) => updatePatient(values, toggleEditing),
+    onSubmit: (values: PatientForm) => updatePatient(t, values, toggleEditing),
     onDelete,
     toggleEditing
   };

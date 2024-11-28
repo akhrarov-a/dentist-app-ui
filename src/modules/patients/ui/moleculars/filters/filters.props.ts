@@ -29,7 +29,7 @@ const usePatientsTableFiltersProps = () => {
   };
 
   const onSearch = () => {
-    getPatients(+search.get('page'), +search.get('perPage'));
+    getPatients(t, +search.get('page'), +search.get('perPage'));
   };
 
   return {

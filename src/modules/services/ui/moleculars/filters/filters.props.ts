@@ -29,7 +29,7 @@ const useServicesTableFiltersProps = () => {
   };
 
   const onSearch = () => {
-    getServices(+search.get('page'), +search.get('perPage'));
+    getServices(t, +search.get('page'), +search.get('perPage'));
   };
 
   return {

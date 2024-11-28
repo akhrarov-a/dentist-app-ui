@@ -3,6 +3,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { message } from 'antd';
 import { AuthCredentials } from '@api';
 import { GlobalStore } from '@store';
+import { TranslationFunctionType } from '@locales';
 
 /**
  * Auth store
@@ -19,6 +20,7 @@ class AuthStore {
   public isAuthorized: boolean = false;
 
   public login = async (
+    t: TranslationFunctionType,
     authCredentials: AuthCredentials,
     navigate: NavigateFunction
   ) => {
@@ -29,15 +31,15 @@ class AuthStore {
         this.isAuthorized = true;
       });
 
-      await this.global.profile.getUser();
+      await this.global.profile.getUser(t);
 
       navigate('/');
     } catch (error) {
-      message.error('Invalid credentials');
+      message.error(t('errors.invalidCredentials'));
     }
   };
 
-  public logout = async () => {
+  public logout = async (t: TranslationFunctionType) => {
     try {
       await this.global.api.auth.logout();
 
@@ -47,7 +49,7 @@ class AuthStore {
 
       window.location.href = '/login';
     } catch (error) {
-      message.error('Something went wrong');
+      message.error(t('errors.somethingWentWrong'));
     }
   };
 }

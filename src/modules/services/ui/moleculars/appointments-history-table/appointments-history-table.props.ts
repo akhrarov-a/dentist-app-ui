@@ -33,6 +33,7 @@ const useAppointmentsHistoryTableProps = () => {
     if (!currentServiceId) return;
 
     getSchedules({
+      t,
       page: pagination.page,
       perPage: pagination.perPage,
       service: currentServiceId
