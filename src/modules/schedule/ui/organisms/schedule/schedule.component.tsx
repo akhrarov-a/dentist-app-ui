@@ -1,8 +1,10 @@
-import { hoc } from '@utils';
+import { Button } from 'antd';
+import moment from 'moment';
+import { DateType } from '@api';
+import { hoc, weekdays } from '@utils';
 import { Appointment, ScheduleParams, Slots } from '../../moleculars';
 import { useScheduleProps } from './schedule.props';
 import styles from './schedule.module.scss';
-import { Button } from 'antd';
 
 /**
  * <Schedule />
@@ -11,7 +13,7 @@ const Schedule = hoc.observer(
   useScheduleProps,
   ({
     t,
-    schedules,
+    schedulesByDate,
     headerText,
     dateType,
     selectedDate,
@@ -41,21 +43,38 @@ const Schedule = hoc.observer(
           </Button>
         </div>
         <div className={styles.appointments_content}>
-          <Slots />
+          <Slots isWeek={dateType === DateType.WEEK} />
           <div
             className={styles.appointments_content_content}
-            style={{ gridTemplateColumns: `repeat(7, 1fr)` }}
+            style={{
+              gridTemplateColumns: `repeat(${schedulesByDate.length}, 1fr)`
+            }}
           >
-            {[1, 2, 3, 4, 5, 6, 7].map(day => (
-              <div className={styles.appointments_content_content_day}>
-                <p className={styles.appointments_content_content_day_title}>
-                  {day}
-                </p>
-                {schedules.map(schedule => (
-                  <Appointment key={schedule.id} appointment={schedule} />
-                ))}
-              </div>
-            ))}
+            {schedulesByDate.map(schedules => {
+              const date = moment(schedules.date);
+              const weekday = weekdays[date.weekday()];
+
+              return (
+                <div
+                  key={schedules.date}
+                  id={schedules.date}
+                  className={styles.appointments_content_content_day}
+                >
+                  {dateType === DateType.WEEK && (
+                    <p
+                      className={styles.appointments_content_content_day_title}
+                    >
+                      {weekday}
+                      <br />
+                      {date.format('D')}
+                    </p>
+                  )}
+                  {schedules.appointments.map(schedule => (
+                    <Appointment key={schedule.id} appointment={schedule} />
+                  ))}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

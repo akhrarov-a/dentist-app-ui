@@ -53,7 +53,8 @@
         border-left: 1px solid $light-grey;
 
         &_title {
-          margin: 5px 0 0;
+          margin: 0 0;
+          line-height: 22px;
           text-align: center;
         }
       }

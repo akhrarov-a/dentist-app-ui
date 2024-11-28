@@ -1,3 +1,4 @@
+import { DateType } from '../models';
 import { HttpService } from './http.service';
 import { PatientContract } from './patients.service';
 import { ServiceContract } from './services.service.ts';
@@ -21,11 +22,14 @@ class ScheduleService {
   /**
    * Get schedule by date
    */
-  public getScheduleByDate = (date: string) =>
-    this.http.request<{ date: string; appointments: ScheduleContract[] }>({
+  public getScheduleByDate = (date: string, type: DateType) =>
+    this.http.request<{
+      date: string;
+      appointments: { date: string; appointments: ScheduleContract[] }[];
+    }>({
       url: '/appointments/by/date',
       method: 'GET',
-      params: { date }
+      params: { date, type }
     });
 
   /**

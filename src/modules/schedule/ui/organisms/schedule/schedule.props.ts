@@ -13,7 +13,7 @@ const format = 'YYYY-MM-DD';
  */
 const useScheduleProps = () => {
   const {
-    schedule: { schedules, clearSchedules, getSchedules }
+    schedule: { schedulesByDate, clearSchedules, getSchedules }
   } = useStore();
 
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const useScheduleProps = () => {
   const { t } = useLocales();
 
   const [selectedDate, setSelectedDate] = useState(dayjs());
-  const [dateType, setDateType] = useState(DateType.DAY);
+  const [dateType, setDateType] = useState(DateType.WEEK);
 
   const headerText = useMemo(() => {
     const weekday = weekdays[selectedDate.day()];
@@ -50,12 +50,12 @@ const useScheduleProps = () => {
   );
 
   useEffect(() => {
-    getSchedules({ t, date: selectedDate.format(format) });
-  }, [selectedDate]);
+    getSchedules({ t, date: selectedDate.format(format), type: dateType });
+  }, [selectedDate, dateType]);
 
   return {
     t,
-    schedules,
+    schedulesByDate,
     headerText,
     selectedDate,
     dateType,

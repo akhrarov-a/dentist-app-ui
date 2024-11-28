@@ -2,7 +2,7 @@ import { NavigateFunction } from 'react-router-dom';
 import { makeAutoObservable, runInAction } from 'mobx';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
-import { GetAppointmentsParams, ScheduleContract } from '@api';
+import { DateType, GetAppointmentsParams, ScheduleContract } from '@api';
 import { TranslationFunctionType } from '@locales';
 import { ScheduleForm } from './schedule.types';
 import { ScheduleAdapter } from './lib';
@@ -23,11 +23,15 @@ class ScheduleStore {
   public schedules: ScheduleContract[] = [];
   public schedulesTotalAmount: number = 0;
 
+  public schedulesByDate: { date: string; appointments: ScheduleContract[] }[] =
+    [];
+
   public currentScheduleId: ScheduleContract['id'] = 0;
   public initialValues: ScheduleForm = {} as ScheduleForm;
 
   public clearSchedules = () => {
     runInAction(() => {
+      this.schedulesByDate = [];
       this.schedules = [];
       this.schedulesTotalAmount = 0;
     });
@@ -43,11 +47,13 @@ class ScheduleStore {
   public getSchedules = async ({
     t,
     date,
+    type,
     showLoader = true,
     ...params
   }: GetAppointmentsParams & {
     t: TranslationFunctionType;
     date?: MomentDateTimeString;
+    type?: DateType;
     showLoader?: boolean;
   }) => {
     if (showLoader) {
@@ -60,10 +66,13 @@ class ScheduleStore {
 
     try {
       if (date) {
-        const response = await this.global.api.schedule.getScheduleByDate(date);
+        const response = await this.global.api.schedule.getScheduleByDate(
+          date,
+          type
+        );
 
         runInAction(() => {
-          this.schedules = response.data.appointments;
+          this.schedulesByDate = response.data.appointments;
         });
       } else {
         const response = await this.global.api.schedule.getSchedules(params);
