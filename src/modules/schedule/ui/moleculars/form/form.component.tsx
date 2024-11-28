@@ -16,10 +16,7 @@ import styles from './form.module.scss';
  */
 const Form = observer<FormProps>(
   ({ isEdit, initialValues, onSubmit, onDelete }) => {
-    const {
-      patients: { loading, patients, debounceFindPatients },
-      services
-    } = useStore();
+    const { patients, services } = useStore();
 
     const modal = useModal();
 
@@ -131,10 +128,12 @@ const Form = observer<FormProps>(
             validateTrigger="onBlur"
           >
             <Select
-              loading={loading.patients}
+              loading={patients.loading.patients}
               placeholder={t('form.fields.patient.placeholder')}
-              options={PatientsAdapter.patientContractToOptionsList(patients)}
-              onSearch={debounceFindPatients}
+              options={PatientsAdapter.patientContractToOptionsList(
+                patients.patients
+              )}
+              onSearch={patients.debounceFindPatients}
               filterOption={false}
               showSearch
             />

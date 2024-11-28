@@ -18,7 +18,7 @@ const useCreateAppointmentProps = () => {
   } = useStore();
 
   useEffect(() => {
-    getServices(t, 1, 100000);
+    getServices(t, 1, 100000, false);
   }, []);
 
   return {

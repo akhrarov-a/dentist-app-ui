@@ -41,7 +41,8 @@ const useAppointmentsHistoryTableProps = () => {
       t,
       page: pagination.page,
       perPage: pagination.perPage,
-      patient: currentPatientId
+      patient: currentPatientId,
+      showLoader: false
     });
   }, [pagination.page, pagination.perPage, currentPatientId]);
 

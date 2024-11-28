@@ -47,9 +47,16 @@ class ServicesStore {
   public getServices = async (
     t: TranslationFunctionType,
     page: number,
-    perPage: number
+    perPage: number,
+    showLoader = true
   ) => {
-    this.global.showLoader();
+    if (showLoader) {
+      this.global.showLoader();
+    } else {
+      runInAction(() => {
+        this.loading.services = true;
+      });
+    }
 
     try {
       const response = await this.global.api.services.getServices({
@@ -65,7 +72,13 @@ class ServicesStore {
     } catch (error) {
       message.error(t('errors.somethingWentWrong'));
     } finally {
-      this.global.hideLoader();
+      if (showLoader) {
+        this.global.hideLoader();
+      } else {
+        runInAction(() => {
+          this.loading.services = false;
+        });
+      }
     }
   };
 

@@ -30,7 +30,7 @@ const useUpdatePatientProps = () => {
   };
 
   useEffect(() => {
-    getServices(t, 1, 100000);
+    getServices(t, 1, 100000, false);
 
     return () => {
       clearInitialValues();

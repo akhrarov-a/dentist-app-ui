@@ -36,7 +36,8 @@ const useAppointmentsHistoryTableProps = () => {
       t,
       page: pagination.page,
       perPage: pagination.perPage,
-      service: currentServiceId
+      service: currentServiceId,
+      showLoader: false
     });
   }, [pagination.page, pagination.perPage, currentServiceId]);
 
