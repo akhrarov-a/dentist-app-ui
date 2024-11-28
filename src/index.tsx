@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
+import dayjs from 'dayjs';
 import ruRU from 'antd/locale/ru_RU';
 import { StoreProvider } from '@store';
 import { router } from './router';
 import './styles/globals.scss';
+
+dayjs.locale('ru_RU', { weekStart: 1 });
 
 /**
  * Create root

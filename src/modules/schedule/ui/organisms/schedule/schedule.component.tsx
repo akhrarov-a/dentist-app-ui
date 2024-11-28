@@ -70,7 +70,11 @@ const Schedule = hoc.observer(
                     </p>
                   )}
                   {schedules.appointments.map(schedule => (
-                    <Appointment key={schedule.id} appointment={schedule} />
+                    <Appointment
+                      key={schedule.id}
+                      dateType={dateType}
+                      appointment={schedule}
+                    />
                   ))}
                 </div>
               );

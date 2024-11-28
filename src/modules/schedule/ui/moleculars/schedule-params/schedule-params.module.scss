@@ -22,4 +22,15 @@
 
 .calendar {
   width: 300px;
+
+  &_day {
+    text-align: center;
+    transition: 0.2s all;
+
+    &_active,
+    &:hover {
+      background-color: $dark-blue;
+      color: $white;
+    }
+  }
 }

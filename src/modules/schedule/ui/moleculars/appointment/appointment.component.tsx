@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import classNames from 'classnames';
 import moment from 'moment';
-import { ScheduleContract } from '@api';
+import { DateType, ScheduleContract } from '@api';
 import { slots } from '../slots/slots.constants';
 import styles from './appointment.module.scss';
 
@@ -10,7 +11,13 @@ const format = 'HH:mm';
 /**
  * <Appointment />
  */
-const Appointment = ({ appointment }: { appointment: ScheduleContract }) => {
+const Appointment = ({
+  dateType,
+  appointment
+}: {
+  dateType: DateType;
+  appointment: ScheduleContract;
+}) => {
   const navigate = useNavigate();
 
   const top = useMemo(() => {
@@ -44,8 +51,12 @@ const Appointment = ({ appointment }: { appointment: ScheduleContract }) => {
       style={{ top, height }}
       onClick={() => navigate(`/schedule/${appointment.id}`)}
     >
-      <div className={styles.content}>
-        <div className={styles.content_left}>
+      <div
+        className={classNames(styles.content, {
+          [styles.content_day]: dateType === DateType.DAY
+        })}
+      >
+        <div className={styles.content_first}>
           <p>
             {appointment.patient.firstname} {appointment.patient.lastname}
           </p>
@@ -54,14 +65,14 @@ const Appointment = ({ appointment }: { appointment: ScheduleContract }) => {
             {moment(appointment.endTime).format(format)}
           </p>
         </div>
-        <p>
+        <div>
           {appointment.appointmentServices.map(appointmentService => (
             <p>
               {appointmentService.service.name} -{' '}
               {appointmentService.description}
             </p>
           ))}
-        </p>
+        </div>
       </div>
     </div>
   );
