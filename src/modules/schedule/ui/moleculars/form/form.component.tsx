@@ -133,7 +133,7 @@ const Form = observer<FormProps>(
               options={PatientsAdapter.patientContractToOptionsList(
                 patients.patients
               )}
-              onSearch={patients.debounceFindPatients}
+              onSearch={value => patients.debounceFindPatients(t, value)}
               filterOption={false}
               showSearch
             />

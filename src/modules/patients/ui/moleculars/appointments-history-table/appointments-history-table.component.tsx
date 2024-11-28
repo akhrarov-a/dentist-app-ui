@@ -60,7 +60,7 @@ const AppointmentsHistoryTable = hoc.observer(
     return (
       <div className={styles.container}>
         <p>
-          {t('table.appointmentHistoryForPatient')} {currentPatientName}:
+          {t('table.appointmentHistoryForPatient')}: {currentPatientName}
         </p>
         <Table
           key={uuid.v4()}
