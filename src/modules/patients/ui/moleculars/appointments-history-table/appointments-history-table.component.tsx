@@ -22,7 +22,7 @@ const AppointmentsHistoryTable = hoc.observer(
   }) => {
     const columns: ColumnsType<ScheduleContract> = [
       {
-        title: t('patients.form.appointmentHistoryTable.dateAndTime'),
+        title: t('table.dateAndTime'),
         render: (_, record) => (
           <div className={styles.column}>
             <p>{moment(record.startTime).format('DD MMMM YYYY')}</p>
@@ -34,7 +34,7 @@ const AppointmentsHistoryTable = hoc.observer(
         )
       },
       {
-        title: t('patients.form.appointmentHistoryTable.services'),
+        title: t('table.services'),
         render: (_, record) => (
           <div className={styles.column}>
             {record.appointmentServices.map(appointmentService => (

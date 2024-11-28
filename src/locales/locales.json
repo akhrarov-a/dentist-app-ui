@@ -32,10 +32,6 @@
     }
   },
   "table": {
-    "ID": {
-      "en": "ID",
-      "ru": "ИД"
-    },
     "search": {
       "en": "Search",
       "ru": "Поиск"
@@ -63,6 +59,22 @@
     "updatedAt": {
       "en": "Updated at",
       "ru": "Обновлено"
+    },
+    "dateAndTime": {
+      "en": "Date and time",
+      "ru": "Дата и время"
+    },
+    "services": {
+      "en": "Services",
+      "ru": "Услуги"
+    },
+    "patient": {
+      "en": "Patient",
+      "ru": "Пациент"
+    },
+    "servicesDescription": {
+      "en": "Services description",
+      "ru": "Описание услуг"
     }
   },
   "form": {
@@ -105,26 +117,6 @@
         "placeholder": {
           "en": "Enter name",
           "ru": "Введите имя"
-        }
-      },
-      "status": {
-        "label": {
-          "en": "Status",
-          "ru": "Статус"
-        },
-        "placeholder": {
-          "en": "Select status",
-          "ru": "Выберите статус"
-        },
-        "options": {
-          "active": {
-            "en": "Active",
-            "ru": "Активный"
-          },
-          "disabled": {
-            "en": "Disabled",
-            "ru": "Отключенный"
-          }
         }
       },
       "firstname": {
@@ -187,10 +179,6 @@
           "ru": "Выберите услуги"
         },
         "description": {
-          "label": {
-            "en": "Description",
-            "ru": "Описание"
-          },
           "placeholder": {
             "en": "Enter description",
             "ru": "Введите описание"
@@ -205,16 +193,6 @@
         "placeholder": {
           "en": "Select date",
           "ru": "Выберите дату"
-        }
-      },
-      "time": {
-        "label": {
-          "en": "Time",
-          "ru": "Время"
-        },
-        "placeholder": {
-          "en": "Select time",
-          "ru": "Выберите время"
         }
       },
       "timeStartFrom": {
@@ -304,24 +282,6 @@
       "createLabel": {
         "en": "Create patient",
         "ru": "Создание пациента"
-      },
-      "appointmentHistoryTable": {
-        "dateAndTime": {
-          "en": "Date and time",
-          "ru": "Дата и время"
-        },
-        "services": {
-          "en": "Services",
-          "ru": "Услуги"
-        },
-        "patient": {
-          "en": "Patient",
-          "ru": "Пациент"
-        },
-        "servicesDescription": {
-          "en": "Services description",
-          "ru": "Описание услуг"
-        }
       }
     }
   },

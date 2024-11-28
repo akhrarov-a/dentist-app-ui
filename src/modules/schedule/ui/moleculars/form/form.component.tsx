@@ -188,7 +188,10 @@ const Form = observer<FormProps>(
             rules={[rules.required(t('form.validations.required'))]}
             validateTrigger="onBlur"
           >
-            <DatePicker style={{ width: '100%' }} />
+            <DatePicker
+              placeholder={t('form.fields.date.placeholder')}
+              style={{ width: '100%' }}
+            />
           </AntdForm.Item>
 
           <div className={styles.content}>

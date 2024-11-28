@@ -12,10 +12,6 @@ const Columns = (t: TranslationFunctionType): ColumnsType<ServiceContract> => [
   {
     title: t('form.fields.name.label'),
     dataIndex: 'name'
-  },
-  {
-    title: t('form.fields.status.label'),
-    dataIndex: 'status'
   }
 ];
 
