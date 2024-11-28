@@ -1,0 +1,62 @@
+@import '@styles/common.scss';
+
+.container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+}
+
+.appointments {
+  position: relative;
+  background: $white;
+  border-radius: $border-radius;
+  margin-left: 15px;
+
+  &_header {
+    @include flex(space-between, center);
+
+    position: sticky;
+    z-index: 999;
+    width: calc(100% + 260px);
+    margin: 0 0 10px -315px;
+    padding: 22px 30px 20px;
+    top: -2px;
+    background: $white;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    &_title {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    &_button {
+      width: 180px;
+      height: 40px;
+      font-size: 16px;
+    }
+  }
+
+  &_content {
+    position: relative;
+    display: grid;
+    width: calc(100% - 30px);
+    height: 1200px;
+    padding: 15px;
+
+    &_content {
+      display: grid;
+      padding-left: 50px;
+
+      &_day {
+        position: relative;
+        border-left: 1px solid $light-grey;
+
+        &_title {
+          margin: 5px 0 0;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

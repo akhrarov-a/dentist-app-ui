@@ -1,4 +1,4 @@
 export * from './slots';
 export * from './appointment';
-export * from './schedules-header';
+export * from './schedule-params';
 export * from './form';

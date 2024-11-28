@@ -1,6 +1,11 @@
 @import '@styles/common.scss';
 
 .container {
+  position: absolute;
+  top: 45px;
+  left: 15px;
+  width: calc(100% - 30px);
+  z-index: 119;
 }
 
 .slot {
@@ -21,13 +26,5 @@
     width: 100%;
     height: 50px;
     border-top: 1px solid $light-grey;
-  }
-
-  &_line {
-    width: 0;
-    height: 52px;
-    margin-top: -4px;
-    margin-left: 4px;
-    border-left: 1px solid $light-grey;
   }
 }

@@ -1,4 +1,5 @@
 @import '../common.scss';
+@import 'public/fonts/style.css';
 
 h1,
 h2,
@@ -23,11 +24,13 @@ ol {
 html,
 body {
   scroll-behavior: smooth;
-  color: $dark-blue;
+  font-size: 16px;
 }
 
 body {
-  font-family: Roboto, Tahoma, sans-serif;
+  font-family: GothamPro, Tahoma, sans-serif;
+  color: $dark-blue;
+  background: $light-blue;
 }
 
 button, input {

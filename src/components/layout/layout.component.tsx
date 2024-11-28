@@ -18,7 +18,7 @@ const Layout = hoc.observer<PropsWithChildren, GlobalStore>(
     }, []);
 
     return (
-      <div className={styles.container}>
+      <div>
         {isAuthorized && (
           <Fragment>
             <Header />

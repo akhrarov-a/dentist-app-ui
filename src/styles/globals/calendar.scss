@@ -1,0 +1,18 @@
+
+#schedule-params {
+  .ant-picker-calendar-header {
+    padding: 20px 10px 0 !important;
+    background: transparent !important;
+    justify-content: space-between !important;
+    margin: 10px 0 20px !important;
+
+    .ant-radio-group {
+      display: none !important
+    }
+
+    .ant-select {
+      width: 140px !important;
+      height: 32px !important;
+    }
+  }
+}

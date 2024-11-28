@@ -320,6 +320,10 @@
       "addAppointment": {
         "en": "Add appointment",
         "ru": "Добавить запись"
+      },
+      "today": {
+        "en": "Today",
+        "ru": "Сегодня"
       }
     },
     "form": {

@@ -1,0 +1,25 @@
+@import '@styles/common.scss';
+
+.container {
+  position: sticky;
+  top: 100px;
+  margin-top: 100px;
+  height: fit-content;
+}
+
+.button {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 20px;
+}
+
+.select {
+  width: 100%;
+  height: 40px;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.calendar {
+  width: 300px;
+}
