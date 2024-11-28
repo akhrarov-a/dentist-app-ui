@@ -227,8 +227,7 @@ const Form = observer<FormProps>(
             rules={[
               rules.whitespace(
                 t('form.validations.shouldNotStartOrEndWithWhitespace')
-              ),
-              rules.required(t('form.validations.required'))
+              )
             ]}
             validateTrigger="onBlur"
           >

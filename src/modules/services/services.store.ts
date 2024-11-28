@@ -107,8 +107,10 @@ class ServicesStore {
     this.global.showLoader();
 
     try {
+      const currentServiceId = this.currentServiceId;
+
       await this.global.api.services.updateService({
-        id: this.currentServiceId,
+        id: currentServiceId,
         ...ServicesAdapter.serviceFormToUpdateServiceDto(data)
       });
 
@@ -116,7 +118,7 @@ class ServicesStore {
 
       this.clearInitialValues();
 
-      await this.getServiceById(this.currentServiceId);
+      await this.getServiceById(currentServiceId);
 
       callback();
     } catch (error) {

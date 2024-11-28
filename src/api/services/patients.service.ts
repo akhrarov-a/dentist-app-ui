@@ -85,14 +85,13 @@ type PatientContract = CreateAndUpdateFields<{
   phone: string;
   email: string;
   description: string;
-  userId: number;
 }>;
 
 /**
  * Get patients params
  */
 type GetPatientsParams = Partial<
-  Omit<PatientContract, 'id' | 'userId' | 'createdAt' | 'updatedAt'>
+  Omit<PatientContract, 'id' | 'createdAt' | 'updatedAt'>
 > & {
   page?: number;
   perPage?: number;
@@ -103,13 +102,7 @@ type GetPatientsParams = Partial<
  */
 type CreatePatientDto = Omit<
   PatientContract,
-  | 'id'
-  | 'userId'
-  | 'lastname'
-  | 'email'
-  | 'description'
-  | 'createdAt'
-  | 'updatedAt'
+  'id' | 'lastname' | 'email' | 'description' | 'createdAt' | 'updatedAt'
 > &
   Partial<Pick<PatientContract, 'email' | 'description' | 'lastname'>>;
 
@@ -117,7 +110,7 @@ type CreatePatientDto = Omit<
  * Update patient DTO
  */
 type UpdatePatientDto = Partial<
-  Omit<PatientContract, 'userId' | 'createdAt' | 'updatedAt'>
+  Omit<PatientContract, 'createdAt' | 'updatedAt'>
 >;
 
 export { PatientsService };

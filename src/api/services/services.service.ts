@@ -1,4 +1,3 @@
-import { Status } from '@api';
 import { HttpService } from './http.service';
 
 /**
@@ -72,16 +71,13 @@ class ServicesService {
 type ServiceContract = CreateAndUpdateFields<{
   id: number;
   name: string;
-  status: Status;
-  userId: number;
 }>;
 
 /**
  * Get services params
  */
-type GetServicesParams = Partial<
-  Omit<ServiceContract, 'id' | 'userId' | 'createdAt' | 'updatedAt'>
-> & {
+type GetServicesParams = {
+  name?: string;
   page?: number;
   perPage?: number;
 };
@@ -89,16 +85,13 @@ type GetServicesParams = Partial<
 /**
  * Create service DTO
  */
-type CreateServiceDto = Omit<
-  ServiceContract,
-  'id' | 'userId' | 'createdAt' | 'updatedAt'
->;
+type CreateServiceDto = Omit<ServiceContract, 'id' | 'createdAt' | 'updatedAt'>;
 
 /**
  * Update service DTO
  */
 type UpdateServiceDto = Partial<
-  Omit<ServiceContract, 'userId' | 'createdAt' | 'updatedAt'>
+  Omit<ServiceContract, 'createdAt' | 'updatedAt'>
 >;
 
 export { ServicesService };

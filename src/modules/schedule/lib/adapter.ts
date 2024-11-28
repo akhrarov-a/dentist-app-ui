@@ -19,9 +19,9 @@ class ScheduleAdapter {
     return {
       patientId: schedule.patient.id,
       date: dayjs(schedule.startTime),
-      services: schedule.services.map(service => ({
-        id: service.service.id,
-        description: service.description
+      services: schedule.appointmentServices.map(appointmentService => ({
+        id: appointmentService.service.id,
+        description: appointmentService.description
       })),
       startTime: dayjs(schedule.startTime),
       endTime: dayjs(schedule.endTime),

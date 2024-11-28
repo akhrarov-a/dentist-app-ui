@@ -17,8 +17,8 @@ const AppointmentsHistoryTable = hoc.observer(
     loading,
     currentPatientName,
     pagination,
-    schedulesForPatient,
-    schedulesForPatientTotalAmount
+    schedules,
+    schedulesTotalAmount
   }) => {
     const columns: ColumnsType<ScheduleContract> = [
       {
@@ -37,9 +37,10 @@ const AppointmentsHistoryTable = hoc.observer(
         title: t('patients.form.appointmentHistoryTable.services'),
         render: (_, record) => (
           <div className={styles.column}>
-            {record.services.map(service => (
+            {record.appointmentServices.map(appointmentService => (
               <p>
-                {service.service.name} - {service.description}
+                {appointmentService.service.name} -{' '}
+                {appointmentService.description}
               </p>
             ))}
           </div>
@@ -55,12 +56,12 @@ const AppointmentsHistoryTable = hoc.observer(
           className={styles.tables_table}
           bordered
           columns={columns}
-          dataSource={schedulesForPatient}
+          dataSource={schedules}
           loading={loading}
           pagination={{
             current: pagination.page,
             pageSize: pagination.perPage,
-            total: schedulesForPatientTotalAmount,
+            total: schedulesTotalAmount,
             position: ['bottomCenter'],
             showSizeChanger: true,
             pageSizeOptions: ['20', '50', '100'],

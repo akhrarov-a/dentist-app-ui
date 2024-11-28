@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Button, Form as AntdForm, Input, Select } from 'antd';
-import { Status } from '@api';
+import { Button, Form as AntdForm, Input } from 'antd';
 import { rules } from '@utils';
 import { useLocales } from '@locales';
 import { ServiceForm } from '../../../services.types.ts';
@@ -64,27 +63,6 @@ const Form = observer<FormProps>(
             validateTrigger="onBlur"
           >
             <Input placeholder={t('form.fields.name.placeholder')} />
-          </AntdForm.Item>
-
-          <AntdForm.Item
-            label={t('form.fields.status.label')}
-            name="status"
-            rules={[rules.required(t('form.validations.required'))]}
-            validateTrigger="onBlur"
-          >
-            <Select
-              placeholder={t('form.fields.status.placeholder')}
-              options={[
-                {
-                  label: t('form.fields.status.options.active'),
-                  value: Status.ACTIVE
-                },
-                {
-                  label: t('form.fields.status.options.disabled'),
-                  value: Status.DISABLED
-                }
-              ]}
-            />
           </AntdForm.Item>
         </AntdForm>
       </div>

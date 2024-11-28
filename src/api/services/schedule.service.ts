@@ -9,21 +9,11 @@ class ScheduleService {
   public constructor(private http: HttpService) {}
 
   /**
-   * Get schedule by patient
+   * Get schedules
    */
-  public getScheduleByPatient = (params: GetAppointmentsByPatientParams) =>
+  public getSchedules = (params: GetAppointmentsParams) =>
     this.http.request<ApiResponseList<ScheduleContract>>({
-      url: '/appointments/by/patient',
-      method: 'GET',
-      params
-    });
-
-  /**
-   * Get schedule by service
-   */
-  public getScheduleByService = (params: GetAppointmentsByServiceParams) =>
-    this.http.request<ApiResponseList<ScheduleContract>>({
-      url: '/appointments/by/service',
+      url: '/appointments',
       method: 'GET',
       params
     });
@@ -82,77 +72,60 @@ class ScheduleService {
  */
 type ScheduleContract = CreateAndUpdateFields<{
   id: number;
-  patient: PatientContract;
-  services: {
-    service: ServiceContract;
-    description: string;
-  }[];
   startTime: DateTimeString;
   endTime: DateTimeString;
   description: string;
-  userId: number;
+  patient: PatientContract;
+  appointmentServices: {
+    id: number;
+    service: ServiceContract;
+    description: string;
+  }[];
 }>;
 
 /**
- * Get appointments by patient params
+ * Get appointments params
  */
-type GetAppointmentsByPatientParams = {
-  page: number;
-  perPage: number;
-  patient: number;
-};
-
-/**
- * Get appointments by service params
- */
-type GetAppointmentsByServiceParams = {
-  page: number;
-  perPage: number;
-  service: number;
+type GetAppointmentsParams = {
+  page?: number;
+  perPage?: number;
+  patient?: number;
+  service?: number;
 };
 
 /**
  * Create schedule DTO
  */
-type CreateScheduleDto = Omit<
-  ScheduleContract,
-  | 'id'
-  | 'userId'
-  | 'description'
-  | 'createdAt'
-  | 'updatedAt'
-  | 'patient'
-  | 'services'
-> &
-  Partial<Pick<ScheduleContract, 'description'>> & {
-    patientId: PatientContract['id'];
-    services: {
-      id: ServiceContract['id'];
-      description: string;
-    }[];
-  };
+type CreateScheduleDto = {
+  patientId: number;
+  services: {
+    id: number;
+    description: string;
+  }[];
+  startTime: DateTimeString;
+  endTime: DateTimeString;
+  description?: string;
+};
 
 /**
  * Update schedule DTO
  */
-type UpdateScheduleDto = Partial<
-  Omit<
-    ScheduleContract,
-    'userId' | 'createdAt' | 'updatedAt' | 'patient' | 'services'
-  >
-> & {
-  patientId: PatientContract['id'];
+type UpdateScheduleDto = Partial<{
+  id: number;
+  patientId: number;
   services: {
-    id: ServiceContract['id'];
+    id: number;
     description: string;
   }[];
-};
+  startTime: DateTimeString;
+  endTime: DateTimeString;
+  description: string;
+}>;
 
 export { ScheduleService };
 export type {
   ScheduleContract,
   CreateScheduleDto,
   UpdateScheduleDto,
-  GetAppointmentsByPatientParams,
-  GetAppointmentsByServiceParams
+  GetAppointmentsParams
 };

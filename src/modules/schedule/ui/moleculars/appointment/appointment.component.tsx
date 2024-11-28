@@ -6,6 +6,7 @@ import { slots } from '../slots/slots.constants';
 import styles from './appointment.module.scss';
 
 const format = 'HH:mm';
+
 /**
  * <Appointment />
  */
@@ -53,7 +54,14 @@ const Appointment = ({ appointment }: { appointment: ScheduleContract }) => {
             {moment(appointment.endTime).format(format)}
           </p>
         </div>
-        <p>{appointment.description}</p>
+        <p>
+          {appointment.appointmentServices.map(appointmentService => (
+            <p>
+              {appointmentService.service.name} -{' '}
+              {appointmentService.description}
+            </p>
+          ))}
+        </p>
       </div>
     </div>
   );

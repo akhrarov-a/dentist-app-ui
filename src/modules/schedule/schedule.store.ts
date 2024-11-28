@@ -2,7 +2,7 @@ import { NavigateFunction } from 'react-router-dom';
 import { makeAutoObservable, runInAction } from 'mobx';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
-import { GetAppointmentsByPatientParams, GetAppointmentsByServiceParams, ScheduleContract } from '@api';
+import { GetAppointmentsParams, ScheduleContract } from '@api';
 import { ScheduleForm } from './schedule.types';
 import { ScheduleAdapter } from './lib';
 
@@ -18,25 +18,17 @@ class ScheduleStore {
 
   public global: GlobalStore;
 
-  public schedulesForPatient: ScheduleContract[] = [];
-  public schedulesForPatientTotalAmount: number = 0;
-
-  public schedulesForService: ScheduleContract[] = [];
-  public schedulesForServiceTotalAmount: number = 0;
-
+  public loading: boolean = false;
   public schedules: ScheduleContract[] = [];
+  public schedulesTotalAmount: number = 0;
 
   public currentScheduleId: ScheduleContract['id'] = 0;
   public initialValues: ScheduleForm = {} as ScheduleForm;
 
-  public loading = {
-    schedulesForPatient: false,
-    schedulesForService: false
-  };
-
   public clearSchedules = () => {
     runInAction(() => {
       this.schedules = [];
+      this.schedulesTotalAmount = 0;
     });
   };
 
@@ -47,19 +39,47 @@ class ScheduleStore {
     });
   };
 
-  public getSchedules = async (date: MomentDateTimeString) => {
-    this.global.showLoader();
+  public getSchedules = async ({
+    date,
+    showLoader = true,
+    ...params
+  }: GetAppointmentsParams & {
+    date?: MomentDateTimeString;
+    showLoader?: boolean;
+  }) => {
+    if (showLoader) {
+      this.global.showLoader();
+    } else {
+      runInAction(() => {
+        this.loading = true;
+      });
+    }
 
     try {
-      const response = await this.global.api.schedule.getScheduleByDate(date);
+      if (date) {
+        const response = await this.global.api.schedule.getScheduleByDate(date);
 
-      runInAction(() => {
-        this.schedules = response.data.appointments;
-      });
+        runInAction(() => {
+          this.schedules = response.data.appointments;
+        });
+      } else {
+        const response = await this.global.api.schedule.getSchedules(params);
+
+        runInAction(() => {
+          this.schedules = response.data.data;
+          this.schedulesTotalAmount = response.data.totalAmount;
+        });
+      }
     } catch (error) {
       message.error('Something went wrong');
     } finally {
-      this.global.hideLoader();
+      if (showLoader) {
+        this.global.hideLoader();
+      } else {
+        runInAction(() => {
+          this.loading = false;
+        });
+      }
     }
   };
 
@@ -108,8 +128,10 @@ class ScheduleStore {
     this.global.showLoader();
 
     try {
+      const currentScheduleId = this.currentScheduleId;
+      
       await this.global.api.schedule.updateSchedule({
-        id: this.currentScheduleId,
+        id: currentScheduleId,
         ...ScheduleAdapter.scheduleFormToUpdateScheduleDto(data)
       });
 
@@ -117,7 +139,7 @@ class ScheduleStore {
 
       this.clearInitialValues();
 
-      await this.getScheduleById(this.currentScheduleId);
+      await this.getScheduleById(currentScheduleId);
     } catch (error) {
       message.error('Something went wrong');
     } finally {
@@ -141,68 +163,6 @@ class ScheduleStore {
       message.error('Something went wrong');
     } finally {
       this.global.hideLoader();
-    }
-  };
-
-  public clearSchedulesForPatient = () => {
-    runInAction(() => {
-      this.schedulesForPatient = [];
-      this.schedulesForPatientTotalAmount = 0;
-    });
-  };
-
-  public getScheduleForPatient = async (
-    params: GetAppointmentsByPatientParams
-  ) => {
-    runInAction(() => {
-      this.loading.schedulesForPatient = true;
-    });
-
-    try {
-      const response =
-        await this.global.api.schedule.getScheduleByPatient(params);
-
-      runInAction(() => {
-        this.schedulesForPatient = response.data.data;
-        this.schedulesForPatientTotalAmount = response.data.totalAmount;
-      });
-    } catch (error) {
-      message.error('Something went wrong');
-    } finally {
-      runInAction(() => {
-        this.loading.schedulesForPatient = false;
-      });
-    }
-  };
-
-  public clearSchedulesForService = () => {
-    runInAction(() => {
-      this.schedulesForService = [];
-      this.schedulesForServiceTotalAmount = 0;
-    });
-  };
-
-  public getScheduleForService = async (
-    params: GetAppointmentsByServiceParams
-  ) => {
-    runInAction(() => {
-      this.loading.schedulesForService = true;
-    });
-
-    try {
-      const response =
-        await this.global.api.schedule.getScheduleByService(params);
-
-      runInAction(() => {
-        this.schedulesForService = response.data.data;
-        this.schedulesForServiceTotalAmount = response.data.totalAmount;
-      });
-    } catch (error) {
-      message.error('Something went wrong');
-    } finally {
-      runInAction(() => {
-        this.loading.schedulesForService = false;
-      });
     }
   };
 }

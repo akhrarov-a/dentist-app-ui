@@ -107,8 +107,10 @@ class PatientsStore {
     this.global.showLoader();
 
     try {
+      const currentPatientId = this.currentPatientId;
+
       await this.global.api.patients.updatePatient({
-        id: this.currentPatientId,
+        id: currentPatientId,
         ...PatientsAdapter.patientFormToUpdatePatientDto(data)
       });
 
@@ -116,7 +118,7 @@ class PatientsStore {
 
       this.clearInitialValues();
 
-      await this.getPatientById(this.currentPatientId);
+      await this.getPatientById(currentPatientId);
 
       callback();
     } catch (error) {

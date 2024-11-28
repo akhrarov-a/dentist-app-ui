@@ -57,7 +57,7 @@ const useSchedulesHeaderProps = () => {
   };
 
   useEffect(() => {
-    getSchedules(selectedDate.format(format));
+    getSchedules({ date: selectedDate.format(format) });
   }, [selectedDate]);
 
   useClickOutside(divRef, event => {

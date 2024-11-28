@@ -55,10 +55,6 @@ const View = observer(
           <p>{t('form.fields.name.label')}</p>
           <p>{initialValues.name}</p>
         </div>
-        <div className={styles.content_field}>
-          <p>{t('form.fields.status.label')}</p>
-          <p>{initialValues.status}</p>
-        </div>
 
         <AppointmentsHistoryTable />
       </div>
