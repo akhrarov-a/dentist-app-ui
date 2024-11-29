@@ -16,7 +16,7 @@ import styles from './form.module.scss';
  */
 const Form = observer<FormProps>(
   ({ isEdit, initialValues, onSubmit, onDelete }) => {
-    const { patients, services } = useStore();
+    const { schedule: store, patients, services } = useStore();
 
     const modal = useModal();
 
@@ -69,7 +69,7 @@ const Form = observer<FormProps>(
         services: initialValues.services?.map(service => service.id) || []
       });
 
-      if (!isEdit) return;
+      if (!isEdit && !store.isCloning) return;
 
       setServicesDescriptions(initialValues.services || []);
       setIsPastAppointment(initialValues.date?.isBefore(new Date(), 'day'));

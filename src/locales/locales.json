@@ -72,9 +72,9 @@
       "en": "Patient",
       "ru": "Пациент"
     },
-    "servicesDescription": {
-      "en": "Services description",
-      "ru": "Описание услуг"
+    "serviceDescription": {
+      "en": "Service description",
+      "ru": "Описание услуги"
     },
     "appointmentHistoryForPatient": {
       "en": "Appointment history for patient",

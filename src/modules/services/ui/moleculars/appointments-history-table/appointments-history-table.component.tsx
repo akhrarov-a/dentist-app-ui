@@ -56,16 +56,14 @@ const AppointmentsHistoryTable = hoc.observer(
         )
       },
       {
-        title: t('table.servicesDescription'),
+        title: t('table.serviceDescription'),
         render: (_, record) => (
           <div className={styles.column}>
             <p>
-              {
-                record.appointmentServices.find(
-                  appointmentService =>
-                    appointmentService.service.id === currentServiceId
-                )?.description
-              }
+              {record.appointmentServices.find(
+                appointmentService =>
+                  appointmentService.service.id === currentServiceId
+              )?.description || '-'}
             </p>
           </div>
         )
