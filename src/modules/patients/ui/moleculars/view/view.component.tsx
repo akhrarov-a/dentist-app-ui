@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { Button, Modal } from 'antd';
 import { useLocales } from '@locales';
 import { useModal } from '@hooks';
+import { NotFound } from '@components';
 import { PatientForm } from '../../../patients.types';
 import { AppointmentsHistoryTable } from '../appointments-history-table';
 import styles from './view.module.scss';
@@ -22,6 +23,8 @@ const View = observer(
     const { t } = useLocales();
 
     const modal = useModal();
+
+    if (!Object.keys(initialValues || {}).length) return <NotFound />;
 
     return (
       <div className={styles.container}>

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Button, Form as AntdForm, Input } from 'antd';
 import { rules } from '@utils';
+import { NotFound } from '@components';
 import { useLocales } from '@locales';
 import { PatientForm } from '../../../patients.types';
 import { FormProps } from './form.props';
@@ -21,6 +22,8 @@ const Form = observer<FormProps>(
 
       form.setFieldsValue(initialValues);
     }, [initialValues]);
+
+    if (!Object.keys(initialValues || {}).length) return <NotFound />;
 
     return (
       <div className={styles.container}>
