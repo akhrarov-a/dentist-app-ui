@@ -25,14 +25,24 @@
 
 .content {
   padding: 7px;
+  font-size: 14px;
   overflow: hidden;
 
   p {
     margin: 0;
-    font-size: 14px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  &_height_is_smaller_than_24 {
+    padding: 1px 7px;
+    font-size: 11px;
+
+    .services,
+    .time {
+      display: none;
+    }
   }
 
   &_first {

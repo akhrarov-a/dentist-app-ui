@@ -67,10 +67,13 @@ const Appointment = ({
       <div data-click-action={appointment.id} style={{ position: 'relative' }}>
         <div
           className={classNames(styles.content, {
-            [styles.content_day]: dateType === DateType.DAY
+            [styles.content_day]: dateType === DateType.DAY,
+            [styles.content_height_is_smaller_than_24]: height < 24
           })}
           data-click-action={appointment.id}
-          style={{ height: `${height - 14}px` }}
+          style={{
+            height: `${height < 24 ? height - 2 : height - 14}px`
+          }}
         >
           <div
             className={styles.content_first}
@@ -79,12 +82,12 @@ const Appointment = ({
             <p data-click-action={appointment.id}>
               {appointment.patient.firstname} {appointment.patient.lastname}
             </p>
-            <p data-click-action={appointment.id}>
+            <p className={styles.time} data-click-action={appointment.id}>
               {dayjs(appointment.startTime).format(format)} -{' '}
               {dayjs(appointment.endTime).format(format)}
             </p>
           </div>
-          <div data-click-action={appointment.id}>
+          <div className={styles.services} data-click-action={appointment.id}>
             {appointment.appointmentServices.map(appointmentService => (
               <p data-click-action={appointment.id}>
                 {appointmentService.service.name} -{' '}
