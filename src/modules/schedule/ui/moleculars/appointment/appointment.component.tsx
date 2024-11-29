@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import { DateType, ScheduleContract } from '@api';
+import { AppointmentInfoModal } from '../../atoms';
 import { slots } from '../slots/slots.constants';
 import styles from './appointment.module.scss';
 
@@ -63,16 +64,16 @@ const Appointment = ({
       }}
       data-click-action={appointment.id}
     >
-      <div className={styles.content} data-click-action={appointment.id}>
+      <div data-click-action={appointment.id} style={{ position: 'relative' }}>
         <div
-          className={classNames(styles.content_content, {
-            [styles.content_content_day]: dateType === DateType.DAY
+          className={classNames(styles.content, {
+            [styles.content_day]: dateType === DateType.DAY
           })}
           data-click-action={appointment.id}
           style={{ height: `${height - 14}px` }}
         >
           <div
-            className={styles.content_content_first}
+            className={styles.content_first}
             data-click-action={appointment.id}
           >
             <p data-click-action={appointment.id}>
@@ -94,15 +95,7 @@ const Appointment = ({
         </div>
 
         {showInfoModal && (
-          <div
-            className={classNames(
-              'animate__animated animate__fadeInRight',
-              styles.content_modal
-            )}
-            data-click-action="appointment-modal"
-          >
-            Modal
-          </div>
+          <AppointmentInfoModal dateType={dateType} appointment={appointment} />
         )}
       </div>
     </div>

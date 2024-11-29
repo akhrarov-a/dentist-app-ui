@@ -24,45 +24,30 @@
 }
 
 .content {
-  position: relative;
+  padding: 7px;
+  overflow: hidden;
 
-  &_content {
-    padding: 7px;
+  p {
+    margin: 0;
+    font-size: 14px;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &_first {
+    margin-bottom: 10px;
 
     p {
-      margin: 0;
-      font-size: 14px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    &_first {
-      margin-bottom: 10px;
-
-      p {
-        &:last-of-type {
-          margin-top: 2px;
-        }
+      &:last-of-type {
+        margin-top: 2px;
       }
-    }
-
-    &_day {
-      display: grid;
-      grid-template-columns: 1fr 3fr;
-      gap: 15px;
     }
   }
 
-  &_modal {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    z-index: 122;
-    background: $light-blue;
-    color: $dark-blue;
-    border-radius: $border-radius;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .12), 0 1px 8px 0 rgba(0, 0, 0, .2);
+  &_day {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 15px;
   }
 }
