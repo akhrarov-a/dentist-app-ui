@@ -9,10 +9,21 @@
 }
 
 .logo {
+  @include flex($align: flex-end);
+
+  gap: 15px;
   height: 50px;
 
   img {
     height: 100%;
+    border-radius: $border-radius;
+  }
+
+  p {
+    margin: 0;
+    font-size: 42px;
+    line-height: 40px;
+    font-weight: 300;
   }
 }
 
