@@ -34,12 +34,17 @@ const useHeaderProps = () => {
     navigate('/profile');
   };
 
+  const onLogoClick = () => {
+    navigate('/schedule');
+  };
+
   return {
     t,
     profileText,
     _links,
     logout: () => logout(t),
-    onProfileClick
+    onProfileClick,
+    onLogoClick
   };
 };
 
