@@ -33,7 +33,7 @@ class AuthStore {
 
       await this.global.profile.getUser(t);
 
-      navigate('/');
+      navigate('/schedule');
     } catch (error) {
       message.error(t('errors.invalidCredentials'));
     }
