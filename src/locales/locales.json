@@ -355,6 +355,10 @@
     "invalidCredentials": {
       "en": "Invalid credentials",
       "ru": "Неверный логин или пароль"
+    },
+    "appointmentDurationIsLessThan15Minutes": {
+      "en": "Appointment duration should be at least 15 minutes",
+      "ru": "Продолжительность записи должно быть минимум 15 минут"
     }
   },
   "successfullyCreated": {

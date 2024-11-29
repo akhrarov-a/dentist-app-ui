@@ -157,6 +157,17 @@ class ScheduleStore {
   ) => {
     this.global.showLoader();
 
+    const isRangeMoreThan15Minutes =
+      data.endTime.unix() - data.startTime.unix() >= 15 * 60;
+
+    if (!isRangeMoreThan15Minutes) {
+      message.error(t('errors.appointmentDurationIsLessThan15Minutes'));
+
+      this.global.hideLoader();
+
+      return;
+    }
+
     try {
       const response = await this.global.api.schedule.createSchedule(
         ScheduleAdapter.scheduleFormToCreateScheduleDto(data)
@@ -180,6 +191,17 @@ class ScheduleStore {
     data: ScheduleForm
   ) => {
     this.global.showLoader();
+
+    const isRangeMoreThan15Minutes =
+      data.endTime.unix() - data.startTime.unix() >= 15 * 60;
+
+    if (!isRangeMoreThan15Minutes) {
+      message.error(t('errors.appointmentDurationIsLessThan15Minutes'));
+
+      this.global.hideLoader();
+
+      return;
+    }
 
     try {
       const currentScheduleId = this.currentScheduleId;
