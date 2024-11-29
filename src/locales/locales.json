@@ -157,6 +157,26 @@
           "ru": "Введите номер телефона"
         }
       },
+      "weekends": {
+        "label": {
+          "en": "Weekdays",
+          "ru": "Выходные"
+        },
+        "placeholder": {
+          "en": "Select weekdays",
+          "ru": "Выберите выходные"
+        }
+      },
+      "holidays": {
+        "label": {
+          "en": "Holidays",
+          "ru": "Праздники"
+        },
+        "placeholder": {
+          "en": "Select holidays",
+          "ru": "Выберите праздники"
+        }
+      },
       "email": {
         "label": {
           "en": "Email",

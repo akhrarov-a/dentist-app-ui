@@ -1,3 +1,5 @@
+import { Dayjs } from 'dayjs';
+
 /**
  * Profile form
  */
@@ -9,6 +11,8 @@ type ProfileForm = {
   layoutTitle: string;
   language: string;
   useMyFirstNameAndLastnameForLayoutTitle: boolean;
+  holidays: Dayjs[];
+  weekends: number[];
 };
 
 export type { ProfileForm };

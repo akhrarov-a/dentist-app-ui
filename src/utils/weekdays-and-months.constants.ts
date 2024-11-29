@@ -23,6 +23,10 @@ const weekdaysEN = [
   'Saturday'
 ];
 
+export const getWeekdays = (lang: string) => {
+  return lang === 'ru' ? weekdaysRU : weekdaysEN;
+};
+
 export const getWeekday = (date: Dayjs, lang: string) => {
   const day = date.day();
 
@@ -66,4 +70,8 @@ export const getMonth = (date: Dayjs, lang: string) => {
   const month = date.month();
 
   return lang === 'ru' ? monthsRU[month] : monthsEN[month];
+};
+
+export const getMonths = (lang: string) => {
+  return lang === 'ru' ? monthsRU : monthsEN;
 };

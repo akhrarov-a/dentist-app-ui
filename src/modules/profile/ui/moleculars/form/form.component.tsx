@@ -1,6 +1,7 @@
+import { useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Button, Checkbox, Form as AntdForm, Input, Select } from 'antd';
-import { rules } from '@utils';
+import { Button, Checkbox, DatePicker, Form as AntdForm, Input, Select } from 'antd';
+import { getWeekdays, rules } from '@utils';
 import { useStore } from '@store';
 import { useLocales } from '@locales';
 import { ProfileForm } from '../../../profile.types';
@@ -11,12 +12,19 @@ import styles from './form.module.scss';
  */
 const Form = observer(({ toggleEditing }: { toggleEditing?: () => void }) => {
   const {
+    language,
     profile: { initialValues, updateProfile }
   } = useStore();
 
   const { t, languages } = useLocales();
 
   const [form] = AntdForm.useForm();
+
+  const weekdaysOptions = useMemo(() => {
+    const [sunday, ...weekdaysOptions] = getWeekdays(language);
+
+    return [...weekdaysOptions, sunday];
+  }, [language]);
 
   const onSubmit = (values: ProfileForm) => {
     updateProfile(t, values, toggleEditing);
@@ -106,6 +114,33 @@ const Form = observer(({ toggleEditing }: { toggleEditing?: () => void }) => {
           </AntdForm.Item>
         </div>
 
+        <AntdForm.Item
+          label={t('form.fields.weekends.label')}
+          name="weekends"
+          validateTrigger="onBlur"
+        >
+          <Select
+            mode="multiple"
+            placeholder={t('form.fields.weekends.placeholder')}
+            options={weekdaysOptions.map((weekday, index) => ({
+              label: weekday,
+              value: index + 1
+            }))}
+          />
+        </AntdForm.Item>
+
+        <AntdForm.Item
+          label={t('form.fields.holidays.label')}
+          name="holidays"
+          validateTrigger="onBlur"
+        >
+          <DatePicker
+            placeholder={t('form.fields.holidays.placeholder')}
+            style={{ width: '100%' }}
+            multiple
+          />
+        </AntdForm.Item>
+
         <div className={styles.checkbox}>
           <p>{t('form.fields.useMyFirstNameAndLastnameForLayoutTitle')}</p>
           <AntdForm.Item
@@ -173,7 +208,6 @@ const Form = observer(({ toggleEditing }: { toggleEditing?: () => void }) => {
           validateTrigger="onBlur"
         >
           <Select
-            className={styles.select}
             placeholder={t('form.fields.language.placeholder')}
             options={languages.map(language => ({
               label: language.name,

@@ -37,6 +37,8 @@ type ProfileContract = {
   email: string;
   layoutTitle: string;
   language: string;
+  holidays: string[];
+  weekends: number[];
   role: UserRole;
 };
 
