@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import dayjs from 'dayjs';
 import { DateType } from '@api';
 import { hoc, weekdays } from '@utils';
@@ -13,6 +13,7 @@ const Schedule = hoc.observer(
   useScheduleProps,
   ({
     t,
+    modal,
     schedulesByDate,
     headerText,
     dateType,
@@ -21,6 +22,7 @@ const Schedule = hoc.observer(
     onCalendarChange,
     onDateTypeChange,
     onAddAppointmentClick,
+    onDeleteAppointmentClick,
     onTodayClick,
     onClickAppointment,
     onDoubleClickAppointment
@@ -35,6 +37,20 @@ const Schedule = hoc.observer(
         onTodayClick={onTodayClick}
       />
       <div className={styles.appointments}>
+        <Modal
+          okText={t('form.actions.yes')}
+          cancelText={t('form.actions.no')}
+          visible={modal.isOpen}
+          onOk={() => {
+            onDeleteAppointmentClick();
+            modal.close();
+          }}
+          onCancel={modal.close}
+          centered
+        >
+          {t('form.areYouSureToDelete')}
+        </Modal>
+
         <div className={styles.appointments_header}>
           <p className={styles.appointments_header_title}>{headerText}</p>
           <Button
@@ -83,7 +99,7 @@ const Schedule = hoc.observer(
                     <Appointment
                       key={schedule.id}
                       showInfoModal={
-                        schedule.id == selectedAppointmentToDisplay
+                        schedule.id === selectedAppointmentToDisplay
                       }
                       dateType={dateType}
                       appointment={schedule}

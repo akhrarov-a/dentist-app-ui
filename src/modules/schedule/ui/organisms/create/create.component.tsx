@@ -1,6 +1,5 @@
 import { hoc } from '@utils';
 import { Form } from '../../moleculars';
-import { initialValues } from './create.constants';
 import { useCreateAppointmentProps } from './create.props';
 
 /**
@@ -8,7 +7,9 @@ import { useCreateAppointmentProps } from './create.props';
  */
 const CreateAppointment = hoc.observer(
   useCreateAppointmentProps,
-  ({ onSubmit }) => <Form initialValues={initialValues} onSubmit={onSubmit} />
+  ({ _initialValues, onSubmit }) => (
+    <Form initialValues={_initialValues} onSubmit={onSubmit} />
+  )
 );
 
 export { CreateAppointment };

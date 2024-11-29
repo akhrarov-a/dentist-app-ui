@@ -72,7 +72,7 @@ const Form = observer<FormProps>(
       if (!isEdit) return;
 
       setServicesDescriptions(initialValues.services || []);
-      setIsPastAppointment(initialValues.date.isBefore(new Date(), 'day'));
+      setIsPastAppointment(initialValues.date?.isBefore(new Date(), 'day'));
     }, [initialValues]);
 
     return (

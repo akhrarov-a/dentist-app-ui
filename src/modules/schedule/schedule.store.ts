@@ -28,6 +28,7 @@ class ScheduleStore {
 
   public currentScheduleId: ScheduleContract['id'] = 0;
   public initialValues: ScheduleForm = {} as ScheduleForm;
+  public isCloning: boolean = false;
 
   public clearSchedules = () => {
     runInAction(() => {
@@ -41,6 +42,7 @@ class ScheduleStore {
     runInAction(() => {
       this.currentScheduleId = 0;
       this.initialValues = {} as ScheduleForm;
+      this.isCloning = false;
     });
   };
 
@@ -95,6 +97,35 @@ class ScheduleStore {
     }
   };
 
+  public cloneScheduleById = async (
+    t: TranslationFunctionType,
+    id: ScheduleContract['id']
+  ) => {
+    this.global.showLoader();
+
+    try {
+      const response = await this.global.api.schedule.getScheduleById(id);
+
+      runInAction(() => {
+        this.isCloning = true;
+        const initialValues = ScheduleAdapter.scheduleContractToScheduleForm(
+          response.data
+        );
+
+        this.initialValues = {
+          ...initialValues,
+          date: null
+        };
+      });
+
+      this.global.patients.findPatients(t, response.data.patient.firstname);
+    } catch (error) {
+      message.error(t('errors.somethingWentWrong'));
+    } finally {
+      this.global.hideLoader();
+    }
+  };
+
   public getScheduleById = async (
     t: TranslationFunctionType,
     id: ScheduleContract['id']
@@ -130,6 +161,10 @@ class ScheduleStore {
       const response = await this.global.api.schedule.createSchedule(
         ScheduleAdapter.scheduleFormToCreateScheduleDto(data)
       );
+
+      runInAction(() => {
+        this.isCloning = false;
+      });
 
       message.success(t('successfullyCreated'));
       navigate(`/schedule/${response.data.id}`);

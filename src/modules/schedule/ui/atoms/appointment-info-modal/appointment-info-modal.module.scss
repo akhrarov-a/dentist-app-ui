@@ -6,6 +6,56 @@
   z-index: 122;
   background: $light-blue;
   color: $dark-blue;
-  border-radius: $border-radius;
-  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .12), 0 1px 8px 0 rgba(0, 0, 0, .2);
+  border-radius: 25px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.3), 0 3px 3px -2px rgba(0, 0, 0, 0.3), 0 1px 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.content {
+  width: 350px;
+  padding: 20px 30px;
+
+  &_header {
+    @include flex(flex-end, center);
+
+    gap: 5px;
+    margin-bottom: 5px;
+
+    img {
+      @include size(24px);
+
+      padding: 8px;
+      cursor: pointer;
+      border-radius: 50px;
+
+      &:active,
+      &:hover {
+        background: lighten($light-grey, 15%);
+      }
+    }
+  }
+
+  &_title {
+    margin: 0 0 10px;
+    font-size: 20px;
+  }
+
+  &_date {
+    margin: 0 0 10px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  &_services {
+    margin-bottom: 15px;
+    font-size: 14px;
+
+    p {
+      margin: 0 0 5px;
+    }
+  }
+
+  &_description {
+    margin: 0 0 5px;
+    font-size: 14px;
+  }
 }

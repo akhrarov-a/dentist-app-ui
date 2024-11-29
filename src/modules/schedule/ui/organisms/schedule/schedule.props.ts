@@ -1,10 +1,12 @@
 import { MouseEvent, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { useLocales } from '@locales';
 import { useStore } from '@store';
 import { DateType } from '@api';
+import { useModal } from '@hooks';
 import { months, weekdays } from '@utils';
+import { AppointmentDataClickAction } from '../../atoms';
 
 const format = 'YYYY-MM-DD';
 
@@ -13,12 +15,19 @@ const format = 'YYYY-MM-DD';
  */
 const useScheduleProps = () => {
   const {
-    schedule: { schedulesByDate, clearSchedules, getSchedules }
+    schedule: {
+      schedulesByDate,
+      clearSchedules,
+      getSchedules,
+      cloneScheduleById,
+      deleteSchedule
+    }
   } = useStore();
 
   const navigate = useNavigate();
 
   const { t } = useLocales();
+  const modal = useModal();
 
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [dateType, setDateType] = useState(DateType.WEEK);
@@ -36,34 +45,80 @@ const useScheduleProps = () => {
     navigate('/schedule/create');
   };
 
+  const onDeleteAppointmentClick = async () => {
+    await deleteSchedule(t, selectedAppointmentToDisplay, navigate);
+
+    getSchedules({ t, date: selectedDate.format(format), type: dateType });
+  };
+
   const onTodayClick = () => {
     setSelectedDate(dayjs());
+    setSelectedAppointmentToDisplay(null);
   };
 
   const onDateTypeChange = (value: string) => {
     setDateType(value as DateType);
+    setSelectedAppointmentToDisplay(null);
   };
 
-  const onClickAppointment = (event: MouseEvent) => {
+  const onCalendarChange = (date: Dayjs) => {
+    setSelectedDate(date);
+    setSelectedAppointmentToDisplay(null);
+  };
+
+  const onClickAppointment = async (event: MouseEvent) => {
     // @ts-ignore
     const dataClickAction = event?.target?.getAttribute('data-click-action');
-    const isAppointmentModal = dataClickAction === 'appointment-modal';
+    const isAppointmentModal =
+      dataClickAction === AppointmentDataClickAction.MODAL;
 
     if (isAppointmentModal) return;
 
-    if (dataClickAction) {
-      setSelectedAppointmentToDisplay(dataClickAction);
-    } else if (selectedAppointmentToDisplay) {
-      setSelectedAppointmentToDisplay(null);
+    switch (dataClickAction) {
+      case AppointmentDataClickAction.EDIT: {
+        navigate(`/schedule/${selectedAppointmentToDisplay}`);
+
+        break;
+      }
+      case AppointmentDataClickAction.DELETE: {
+        modal.open();
+
+        break;
+      }
+      case AppointmentDataClickAction.CLONE: {
+        await cloneScheduleById(t, selectedAppointmentToDisplay);
+
+        onAddAppointmentClick();
+
+        break;
+      }
+      case AppointmentDataClickAction.CLOSE: {
+        setSelectedAppointmentToDisplay(null);
+
+        break;
+      }
+      default: {
+        if (dataClickAction) {
+          setSelectedAppointmentToDisplay(+dataClickAction);
+        } else if (selectedAppointmentToDisplay) {
+          setSelectedAppointmentToDisplay(null);
+        }
+      }
     }
   };
 
   const onDoubleClickAppointment = (event: MouseEvent) => {
     // @ts-ignore
     const dataClickAction = event?.target?.getAttribute('data-click-action');
-    const isAppointmentModal = dataClickAction === 'appointment-modal';
+    const isAppointmentModalOrAction = [
+      AppointmentDataClickAction.MODAL,
+      AppointmentDataClickAction.EDIT,
+      AppointmentDataClickAction.DELETE,
+      AppointmentDataClickAction.CLONE,
+      AppointmentDataClickAction.CLOSE
+    ].includes(dataClickAction);
 
-    if (!dataClickAction || isAppointmentModal) return;
+    if (!dataClickAction || isAppointmentModalOrAction) return;
 
     navigate(`/schedule/${dataClickAction}`);
   };
@@ -81,14 +136,16 @@ const useScheduleProps = () => {
 
   return {
     t,
+    modal,
     schedulesByDate,
     headerText,
     selectedDate,
     dateType,
     selectedAppointmentToDisplay,
-    onCalendarChange: setSelectedDate,
+    onCalendarChange,
     onDateTypeChange,
     onAddAppointmentClick,
+    onDeleteAppointmentClick,
     onTodayClick,
     onClickAppointment,
     onDoubleClickAppointment

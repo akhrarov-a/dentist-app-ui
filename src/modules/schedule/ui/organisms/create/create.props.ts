@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '@store';
 import { useLocales } from '@locales';
+import { initialValues as values } from './create.constants';
 import { ScheduleForm } from '../../../schedule.types';
 
 /**
@@ -13,15 +14,25 @@ const useCreateAppointmentProps = () => {
   const { t } = useLocales();
 
   const {
-    schedule: { createSchedule },
+    schedule: { isCloning, initialValues, createSchedule, clearInitialValues },
     services: { getServices }
   } = useStore();
 
+  const _initialValues = useMemo(
+    () => (isCloning ? initialValues : values),
+    [isCloning, initialValues, values]
+  );
+
   useEffect(() => {
     getServices(t, 1, 100000, false);
+
+    return () => {
+      clearInitialValues();
+    };
   }, []);
 
   return {
+    _initialValues,
     onSubmit: (values: ScheduleForm) => createSchedule(t, values, navigate)
   };
 };
