@@ -17,10 +17,13 @@ const Schedule = hoc.observer(
     headerText,
     dateType,
     selectedDate,
+    selectedAppointmentToDisplay,
     onCalendarChange,
     onDateTypeChange,
     onAddAppointmentClick,
-    onTodayClick
+    onTodayClick,
+    onClickAppointment,
+    onDoubleClickAppointment
   }) => (
     <div className={styles.container}>
       <ScheduleParams
@@ -54,11 +57,18 @@ const Schedule = hoc.observer(
               const date = dayjs(schedules.date);
               const weekday = weekdays[date.day()];
 
+              const hasShowInfoModal = schedules.appointments.some(
+                schedule => schedule.id == selectedAppointmentToDisplay
+              );
+
               return (
                 <div
                   key={schedules.date}
                   id={schedules.date}
                   className={styles.appointments_content_content_day}
+                  onClick={onClickAppointment}
+                  onDoubleClick={onDoubleClickAppointment}
+                  style={{ zIndex: hasShowInfoModal ? '122' : '119' }}
                 >
                   {dateType === DateType.WEEK && (
                     <p
@@ -72,6 +82,9 @@ const Schedule = hoc.observer(
                   {schedules.appointments.map(schedule => (
                     <Appointment
                       key={schedule.id}
+                      showInfoModal={
+                        schedule.id == selectedAppointmentToDisplay
+                      }
                       dateType={dateType}
                       appointment={schedule}
                     />

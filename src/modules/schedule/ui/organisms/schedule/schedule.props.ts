@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { MouseEvent, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { useLocales } from '@locales';
@@ -22,6 +22,8 @@ const useScheduleProps = () => {
 
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [dateType, setDateType] = useState(DateType.WEEK);
+  const [selectedAppointmentToDisplay, setSelectedAppointmentToDisplay] =
+    useState(null);
 
   const headerText = useMemo(() => {
     const weekday = weekdays[selectedDate.day()];
@@ -42,6 +44,30 @@ const useScheduleProps = () => {
     setDateType(value as DateType);
   };
 
+  const onClickAppointment = (event: MouseEvent) => {
+    // @ts-ignore
+    const dataClickAction = event?.target?.getAttribute('data-click-action');
+    const isAppointmentModal = dataClickAction === 'appointment-modal';
+
+    if (isAppointmentModal) return;
+
+    if (dataClickAction) {
+      setSelectedAppointmentToDisplay(dataClickAction);
+    } else if (selectedAppointmentToDisplay) {
+      setSelectedAppointmentToDisplay(null);
+    }
+  };
+
+  const onDoubleClickAppointment = (event: MouseEvent) => {
+    // @ts-ignore
+    const dataClickAction = event?.target?.getAttribute('data-click-action');
+    const isAppointmentModal = dataClickAction === 'appointment-modal';
+
+    if (!dataClickAction || isAppointmentModal) return;
+
+    navigate(`/schedule/${dataClickAction}`);
+  };
+
   useEffect(
     () => () => {
       clearSchedules();
@@ -59,10 +85,13 @@ const useScheduleProps = () => {
     headerText,
     selectedDate,
     dateType,
+    selectedAppointmentToDisplay,
     onCalendarChange: setSelectedDate,
     onDateTypeChange,
     onAddAppointmentClick,
-    onTodayClick
+    onTodayClick,
+    onClickAppointment,
+    onDoubleClickAppointment
   };
 };
 

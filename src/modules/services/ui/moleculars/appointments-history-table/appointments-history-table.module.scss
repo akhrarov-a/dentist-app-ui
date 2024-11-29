@@ -11,6 +11,8 @@
 }
 
 .row {
+  cursor: pointer;
+
   &_past {
     background: $light-grey;
   }

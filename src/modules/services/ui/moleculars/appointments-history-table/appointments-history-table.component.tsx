@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import * as uuid from 'uuid';
 import { Table } from 'antd';
 import dayjs from 'dayjs';
@@ -19,7 +20,8 @@ const AppointmentsHistoryTable = hoc.observer(
     currentServiceId,
     pagination,
     schedules,
-    schedulesTotalAmount
+    schedulesTotalAmount,
+    onAppointmentClick
   }) => {
     const columns: ColumnsType<ScheduleContract> = [
       {
@@ -80,9 +82,10 @@ const AppointmentsHistoryTable = hoc.observer(
           className={styles.tables_table}
           rowClassName={record =>
             dayjs(record.endTime).isBefore(new Date(), 'day')
-              ? styles.row_past
-              : ''
+              ? classNames(styles.row, styles.row_past)
+              : styles.row
           }
+          onRow={record => ({ onClick: () => onAppointmentClick(record) })}
           bordered
           columns={columns}
           dataSource={schedules}

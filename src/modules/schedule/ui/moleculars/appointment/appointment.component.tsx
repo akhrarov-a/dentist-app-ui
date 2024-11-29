@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import { DateType, ScheduleContract } from '@api';
@@ -12,14 +11,14 @@ const format = 'HH:mm';
  * <Appointment />
  */
 const Appointment = ({
+  showInfoModal,
   dateType,
   appointment
 }: {
+  showInfoModal: boolean;
   dateType: DateType;
   appointment: ScheduleContract;
 }) => {
-  const navigate = useNavigate();
-
   const top = useMemo(() => {
     const startTime = dayjs(appointment.startTime).format('HH:00');
     const startTimeMinutes = parseInt(
@@ -42,7 +41,11 @@ const Appointment = ({
     const startIndex = slots.indexOf(startTime);
     const endIndex = slots.indexOf(endTime);
 
-    return `${(endIndex - startIndex) * 50 - 1 + ((endTimeMinutes - startTimeMinutes) * 50) / 60}px`;
+    return (
+      (endIndex - startIndex) * 50 -
+      1 +
+      ((endTimeMinutes - startTimeMinutes) * 50) / 60
+    );
   }, [appointment]);
 
   return (
@@ -53,31 +56,54 @@ const Appointment = ({
           'day'
         )
       })}
-      style={{ top, height }}
-      onClick={() => navigate(`/schedule/${appointment.id}`)}
+      style={{
+        top,
+        height: `${height}px`,
+        zIndex: showInfoModal ? '122' : '120'
+      }}
+      data-click-action={appointment.id}
     >
-      <div
-        className={classNames(styles.content, {
-          [styles.content_day]: dateType === DateType.DAY
-        })}
-      >
-        <div className={styles.content_first}>
-          <p>
-            {appointment.patient.firstname} {appointment.patient.lastname}
-          </p>
-          <p>
-            {dayjs(appointment.startTime).format(format)} -{' '}
-            {dayjs(appointment.endTime).format(format)}
-          </p>
-        </div>
-        <div>
-          {appointment.appointmentServices.map(appointmentService => (
-            <p>
-              {appointmentService.service.name} -{' '}
-              {appointmentService.description}
+      <div className={styles.content} data-click-action={appointment.id}>
+        <div
+          className={classNames(styles.content_content, {
+            [styles.content_content_day]: dateType === DateType.DAY
+          })}
+          data-click-action={appointment.id}
+          style={{ height: `${height - 14}px` }}
+        >
+          <div
+            className={styles.content_content_first}
+            data-click-action={appointment.id}
+          >
+            <p data-click-action={appointment.id}>
+              {appointment.patient.firstname} {appointment.patient.lastname}
             </p>
-          ))}
+            <p data-click-action={appointment.id}>
+              {dayjs(appointment.startTime).format(format)} -{' '}
+              {dayjs(appointment.endTime).format(format)}
+            </p>
+          </div>
+          <div data-click-action={appointment.id}>
+            {appointment.appointmentServices.map(appointmentService => (
+              <p data-click-action={appointment.id}>
+                {appointmentService.service.name} -{' '}
+                {appointmentService.description}
+              </p>
+            ))}
+          </div>
         </div>
+
+        {showInfoModal && (
+          <div
+            className={classNames(
+              'animate__animated animate__fadeInRight',
+              styles.content_modal
+            )}
+            data-click-action="appointment-modal"
+          >
+            Modal
+          </div>
+        )}
       </div>
     </div>
   );

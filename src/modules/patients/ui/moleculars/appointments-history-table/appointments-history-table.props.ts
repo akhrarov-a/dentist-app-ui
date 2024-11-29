@@ -1,13 +1,16 @@
 import { useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { usePagination } from '@hooks';
 import { useLocales } from '@locales';
 import { useStore } from '@store';
+import { ScheduleContract } from '@api';
 
 /**
  * <AppointmentsHistoryTable /> props
  */
 const useAppointmentsHistoryTableProps = () => {
   const { t } = useLocales();
+  const navigate = useNavigate();
 
   const {
     schedule: {
@@ -26,6 +29,10 @@ const useAppointmentsHistoryTableProps = () => {
     () => `${initialValues?.firstname || ''} ${initialValues?.lastname || ''}`,
     [initialValues]
   );
+
+  const onAppointmentClick = (schedule: ScheduleContract) => {
+    navigate(`/schedule/${schedule.id}`);
+  };
 
   useEffect(
     () => () => {
@@ -52,7 +59,8 @@ const useAppointmentsHistoryTableProps = () => {
     loading,
     pagination,
     schedules,
-    schedulesTotalAmount
+    schedulesTotalAmount,
+    onAppointmentClick
   };
 };
 
