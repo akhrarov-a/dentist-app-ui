@@ -1,4 +1,5 @@
 import { Button, Modal } from 'antd';
+import classNames from 'classnames';
 import dayjs from 'dayjs';
 import { DateType } from '@api';
 import { getWeekday, hoc } from '@utils';
@@ -15,6 +16,7 @@ const Schedule = hoc.observer(
     t,
     modal,
     language,
+    user,
     schedulesByDate,
     headerText,
     dateType,
@@ -74,6 +76,10 @@ const Schedule = hoc.observer(
               const date = dayjs(schedules.date);
               const weekday = getWeekday(date, language);
 
+              const isWeekendOrHolidayForUser =
+                user.weekends?.includes(date.day() === 0 ? 7 : date.day()) ||
+                user.holidays?.includes(date.format('YYYY-MM-DD'));
+
               const hasShowInfoModal = schedules.appointments.some(
                 schedule => schedule.id == selectedAppointmentToDisplay
               );
@@ -82,14 +88,26 @@ const Schedule = hoc.observer(
                 <div
                   key={schedules.date}
                   id={schedules.date}
-                  className={styles.appointments_content_content_day}
+                  className={classNames(
+                    styles.appointments_content_content_day,
+                    {
+                      [styles.appointments_content_content_day_weekend]:
+                        isWeekendOrHolidayForUser
+                    }
+                  )}
                   onClick={onClickAppointment}
                   onDoubleClick={onDoubleClickAppointment}
                   style={{ zIndex: hasShowInfoModal ? '122' : '119' }}
                 >
                   {dateType === DateType.WEEK && (
                     <p
-                      className={styles.appointments_content_content_day_title}
+                      className={classNames(
+                        styles.appointments_content_content_day_title,
+                        {
+                          [styles.appointments_content_content_day_weekend_title]:
+                            isWeekendOrHolidayForUser
+                        }
+                      )}
                     >
                       {weekday}
                       <br />

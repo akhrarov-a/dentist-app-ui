@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import dayjs from 'dayjs';
 import { observer } from 'mobx-react-lite';
 import { Button, Checkbox, DatePicker, Form as AntdForm, Input, Select } from 'antd';
 import { getWeekdays, rules } from '@utils';
@@ -135,6 +136,7 @@ const Form = observer(({ toggleEditing }: { toggleEditing?: () => void }) => {
           validateTrigger="onBlur"
         >
           <DatePicker
+            disabledDate={date => date.isBefore(dayjs())}
             placeholder={t('form.fields.holidays.placeholder')}
             style={{ width: '100%' }}
             multiple

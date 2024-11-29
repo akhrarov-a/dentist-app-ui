@@ -16,6 +16,7 @@ const format = 'YYYY-MM-DD';
 const useScheduleProps = () => {
   const {
     language,
+    profile: { user },
     schedule: {
       schedulesByDate,
       clearSchedules,
@@ -139,6 +140,7 @@ const useScheduleProps = () => {
     t,
     modal,
     language,
+    user,
     schedulesByDate,
     headerText,
     selectedDate,

@@ -50,7 +50,7 @@ const AppointmentInfoModal = ({
   return (
     <div
       className={classNames(
-        'animate__animated animate__fadeInRight animate__fast',
+        'animate__animated animate__fadeInRight animate__faster',
         styles.container
       )}
       data-click-action={AppointmentDataClickAction.MODAL}

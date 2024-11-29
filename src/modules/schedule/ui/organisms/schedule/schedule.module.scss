@@ -52,6 +52,17 @@
         position: relative;
         border-left: 1px solid $light-grey;
 
+        &_weekend {
+          padding-top: 30px;
+          color: $white;
+          background: $persian-red;
+
+          &_title {
+            position: sticky;
+            top: 100px;
+          }
+        }
+
         &_title {
           margin: 0 0;
           line-height: 22px;
