@@ -1,14 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
-import { ConfigProvider } from 'antd';
-import dayjs from 'dayjs';
-import ruRU from 'antd/locale/ru_RU';
 import { StoreProvider } from '@store';
 import { router } from './router';
 import './styles/globals.scss';
-
-dayjs.locale('ru_RU', { weekStart: 1 });
 
 /**
  * Create root
@@ -16,17 +11,7 @@ dayjs.locale('ru_RU', { weekStart: 1 });
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <StoreProvider>
-      <ConfigProvider
-        locale={ruRU}
-        theme={{
-          token: {
-            colorPrimary: '#003b5e',
-            colorTextBase: '#211f27'
-          }
-        }}
-      >
-        <RouterProvider router={router} />
-      </ConfigProvider>
+      <RouterProvider router={router} />
     </StoreProvider>
   </React.StrictMode>
 );

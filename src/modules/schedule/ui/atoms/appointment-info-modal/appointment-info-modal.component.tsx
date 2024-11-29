@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import dayjs from 'dayjs';
 import classNames from 'classnames';
 import { DateType, ScheduleContract } from '@api';
-import { months, weekdays } from '@utils';
+import { getMonth, getWeekday } from '@utils';
 import styles from './appointment-info-modal.module.scss';
 
 enum AppointmentDataClickAction {
@@ -17,19 +17,21 @@ enum AppointmentDataClickAction {
  * <AppointmentInfoModal />
  */
 const AppointmentInfoModal = ({
+  language,
   dateType,
   appointment
 }: {
+  language: string;
   dateType: DateType;
   appointment: ScheduleContract;
 }) => {
   const appointmentDate = useMemo(() => {
     const selectedDate = dayjs(appointment.startTime);
-    const weekday = weekdays[selectedDate.day()];
-    const month = months[selectedDate.month()];
+    const weekday = getWeekday(selectedDate, language);
+    const month = getMonth(selectedDate, language);
 
     return `${weekday}, ${selectedDate.date()} ${month} ${selectedDate.year()}`;
-  }, [appointment]);
+  }, [appointment, language]);
 
   const style = useMemo(() => {
     if (dateType === DateType.DAY) {

@@ -13,10 +13,12 @@ const format = 'HH:mm';
  */
 const Appointment = ({
   showInfoModal,
+  language,
   dateType,
   appointment
 }: {
   showInfoModal: boolean;
+  language: string;
   dateType: DateType;
   appointment: ScheduleContract;
 }) => {
@@ -98,7 +100,11 @@ const Appointment = ({
         </div>
 
         {showInfoModal && (
-          <AppointmentInfoModal dateType={dateType} appointment={appointment} />
+          <AppointmentInfoModal
+            language={language}
+            dateType={dateType}
+            appointment={appointment}
+          />
         )}
       </div>
     </div>

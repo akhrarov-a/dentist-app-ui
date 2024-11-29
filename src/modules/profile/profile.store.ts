@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { ProfileContract } from '@api';
-import { TranslationFunctionType } from '@locales';
+import { Languages, TranslationFunctionType } from '@locales';
 import { ProfileAdapter } from './lib';
 import { ProfileForm } from './profile.types';
 
@@ -34,6 +34,8 @@ class ProfileStore {
           response.data
         );
       });
+
+      this.global.setLanguage(this.user.language?.toLowerCase() as Languages);
     } catch (e) {
       const error = e as AxiosError;
 

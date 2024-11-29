@@ -1,7 +1,9 @@
+import { Dayjs } from 'dayjs';
+
 /**
  * Weekdays
  */
-export const weekdays = [
+const weekdaysRU = [
   'Воскресенье',
   'Понедельник',
   'Вторник',
@@ -11,10 +13,26 @@ export const weekdays = [
   'Суббота'
 ];
 
+const weekdaysEN = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday'
+];
+
+export const getWeekday = (date: Dayjs, lang: string) => {
+  const day = date.day();
+
+  return lang === 'ru' ? weekdaysRU[day] : weekdaysEN[day];
+};
+
 /**
  * Months
  */
-export const months = [
+const monthsRU = [
   'Январь',
   'Февраль',
   'Март',
@@ -28,3 +46,24 @@ export const months = [
   'Ноябрь',
   'Декабрь'
 ];
+
+const monthsEN = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+
+export const getMonth = (date: Dayjs, lang: string) => {
+  const month = date.month();
+
+  return lang === 'ru' ? monthsRU[month] : monthsEN[month];
+};

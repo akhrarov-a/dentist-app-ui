@@ -70,11 +70,11 @@ const ScheduleParams: FC<ScheduleParamsProps> = ({
         value={dateType}
         options={[
           {
-            label: 'Day',
+            label: t('schedule.table.day'),
             value: DateType.DAY
           },
           {
-            label: 'Week',
+            label: t('schedule.table.week'),
             value: DateType.WEEK
           }
         ]}

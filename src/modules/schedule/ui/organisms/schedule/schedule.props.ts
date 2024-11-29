@@ -5,7 +5,7 @@ import { useLocales } from '@locales';
 import { useStore } from '@store';
 import { DateType } from '@api';
 import { useModal } from '@hooks';
-import { months, weekdays } from '@utils';
+import { getMonth, getWeekday } from '@utils';
 import { AppointmentDataClickAction } from '../../atoms';
 
 const format = 'YYYY-MM-DD';
@@ -15,6 +15,7 @@ const format = 'YYYY-MM-DD';
  */
 const useScheduleProps = () => {
   const {
+    language,
     schedule: {
       schedulesByDate,
       clearSchedules,
@@ -35,11 +36,11 @@ const useScheduleProps = () => {
     useState(null);
 
   const headerText = useMemo(() => {
-    const weekday = weekdays[selectedDate.day()];
-    const month = months[selectedDate.month()];
+    const weekday = getWeekday(selectedDate, language);
+    const month = getMonth(selectedDate, language);
 
     return `${weekday}, ${selectedDate.date()} ${month} ${selectedDate.year()}`;
-  }, [selectedDate]);
+  }, [selectedDate, language]);
 
   const onAddAppointmentClick = () => {
     navigate('/schedule/create');
@@ -137,6 +138,7 @@ const useScheduleProps = () => {
   return {
     t,
     modal,
+    language,
     schedulesByDate,
     headerText,
     selectedDate,

@@ -3,7 +3,7 @@ import * as uuid from 'uuid';
 import { Table } from 'antd';
 import dayjs from 'dayjs';
 import { ColumnsType } from 'antd/es/table';
-import { hoc, months, weekdays } from '@utils';
+import { getMonth, getWeekday, hoc } from '@utils';
 import { ScheduleContract } from '@api';
 import { useAppointmentsHistoryTableProps } from './appointments-history-table.props.ts';
 import styles from './appointments-history-table.module.scss';
@@ -16,6 +16,7 @@ const AppointmentsHistoryTable = hoc.observer(
   ({
     t,
     loading,
+    language,
     name,
     currentServiceId,
     pagination,
@@ -29,8 +30,8 @@ const AppointmentsHistoryTable = hoc.observer(
         render: (_, record) => {
           const date = dayjs(record.startTime);
 
-          const weekday = weekdays[date.day()];
-          const month = months[date.month()];
+          const weekday = getWeekday(date, language);
+          const month = getMonth(date, language);
 
           return (
             <div className={styles.column}>

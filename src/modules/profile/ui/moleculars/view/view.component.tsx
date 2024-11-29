@@ -43,6 +43,14 @@ const View = observer(({ toggleEditing }: { toggleEditing?: () => void }) => {
           <p>{t('form.fields.email.label')}</p>
           <p>{user.email}</p>
         </div>
+        <div className={styles.content_field}>
+          <p>{t('form.fields.layoutTitle.label')}</p>
+          <p>{user.layoutTitle}</p>
+        </div>
+        <div className={styles.content_field}>
+          <p>{t('form.fields.language.label')}</p>
+          <p>{user.language}</p>
+        </div>
       </div>
     </div>
   );

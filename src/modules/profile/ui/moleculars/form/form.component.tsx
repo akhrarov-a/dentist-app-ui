@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { Button, Form as AntdForm, Input } from 'antd';
+import { Button, Checkbox, Form as AntdForm, Input, Select } from 'antd';
 import { rules } from '@utils';
 import { useStore } from '@store';
 import { useLocales } from '@locales';
@@ -14,7 +14,7 @@ const Form = observer(({ toggleEditing }: { toggleEditing?: () => void }) => {
     profile: { initialValues, updateProfile }
   } = useStore();
 
-  const { t } = useLocales();
+  const { t, languages } = useLocales();
 
   const [form] = AntdForm.useForm();
 
@@ -105,6 +105,82 @@ const Form = observer(({ toggleEditing }: { toggleEditing?: () => void }) => {
             />
           </AntdForm.Item>
         </div>
+
+        <div className={styles.checkbox}>
+          <p>{t('form.fields.useMyFirstNameAndLastnameForLayoutTitle')}</p>
+          <AntdForm.Item
+            className={styles.row_equal_input}
+            name="useMyFirstNameAndLastnameForLayoutTitle"
+            valuePropName="checked"
+            validateTrigger="onBlur"
+            noStyle
+          >
+            <Checkbox
+              onChange={event => {
+                if (event.target.checked) {
+                  form.setFieldsValue({
+                    layoutTitle: `${form.getFieldValue('firstname')} ${form.getFieldValue('lastname')}`
+                  });
+
+                  return;
+                }
+
+                form.setFieldsValue({
+                  layoutTitle: ''
+                });
+              }}
+            />
+          </AntdForm.Item>
+        </div>
+
+        <AntdForm.Item noStyle shouldUpdate>
+          {formInstance => {
+            const useMyFirstNameAndLastnameForLayoutTitle =
+              formInstance.getFieldValue(
+                'useMyFirstNameAndLastnameForLayoutTitle'
+              );
+
+            return (
+              <AntdForm.Item
+                label={t('form.fields.layoutTitle.label')}
+                name="layoutTitle"
+                rules={[
+                  rules.whitespace(
+                    t('form.validations.shouldNotStartOrEndWithWhitespace')
+                  ),
+                  rules.required(t('form.validations.required'))
+                ]}
+                validateTrigger="onBlur"
+              >
+                <Input
+                  disabled={useMyFirstNameAndLastnameForLayoutTitle}
+                  placeholder={t('form.fields.layoutTitle.placeholder')}
+                />
+              </AntdForm.Item>
+            );
+          }}
+        </AntdForm.Item>
+
+        <AntdForm.Item
+          label={t('form.fields.language.label')}
+          name="language"
+          rules={[
+            rules.whitespace(
+              t('form.validations.shouldNotStartOrEndWithWhitespace')
+            ),
+            rules.required(t('form.validations.required'))
+          ]}
+          validateTrigger="onBlur"
+        >
+          <Select
+            className={styles.select}
+            placeholder={t('form.fields.language.placeholder')}
+            options={languages.map(language => ({
+              label: language.name,
+              value: language.id
+            }))}
+          />
+        </AntdForm.Item>
       </AntdForm>
     </div>
   );

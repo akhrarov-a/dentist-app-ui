@@ -40,6 +40,7 @@ const useHeaderProps = () => {
 
   return {
     t,
+    layoutTitle: user.layoutTitle,
     profileText,
     _links,
     logout: () => logout(t),

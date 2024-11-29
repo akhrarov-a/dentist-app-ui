@@ -1,4 +1,5 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
+import dayjs from 'dayjs';
 import { useStore } from '@store';
 import locales from './locales.json';
 
@@ -28,12 +29,12 @@ export enum Languages {
  */
 const useLocaleOptions = () => [
   {
-    id: Languages.EN,
-    name: Languages.EN
+    id: 'EN',
+    name: 'EN'
   },
   {
-    id: Languages.RU,
-    name: Languages.RU
+    id: 'RU',
+    name: 'RU'
   }
 ];
 
@@ -79,6 +80,14 @@ const useLocales = () => {
     },
     [language, translations]
   );
+
+  useEffect(() => {
+    if (language === 'ru') {
+      dayjs.locale('ru_RU', { weekStart: 1 });
+    } else if (language === 'en') {
+      dayjs.locale('en_US', { weekStart: 1 });
+    }
+  }, [language]);
 
   return {
     t,

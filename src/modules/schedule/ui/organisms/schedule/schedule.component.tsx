@@ -1,7 +1,7 @@
 import { Button, Modal } from 'antd';
 import dayjs from 'dayjs';
 import { DateType } from '@api';
-import { hoc, weekdays } from '@utils';
+import { getWeekday, hoc } from '@utils';
 import { Appointment, ScheduleParams, Slots } from '../../moleculars';
 import { useScheduleProps } from './schedule.props';
 import styles from './schedule.module.scss';
@@ -14,6 +14,7 @@ const Schedule = hoc.observer(
   ({
     t,
     modal,
+    language,
     schedulesByDate,
     headerText,
     dateType,
@@ -71,7 +72,7 @@ const Schedule = hoc.observer(
           >
             {schedulesByDate.map(schedules => {
               const date = dayjs(schedules.date);
-              const weekday = weekdays[date.day()];
+              const weekday = getWeekday(date, language);
 
               const hasShowInfoModal = schedules.appointments.some(
                 schedule => schedule.id == selectedAppointmentToDisplay
@@ -98,6 +99,7 @@ const Schedule = hoc.observer(
                   {schedules.appointments.map(schedule => (
                     <Appointment
                       key={schedule.id}
+                      language={language}
                       showInfoModal={
                         schedule.id === selectedAppointmentToDisplay
                       }

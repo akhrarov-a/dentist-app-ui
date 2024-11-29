@@ -10,12 +10,24 @@ import styles from './header.module.scss';
  */
 const Header = hoc.observer(
   useHeaderProps,
-  ({ t, profileText, _links, logout, onProfileClick, onLogoClick }) => (
+  ({
+    t,
+    layoutTitle,
+    profileText,
+    _links,
+    logout,
+    onProfileClick,
+    onLogoClick
+  }) => (
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.logo} onClick={onLogoClick}>
           <img src="/img/logo.webp" alt="Logo" />
-          <p>Dentica</p>
+          {layoutTitle ? (
+            <p style={{ fontSize: '24px' }}>{layoutTitle}</p>
+          ) : (
+            <p>Dentica</p>
+          )}
         </div>
         <div className={styles.profile}>
           <div className={styles.profile_content} onClick={onProfileClick}>

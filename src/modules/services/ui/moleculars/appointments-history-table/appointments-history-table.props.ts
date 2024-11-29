@@ -13,6 +13,7 @@ const useAppointmentsHistoryTableProps = () => {
   const navigate = useNavigate();
 
   const {
+    language,
     schedule: {
       loading,
       schedules,
@@ -51,6 +52,7 @@ const useAppointmentsHistoryTableProps = () => {
   return {
     t,
     currentServiceId,
+    language,
     name: initialValues.name,
     loading,
     pagination,

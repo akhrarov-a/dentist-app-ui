@@ -232,6 +232,30 @@
           "en": "Enter description",
           "ru": "Введите описания"
         }
+      },
+      "layoutTitle": {
+        "label": {
+          "en": "Layout title",
+          "ru": "Заголовок на сайте"
+        },
+        "placeholder": {
+          "en": "Enter layout title",
+          "ru": "Введите заголовок на сайте"
+        }
+      },
+      "language": {
+        "label": {
+          "en": "Language",
+          "ru": "Язык"
+        },
+        "placeholder": {
+          "en": "Select language",
+          "ru": "Выберите язык"
+        }
+      },
+      "useMyFirstNameAndLastnameForLayoutTitle": {
+        "en": "Use my firstname and lastname for layout title",
+        "ru": "Использовать мое имя и фамилию для заголовка на сайте"
       }
     },
     "validations": {
@@ -324,6 +348,14 @@
       "today": {
         "en": "Today",
         "ru": "Сегодня"
+      },
+      "day": {
+        "en": "Day",
+        "ru": "День"
+      },
+      "week": {
+        "en": "Week",
+        "ru": "Неделя"
       }
     },
     "form": {

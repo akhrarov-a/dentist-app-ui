@@ -35,6 +35,8 @@ type ProfileContract = {
   lastname: string;
   phone: string;
   email: string;
+  layoutTitle: string;
+  language: string;
   role: UserRole;
 };
 

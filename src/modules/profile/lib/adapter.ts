@@ -10,7 +10,12 @@ class ProfileAdapter {
       firstname: patient.firstname,
       lastname: patient.lastname,
       email: patient.email,
-      phone: patient.phone
+      phone: patient.phone,
+      language: patient.language,
+      layoutTitle: patient.layoutTitle,
+      useMyFirstNameAndLastnameForLayoutTitle:
+        patient.layoutTitle?.trim() ===
+        `${patient.firstname} ${patient.lastname}`?.trim()
     };
   }
 
@@ -19,7 +24,9 @@ class ProfileAdapter {
       firstname: patient.firstname,
       lastname: patient.lastname,
       email: patient.email,
-      phone: patient.phone
+      phone: patient.phone,
+      language: patient.language,
+      layoutTitle: patient.layoutTitle
     };
   }
 }
