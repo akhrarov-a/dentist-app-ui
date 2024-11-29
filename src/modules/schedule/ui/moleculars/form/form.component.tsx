@@ -173,8 +173,8 @@ const Form = observer<FormProps>(
               const servicesValues: number[] =
                 formInstance.getFieldValue('services');
 
-              return servicesValues?.map(service => (
-                <div className={styles.description}>
+              return servicesValues?.map((service, index) => (
+                <div key={index} className={styles.description}>
                   <p>{services.services.find(s => s.id === service)?.name}:</p>
                   <Input.TextArea
                     placeholder={t(

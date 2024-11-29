@@ -89,7 +89,7 @@ const Appointment = ({
           </div>
           <div className={styles.services} data-click-action={appointment.id}>
             {appointment.appointmentServices.map(appointmentService => (
-              <p data-click-action={appointment.id}>
+              <p key={appointmentService.id} data-click-action={appointment.id}>
                 {appointmentService.service.name} -{' '}
                 {appointmentService.description}
               </p>

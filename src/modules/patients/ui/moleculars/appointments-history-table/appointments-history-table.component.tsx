@@ -49,7 +49,7 @@ const AppointmentsHistoryTable = hoc.observer(
         render: (_, record) => (
           <div className={styles.column}>
             {record.appointmentServices.map(appointmentService => (
-              <p>
+              <p key={appointmentService.id}>
                 {appointmentService.service.name}
                 {appointmentService.description
                   ? ` - ${appointmentService.description}`
