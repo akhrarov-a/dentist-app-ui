@@ -361,8 +361,8 @@
       "ru": "Продолжительность записи должно быть минимум 15 минут"
     },
     "notFound": {
-      "en": "Not found",
-      "ru": "Не найдено"
+      "en": "Not found element with id {{id}}",
+      "ru": "Не найдено элемент с ид {{id}}"
     }
   },
   "successfullyCreated": {

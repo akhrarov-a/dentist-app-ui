@@ -1,4 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
+import { AxiosError } from 'axios';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { ProfileContract } from '@api';
@@ -33,8 +34,14 @@ class ProfileStore {
           response.data
         );
       });
-    } catch (error) {
-      message.error(t('errors.somethingWentWrong'));
+    } catch (e) {
+      const error = e as AxiosError;
+
+      if (error?.response?.status === 404) {
+        message.error(t('errors.notFound'));
+      } else {
+        message.error(t('errors.somethingWentWrong'));
+      }
     } finally {
       this.global.hideLoader();
     }
@@ -57,8 +64,16 @@ class ProfileStore {
       await this.getUser(t);
 
       callback();
-    } catch (error) {
-      message.error(t('errors.somethingWentWrong'));
+    } catch (e) {
+      const error = e as AxiosError;
+
+      if (error?.response?.status === 404) {
+        message.error(
+          t('errors.notFound')?.replace('{{id}}', this.user.id?.toString())
+        );
+      } else {
+        message.error(t('errors.somethingWentWrong'));
+      }
     } finally {
       this.global.hideLoader();
     }

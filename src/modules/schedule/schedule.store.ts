@@ -1,5 +1,6 @@
 import { NavigateFunction } from 'react-router-dom';
 import { makeAutoObservable, runInAction } from 'mobx';
+import { AxiosError } from 'axios';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { DateType, GetAppointmentsParams, ScheduleContract } from '@api';
@@ -119,8 +120,14 @@ class ScheduleStore {
       });
 
       this.global.patients.findPatients(t, response.data.patient.firstname);
-    } catch (error) {
-      message.error(t('errors.somethingWentWrong'));
+    } catch (e) {
+      const error = e as AxiosError;
+
+      if (error?.response?.status === 404) {
+        message.error(t('errors.notFound')?.replace('{{id}}', id?.toString()));
+      } else {
+        message.error(t('errors.somethingWentWrong'));
+      }
     } finally {
       this.global.hideLoader();
     }
@@ -143,8 +150,14 @@ class ScheduleStore {
       });
 
       this.global.patients.findPatients(t, response.data.patient.firstname);
-    } catch (error) {
-      message.error(t('errors.somethingWentWrong'));
+    } catch (e) {
+      const error = e as AxiosError;
+
+      if (error?.response?.status === 404) {
+        message.error(t('errors.notFound')?.replace('{{id}}', id?.toString()));
+      } else {
+        message.error(t('errors.somethingWentWrong'));
+      }
     } finally {
       this.global.hideLoader();
     }
@@ -216,8 +229,19 @@ class ScheduleStore {
       this.clearInitialValues();
 
       await this.getScheduleById(t, currentScheduleId);
-    } catch (error) {
-      message.error(t('errors.somethingWentWrong'));
+    } catch (e) {
+      const error = e as AxiosError;
+
+      if (error?.response?.status === 404) {
+        message.error(
+          t('errors.notFound')?.replace(
+            '{{id}}',
+            this.currentScheduleId?.toString()
+          )
+        );
+      } else {
+        message.error(t('errors.somethingWentWrong'));
+      }
     } finally {
       this.global.hideLoader();
     }
@@ -236,8 +260,14 @@ class ScheduleStore {
       message.success(t('successfullyDeleted'));
 
       navigate('/schedule');
-    } catch (error) {
-      message.error(t('errors.somethingWentWrong'));
+    } catch (e) {
+      const error = e as AxiosError;
+
+      if (error?.response?.status === 404) {
+        message.error(t('errors.notFound')?.replace('{{id}}', id?.toString()));
+      } else {
+        message.error(t('errors.somethingWentWrong'));
+      }
     } finally {
       this.global.hideLoader();
     }

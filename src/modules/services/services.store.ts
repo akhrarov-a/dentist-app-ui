@@ -1,5 +1,6 @@
 import { NavigateFunction } from 'react-router-dom';
 import { makeAutoObservable, runInAction } from 'mobx';
+import { AxiosError } from 'axios';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { GetServicesParams, ServiceContract } from '@api';
@@ -97,8 +98,14 @@ class ServicesStore {
           response.data
         );
       });
-    } catch (error) {
-      message.error(t('errors.somethingWentWrong'));
+    } catch (e) {
+      const error = e as AxiosError;
+
+      if (error?.response?.status === 404) {
+        message.error(t('errors.notFound')?.replace('{{id}}', id?.toString()));
+      } else {
+        message.error(t('errors.somethingWentWrong'));
+      }
     } finally {
       this.global.hideLoader();
     }
@@ -147,8 +154,19 @@ class ServicesStore {
       await this.getServiceById(t, currentServiceId);
 
       callback();
-    } catch (error) {
-      message.error(t('errors.somethingWentWrong'));
+    } catch (e) {
+      const error = e as AxiosError;
+
+      if (error?.response?.status === 404) {
+        message.error(
+          t('errors.notFound')?.replace(
+            '{{id}}',
+            this.currentServiceId?.toString()
+          )
+        );
+      } else {
+        message.error(t('errors.somethingWentWrong'));
+      }
     } finally {
       this.global.hideLoader();
     }
@@ -167,8 +185,14 @@ class ServicesStore {
       message.success(t('successfullyDeleted'));
 
       navigate('/services');
-    } catch (error) {
-      message.error(t('errors.somethingWentWrong'));
+    } catch (e) {
+      const error = e as AxiosError;
+
+      if (error?.response?.status === 404) {
+        message.error(t('errors.notFound')?.replace('{{id}}', id?.toString()));
+      } else {
+        message.error(t('errors.somethingWentWrong'));
+      }
     } finally {
       this.global.hideLoader();
     }
@@ -184,8 +208,14 @@ class ServicesStore {
       await this.global.api.services.deleteServicesByIds(ids);
 
       message.success(t('successfullyDeleted'));
-    } catch (error) {
-      message.error(t('errors.somethingWentWrong'));
+    } catch (e) {
+      const error = e as AxiosError;
+
+      if (error?.response?.status === 404) {
+        message.error(t('errors.notFound')?.replace('{{id}}', ids.join(', ')));
+      } else {
+        message.error(t('errors.somethingWentWrong'));
+      }
     } finally {
       this.global.hideLoader();
     }
