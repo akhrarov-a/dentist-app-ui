@@ -96,7 +96,7 @@ const router = createBrowserRouter([
         element: <Profile />
       },
       {
-        path: '',
+        path: '*',
         element: <Redirect />
       }
     ]

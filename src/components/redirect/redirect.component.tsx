@@ -11,7 +11,7 @@ const Redirect = hoc.observer(useStore, ({ profile: { user } }) => {
     return <Navigate to="/users" />;
   }
 
-  return <Navigate to="/patients" />;
+  return <Navigate to="/schedule" />;
 });
 
 export { Redirect };
