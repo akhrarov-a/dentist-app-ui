@@ -64,6 +64,17 @@ const useScheduleProps = () => {
   };
 
   const onCalendarChange = (date: Dayjs) => {
+    if (dateType === DateType.DAY) {
+      if (selectedDate.isSame(date, 'date')) return;
+
+      setSelectedDate(date);
+      setSelectedAppointmentToDisplay(null);
+
+      return;
+    }
+
+    if (selectedDate.isSame(date, 'weeks')) return;
+
     setSelectedDate(date);
     setSelectedAppointmentToDisplay(null);
   };

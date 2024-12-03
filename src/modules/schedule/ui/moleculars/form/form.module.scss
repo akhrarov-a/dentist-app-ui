@@ -43,3 +43,22 @@
     margin: 0;
   }
 }
+
+.day {
+  text-align: center;
+
+  &_holiday {
+    background: $persian-red;
+    color: $white;
+
+    &:hover {
+      background-color: $persian-red;
+      color: $white;
+    }
+  }
+
+  &_selected {
+    background-color: $dark-blue;
+    color: $white;
+  }
+}

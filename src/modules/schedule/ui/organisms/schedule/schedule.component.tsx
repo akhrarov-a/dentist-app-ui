@@ -33,6 +33,7 @@ const Schedule = hoc.observer(
     <div className={styles.container}>
       <ScheduleParams
         t={t}
+        user={user}
         dateType={dateType}
         selectedDate={selectedDate}
         onCalendarChange={onCalendarChange}

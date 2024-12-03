@@ -11,6 +11,7 @@ import styles from './schedule-params.module.scss';
  */
 const ScheduleParams: FC<ScheduleParamsProps> = ({
   t,
+  user,
   selectedDate,
   dateType,
   onCalendarChange,
@@ -18,13 +19,21 @@ const ScheduleParams: FC<ScheduleParamsProps> = ({
   onTodayClick
 }) => {
   const fullCellRender = (value: Dayjs) => {
+    const isHoliday = user.holidays?.some(holiday =>
+      value.isSame(holiday, 'date')
+    );
+    const isWeekend = user.weekends?.includes(
+      value.day() === 0 ? 7 : value.day()
+    );
+
     if (dateType === DateType.DAY) {
       const isActive = selectedDate.isSame(value, 'date');
 
       return (
         <div
           className={classNames(styles.calendar_day, {
-            [styles.calendar_day_active]: isActive
+            [styles.calendar_day_active]: isActive,
+            [styles.calendar_day_holiday]: isHoliday || isWeekend
           })}
         >
           {value.date()}
@@ -49,7 +58,10 @@ const ScheduleParams: FC<ScheduleParamsProps> = ({
           key={value.date()}
           className={classNames(
             styles.calendar_day,
-            styles.calendar_day_active
+            styles.calendar_day_active,
+            {
+              [styles.calendar_day_holiday]: isHoliday || isWeekend
+            }
           )}
         >
           {value.date()}
@@ -57,7 +69,15 @@ const ScheduleParams: FC<ScheduleParamsProps> = ({
       );
     }
 
-    return <div className={styles.calendar_day}>{value.date()}</div>;
+    return (
+      <div
+        className={classNames(styles.calendar_day, {
+          [styles.calendar_day_holiday]: isHoliday || isWeekend
+        })}
+      >
+        {value.date()}
+      </div>
+    );
   };
 
   return (

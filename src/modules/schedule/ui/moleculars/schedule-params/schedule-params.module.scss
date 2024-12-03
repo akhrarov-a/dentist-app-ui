@@ -32,5 +32,15 @@
       background-color: $dark-blue;
       color: $white;
     }
+
+    &_holiday {
+      background: $persian-red;
+      color: $white;
+
+      &:hover {
+        background-color: $persian-red;
+        color: $white;
+      }
+    }
   }
 }

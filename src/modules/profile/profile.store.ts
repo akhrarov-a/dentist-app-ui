@@ -1,4 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
+import cookie from 'react-cookies';
 import { AxiosError } from 'axios';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
@@ -34,6 +35,8 @@ class ProfileStore {
           response.data
         );
       });
+
+      cookie.save('user', this.user, { path: '/', maxAge: 604800 });
 
       this.global.setLanguage(this.user.language?.toLowerCase() as Languages);
     } catch (e) {

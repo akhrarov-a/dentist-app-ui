@@ -1,5 +1,5 @@
 import { Dayjs } from 'dayjs';
-import { DateType } from '@api';
+import { DateType, ProfileContract } from '@api';
 import { TranslationFunctionType } from '@locales';
 
 /**
@@ -7,6 +7,7 @@ import { TranslationFunctionType } from '@locales';
  */
 type ScheduleParamsProps = {
   t: TranslationFunctionType;
+  user: ProfileContract;
   selectedDate: Dayjs;
   dateType: DateType;
   onDateTypeChange: (value: string) => void;

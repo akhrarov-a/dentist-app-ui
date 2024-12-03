@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import { Dayjs } from 'dayjs';
+import classNames from 'classnames';
 import { Button, DatePicker, Form as AntdForm, Input, Modal, Select, TimePicker } from 'antd';
 import { rules } from '@utils';
 import { useStore } from '@store';
@@ -16,7 +18,7 @@ import styles from './form.module.scss';
  */
 const Form = observer<FormProps>(
   ({ isEdit, initialValues, onSubmit, onDelete }) => {
-    const { schedule: store, patients, services } = useStore();
+    const { schedule: store, patients, services, profile } = useStore();
 
     const modal = useModal();
 
@@ -59,6 +61,37 @@ const Form = observer<FormProps>(
           description
         }
       ]);
+    };
+
+    const checkIsDateUserWeekendOrHoliday = (value: Dayjs) => {
+      if (!value) return false;
+
+      const isHoliday = profile.user.holidays?.some(holiday =>
+        value.isSame(holiday, 'date')
+      );
+      const isWeekend = profile.user.weekends?.includes(
+        value.day() === 0 ? 7 : value.day()
+      );
+
+      return isHoliday || isWeekend;
+    };
+
+    const dateRender = (current: Dayjs | string | number) => {
+      const value = current as Dayjs;
+
+      const isSelected = form.getFieldValue('date')?.isSame(value, 'date');
+      const isWeekendOrHoliday = checkIsDateUserWeekendOrHoliday(value);
+
+      return (
+        <div
+          className={classNames(styles.day, {
+            [styles.day_holiday]: isWeekendOrHoliday,
+            [styles.day_selected]: isSelected
+          })}
+        >
+          {value.date()}
+        </div>
+      );
     };
 
     useEffect(() => {
@@ -172,39 +205,55 @@ const Form = observer<FormProps>(
             {formInstance => {
               const servicesValues: number[] =
                 formInstance.getFieldValue('services');
+              const dateValue: Dayjs = formInstance.getFieldValue('date');
 
-              return servicesValues?.map((service, index) => (
-                <div key={index} className={styles.description}>
-                  <p>{services.services.find(s => s.id === service)?.name}:</p>
-                  <Input.TextArea
-                    placeholder={t(
-                      'form.fields.services.description.placeholder'
-                    )}
-                    value={
-                      servicesDescriptions.find(
-                        serviceDescription => serviceDescription.id === service
-                      )?.description
-                    }
-                    onChange={event =>
-                      onServicesDescriptionsChange(service, event.target.value)
-                    }
-                  />
-                </div>
-              ));
+              return (
+                <Fragment>
+                  {servicesValues?.map((service, index) => (
+                    <div key={index} className={styles.description}>
+                      <p>
+                        {services.services.find(s => s.id === service)?.name}:
+                      </p>
+                      <Input.TextArea
+                        placeholder={t(
+                          'form.fields.services.description.placeholder'
+                        )}
+                        value={
+                          servicesDescriptions.find(
+                            serviceDescription =>
+                              serviceDescription.id === service
+                          )?.description
+                        }
+                        onChange={event =>
+                          onServicesDescriptionsChange(
+                            service,
+                            event.target.value
+                          )
+                        }
+                      />
+                    </div>
+                  ))}
+
+                  <AntdForm.Item
+                    label={t('form.fields.date.label')}
+                    name="date"
+                    rules={[rules.required(t('form.validations.required'))]}
+                    validateTrigger="onBlur"
+                  >
+                    <DatePicker
+                      className={classNames({
+                        [styles.day_holiday]:
+                          checkIsDateUserWeekendOrHoliday(dateValue)
+                      })}
+                      disabled={isPastAppointment}
+                      dateRender={dateRender}
+                      placeholder={t('form.fields.date.placeholder')}
+                      style={{ width: '100%' }}
+                    />
+                  </AntdForm.Item>
+                </Fragment>
+              );
             }}
-          </AntdForm.Item>
-
-          <AntdForm.Item
-            label={t('form.fields.date.label')}
-            name="date"
-            rules={[rules.required(t('form.validations.required'))]}
-            validateTrigger="onBlur"
-          >
-            <DatePicker
-              disabled={isPastAppointment}
-              placeholder={t('form.fields.date.placeholder')}
-              style={{ width: '100%' }}
-            />
           </AntdForm.Item>
 
           <div className={styles.content}>
