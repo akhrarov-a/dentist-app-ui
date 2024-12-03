@@ -44,5 +44,14 @@
         font-size: 15px;
       }
     }
+
+    &_holidays {
+      div {
+        p {
+          color: $dark-blue !important;
+          font-size: 15px !important;
+        }
+      }
+    }
   }
 }
