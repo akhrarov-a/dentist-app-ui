@@ -1,7 +1,7 @@
 import { NavigateFunction } from 'react-router-dom';
 import { makeAutoObservable, runInAction } from 'mobx';
 import { message } from 'antd';
-import { AuthCredentials } from '@api';
+import { AuthCredentials, UserRole } from '@api';
 import { GlobalStore } from '@store';
 import { TranslationFunctionType } from '@locales';
 
@@ -33,7 +33,12 @@ class AuthStore {
 
       await this.global.profile.getUser(t);
 
-      navigate('/schedule');
+      const userRole = this.global.profile.user?.role;
+      if (userRole === UserRole.ADMIN) {
+        navigate('/users');
+      } else if (userRole === UserRole.DENTIST) {
+        navigate('/schedule');
+      }
     } catch (error) {
       message.error(t('errors.invalidCredentials'));
     }

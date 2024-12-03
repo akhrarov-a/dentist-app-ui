@@ -415,6 +415,14 @@
     "notFound": {
       "en": "Not found element with id {{id}}",
       "ru": "Не найдено элемент с ид {{id}}"
+    },
+    "patientWithThisPhoneAlreadyExists": {
+      "en": "Patient with this phone already exists",
+      "ru": "Пациент с таким номером телефона уже существует"
+    },
+    "serviceWithThisNameAlreadyExists": {
+      "en": "Service with this name already exists",
+      "ru": "Услуга с таким именем уже существует"
     }
   },
   "successfullyCreated": {

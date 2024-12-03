@@ -3,7 +3,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { AxiosError } from 'axios';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
-import { GetPatientsParams, PatientContract } from '@api';
+import { ApiErrorCodes, GetPatientsParams, PatientContract } from '@api';
 import { debounce, filterOutFalsyValuesFromObject } from '@utils';
 import { TranslationFunctionType } from '@locales';
 import { PatientForm } from './patients.types';
@@ -112,8 +112,16 @@ class PatientsStore {
 
       message.success(t('successfullyCreated'));
       navigate(`/patients/${response.data.id}`);
-    } catch (error) {
-      message.error(t('errors.somethingWentWrong'));
+    } catch (e) {
+      const error = e as AxiosError;
+
+      const errorCode = (error?.response?.data as any)?.errorCode;
+
+      if (errorCode === ApiErrorCodes.ALREADY_EXISTS) {
+        message.error(t('errors.patientWithThisPhoneAlreadyExists'));
+      } else {
+        message.error(t('errors.somethingWentWrong'));
+      }
     } finally {
       this.global.hideLoader();
     }
@@ -144,6 +152,8 @@ class PatientsStore {
     } catch (e) {
       const error = e as AxiosError;
 
+      const errorCode = (error?.response?.data as any)?.errorCode;
+
       if (error?.response?.status === 404) {
         message.error(
           t('errors.notFound')?.replace(
@@ -151,6 +161,8 @@ class PatientsStore {
             this.currentPatientId?.toString()
           )
         );
+      } else if (errorCode === ApiErrorCodes.ALREADY_EXISTS) {
+        message.error(t('errors.patientWithThisPhoneAlreadyExists'));
       } else {
         message.error(t('errors.somethingWentWrong'));
       }

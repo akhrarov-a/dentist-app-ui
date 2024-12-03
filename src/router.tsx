@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { Redirect } from '@components';
+import { UserRole } from '@api';
+import { Redirect, RoleGuard } from '@components';
 import { Profile } from '@profile';
 import { Login, ResetPassword } from '@auth';
 import { CreatePatient, PatientsList, UpdatePatient } from '@patients';
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/patients',
+        element: <RoleGuard roles={[UserRole.DENTIST]} />,
         children: [
           {
             path: '/patients/create',
@@ -42,6 +44,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/services',
+        element: <RoleGuard roles={[UserRole.DENTIST]} />,
         children: [
           {
             path: '/services/create',
@@ -59,6 +62,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/schedule',
+        element: <RoleGuard roles={[UserRole.DENTIST]} />,
         children: [
           {
             path: '/schedule/create',
@@ -76,6 +80,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/users',
+        element: <RoleGuard roles={[UserRole.ADMIN]} />,
         children: [
           {
             path: '/users/create',
@@ -93,7 +98,13 @@ const router = createBrowserRouter([
       },
       {
         path: '/profile',
-        element: <Profile />
+        element: <RoleGuard roles={[UserRole.DENTIST, UserRole.ADMIN]} />,
+        children: [
+          {
+            path: '',
+            element: <Profile />
+          }
+        ]
       },
       {
         path: '*',

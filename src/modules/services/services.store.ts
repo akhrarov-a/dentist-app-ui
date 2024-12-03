@@ -3,7 +3,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { AxiosError } from 'axios';
 import { message } from 'antd';
 import { GlobalStore } from '@store';
-import { GetServicesParams, ServiceContract } from '@api';
+import { ApiErrorCodes, GetServicesParams, ServiceContract } from '@api';
 import { filterOutFalsyValuesFromObject } from '@utils';
 import { TranslationFunctionType } from '@locales';
 import { ServicesAdapter } from './lib';
@@ -125,8 +125,16 @@ class ServicesStore {
 
       message.success(t('successfullyCreated'));
       navigate(`/services/${response.data.id}`);
-    } catch (error) {
-      message.error(t('errors.somethingWentWrong'));
+    } catch (e) {
+      const error = e as AxiosError;
+
+      const errorCode = (error?.response?.data as any)?.errorCode;
+
+      if (errorCode === ApiErrorCodes.ALREADY_EXISTS) {
+        message.error(t('errors.serviceWithThisNameAlreadyExists'));
+      } else {
+        message.error(t('errors.somethingWentWrong'));
+      }
     } finally {
       this.global.hideLoader();
     }
@@ -157,6 +165,8 @@ class ServicesStore {
     } catch (e) {
       const error = e as AxiosError;
 
+      const errorCode = (error?.response?.data as any)?.errorCode;
+
       if (error?.response?.status === 404) {
         message.error(
           t('errors.notFound')?.replace(
@@ -164,6 +174,8 @@ class ServicesStore {
             this.currentServiceId?.toString()
           )
         );
+      } else if (errorCode === ApiErrorCodes.ALREADY_EXISTS) {
+        message.error(t('errors.serviceWithThisNameAlreadyExists'));
       } else {
         message.error(t('errors.somethingWentWrong'));
       }
