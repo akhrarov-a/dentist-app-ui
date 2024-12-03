@@ -5,6 +5,7 @@ import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { DateType, GetAppointmentsParams, ScheduleContract } from '@api';
 import { TranslationFunctionType } from '@locales';
+import { initialValues } from './ui/organisms/create/create.constants.ts';
 import { ScheduleForm } from './schedule.types';
 import { ScheduleAdapter } from './lib';
 
@@ -30,6 +31,17 @@ class ScheduleStore {
   public currentScheduleId: ScheduleContract['id'] = 0;
   public initialValues: ScheduleForm = {} as ScheduleForm;
   public isCloning: boolean = false;
+
+  public setInitialValues = (values: Partial<ScheduleForm>) => {
+    runInAction(() => {
+      this.initialValues = {
+        ...initialValues,
+        ...this.initialValues,
+        ...values
+      };
+      this.isCloning = true;
+    });
+  };
 
   public clearSchedules = () => {
     runInAction(() => {

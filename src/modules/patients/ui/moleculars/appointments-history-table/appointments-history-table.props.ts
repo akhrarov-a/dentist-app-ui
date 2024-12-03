@@ -19,9 +19,10 @@ const useAppointmentsHistoryTableProps = () => {
       schedules,
       schedulesTotalAmount,
       getSchedules,
-      clearSchedules
+      clearSchedules,
+      setInitialValues
     },
-    patients: { currentPatientId, initialValues }
+    patients: { currentPatientId, initialValues, findPatients }
   } = useStore();
 
   const pagination = usePagination();
@@ -30,6 +31,13 @@ const useAppointmentsHistoryTableProps = () => {
     () => `${initialValues?.firstname || ''} ${initialValues?.lastname || ''}`,
     [initialValues]
   );
+
+  const onAddAppointmentClick = () => {
+    setInitialValues({ patientId: currentPatientId });
+    findPatients(t, initialValues.firstname);
+
+    navigate('/schedule/create');
+  };
 
   const onAppointmentClick = (schedule: ScheduleContract) => {
     navigate(`/schedule/${schedule.id}`);
@@ -62,7 +70,8 @@ const useAppointmentsHistoryTableProps = () => {
     pagination,
     schedules,
     schedulesTotalAmount,
-    onAppointmentClick
+    onAppointmentClick,
+    onAddAppointmentClick
   };
 };
 

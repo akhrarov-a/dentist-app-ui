@@ -18,6 +18,7 @@ const useAppointmentsHistoryTableProps = () => {
       loading,
       schedules,
       schedulesTotalAmount,
+      setInitialValues,
       getSchedules,
       clearSchedules
     },
@@ -25,6 +26,12 @@ const useAppointmentsHistoryTableProps = () => {
   } = useStore();
 
   const pagination = usePagination();
+
+  const onAddAppointmentClick = () => {
+    setInitialValues({ services: [{ id: currentServiceId, description: '' }] });
+
+    navigate('/schedule/create');
+  };
 
   const onAppointmentClick = (schedule: ScheduleContract) => {
     navigate(`/schedule/${schedule.id}`);
@@ -58,7 +65,8 @@ const useAppointmentsHistoryTableProps = () => {
     pagination,
     schedules,
     schedulesTotalAmount,
-    onAppointmentClick
+    onAppointmentClick,
+    onAddAppointmentClick
   };
 };
 

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import * as uuid from 'uuid';
-import { Table } from 'antd';
+import { Button, Table } from 'antd';
 import dayjs from 'dayjs';
 import { ColumnsType } from 'antd/es/table';
 import { getMonth, getWeekday, hoc } from '@utils';
@@ -22,7 +22,8 @@ const AppointmentsHistoryTable = hoc.observer(
     pagination,
     schedules,
     schedulesTotalAmount,
-    onAppointmentClick
+    onAppointmentClick,
+    onAddAppointmentClick
   }) => {
     const columns: ColumnsType<ScheduleContract> = [
       {
@@ -73,9 +74,14 @@ const AppointmentsHistoryTable = hoc.observer(
 
     return (
       <div className={styles.container}>
-        <p>
-          {t('table.appointmentHistoryForService')}: {name}
-        </p>
+        <div className={styles.header}>
+          <p>
+            {t('table.appointmentHistoryForService')}: {name}
+          </p>
+          <Button onClick={onAddAppointmentClick}>
+            {t('schedule.table.addAppointment')}
+          </Button>
+        </div>
         <Table
           key={uuid.v4()}
           className={styles.tables_table}

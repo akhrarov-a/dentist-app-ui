@@ -4,6 +4,18 @@
   margin-top: 60px;
 }
 
+.header {
+  @include flex(space-between, center);
+
+  margin-bottom: 10px;
+
+  p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+  }
+}
+
 .column {
   p {
     margin: 0;
