@@ -3,3 +3,39 @@
 .content {
   padding: 16px;
 }
+
+.loader {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  background-color: rgba(255, 255, 255, 0.7);
+
+  &:after {
+    @include size(30px);
+
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    display: block;
+    margin-left: -0.4rem;
+    margin-top: -0.4rem;
+    padding: 0;
+    background: transparent;
+    border: 0.1rem solid $dark-blue;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    border-radius: 50%;
+    opacity: 1;
+    animation: spin 500ms infinite linear;
+  }
+}
+
+.loader-loading {
+  display: block;
+}

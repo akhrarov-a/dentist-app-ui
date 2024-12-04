@@ -1,4 +1,5 @@
 import { Fragment, PropsWithChildren, useEffect } from 'react';
+import classNames from 'classnames';
 import { GlobalStore, useStore } from '@store';
 import { hoc } from '@utils';
 import { useLocales } from '@locales';
@@ -10,7 +11,7 @@ import styles from './layout.module.scss';
  */
 const Layout = hoc.observer<PropsWithChildren, GlobalStore>(
   useStore,
-  ({ autoLogin, auth: { isAuthorized }, children }) => {
+  ({ loading, autoLogin, auth: { isAuthorized }, children }) => {
     const { t } = useLocales();
 
     useEffect(() => {
@@ -19,6 +20,12 @@ const Layout = hoc.observer<PropsWithChildren, GlobalStore>(
 
     return (
       <div>
+        <div
+          className={classNames(styles.loader, {
+            [styles['loader-loading']]: loading
+          })}
+        />
+
         {isAuthorized && (
           <Fragment>
             <Header />
