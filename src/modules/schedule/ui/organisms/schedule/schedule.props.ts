@@ -7,6 +7,7 @@ import { DateType } from '@api';
 import { useModal } from '@hooks';
 import { getMonth, getWeekday } from '@utils';
 import { AppointmentDataClickAction } from '../../atoms';
+import { slots } from './schedule.constants.ts';
 
 const format = 'YYYY-MM-DD';
 
@@ -42,6 +43,28 @@ const useScheduleProps = () => {
 
     return `${weekday}, ${selectedDate.date()} ${month} ${selectedDate.year()}`;
   }, [selectedDate, language]);
+
+  const _slots = useMemo(() => {
+    const _slots = slots;
+
+    const splitUserWorkingHours = user.workingHours?.split('-');
+    const start = splitUserWorkingHours?.[0]?.trim();
+    const end = splitUserWorkingHours?.[1]?.trim();
+
+    if (start) {
+      const startIndex = slots.indexOf(start);
+
+      _slots.splice(0, startIndex);
+    }
+
+    if (end) {
+      const endIndex = slots.indexOf(end);
+
+      _slots.splice(endIndex + 1);
+    }
+
+    return _slots;
+  }, [user, slots]);
 
   const onAddAppointmentClick = () => {
     navigate('/schedule/create');
@@ -153,6 +176,7 @@ const useScheduleProps = () => {
     language,
     user,
     schedulesByDate,
+    _slots,
     headerText,
     selectedDate,
     dateType,

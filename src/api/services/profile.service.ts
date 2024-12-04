@@ -39,6 +39,7 @@ type ProfileContract = {
   language: string;
   holidays: string[];
   weekends: number[];
+  workingHours: string;
   role: UserRole;
 };
 

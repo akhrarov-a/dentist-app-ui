@@ -55,20 +55,25 @@ const View = observer(({ toggleEditing }: { toggleEditing?: () => void }) => {
       <div className={styles.content}>
         <div className={styles.content_field}>
           <p>{t('form.fields.firstname.label')}</p>
-          <p>{user.firstname}</p>
+          <p>{user.firstname || '-'}</p>
         </div>
         <div className={styles.content_field}>
           <p>{t('form.fields.phone.label')}</p>
-          <p>{user.phone}</p>
+          <p>{user.phone || '-'}</p>
         </div>
         <div className={styles.content_field}>
           <p>{t('form.fields.lastname.label')}</p>
-          <p>{user.lastname}</p>
+          <p>{user.lastname || '-'}</p>
         </div>
         <div className={styles.content_field}>
           <p>{t('form.fields.email.label')}</p>
-          <p>{user.email}</p>
+          <p>{user.email || '-'}</p>
         </div>
+        <div className={styles.content_field}>
+          <p>{t('form.fields.workingHours.label')}</p>
+          <p>{user.workingHours || '-'}</p>
+        </div>
+        <div className={styles.content_field} />
         <div className={styles.content_field}>
           <p>{t('form.fields.weekends.label')}</p>
           <p>{userWeekends}</p>
@@ -88,11 +93,11 @@ const View = observer(({ toggleEditing }: { toggleEditing?: () => void }) => {
         </div>
         <div className={styles.content_field}>
           <p>{t('form.fields.layoutTitle.label')}</p>
-          <p>{user.layoutTitle}</p>
+          <p>{user.layoutTitle || '-'}</p>
         </div>
         <div className={styles.content_field}>
           <p>{t('form.fields.language.label')}</p>
-          <p>{user.language}</p>
+          <p>{user.language || '-'}</p>
         </div>
       </div>
     </div>

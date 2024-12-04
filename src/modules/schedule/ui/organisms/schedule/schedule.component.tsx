@@ -17,6 +17,7 @@ const Schedule = hoc.observer(
     modal,
     language,
     user,
+    _slots,
     schedulesByDate,
     headerText,
     dateType,
@@ -65,8 +66,11 @@ const Schedule = hoc.observer(
             {t('schedule.table.addAppointment')}
           </Button>
         </div>
-        <div className={styles.appointments_content}>
-          <Slots isWeek={dateType === DateType.WEEK} />
+        <div
+          className={styles.appointments_content}
+          style={{ height: `${_slots.length * 50}px` }}
+        >
+          <Slots isWeek={dateType === DateType.WEEK} slots={_slots} />
           <div
             className={styles.appointments_content_content}
             style={{

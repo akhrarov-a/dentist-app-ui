@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import dayjs from 'dayjs';
 import { DateType, ScheduleContract } from '@api';
 import { AppointmentInfoModal } from '../../atoms';
-import { slots } from '../slots/slots.constants';
+import { slots } from '../../organisms/schedule/schedule.constants';
 import styles from './appointment.module.scss';
 
 const format = 'HH:mm';

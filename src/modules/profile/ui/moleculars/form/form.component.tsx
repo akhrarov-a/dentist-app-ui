@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import dayjs from 'dayjs';
 import { observer } from 'mobx-react-lite';
-import { Button, Checkbox, DatePicker, Form as AntdForm, Input, Select } from 'antd';
+import { Button, Checkbox, DatePicker, Form as AntdForm, Input, Select, TimePicker } from 'antd';
 import { getWeekdays, rules } from '@utils';
 import { useStore } from '@store';
 import { useLocales } from '@locales';
@@ -111,6 +111,40 @@ const Form = observer(({ toggleEditing }: { toggleEditing?: () => void }) => {
               disabled
               type="email"
               placeholder={t('form.fields.email.placeholder')}
+            />
+          </AntdForm.Item>
+        </div>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            alignItems: 'flex-end',
+            gap: '15px'
+          }}
+        >
+          <AntdForm.Item
+            label={t('form.fields.workingHours.label')}
+            name={['workingHours', 'start']}
+            validateTrigger="onBlur"
+          >
+            <TimePicker
+              placeholder={t('form.fields.timeStartFrom.placeholder')}
+              style={{ width: '100%' }}
+              showSecond={false}
+              needConfirm={false}
+            />
+          </AntdForm.Item>
+
+          <AntdForm.Item
+            name={['workingHours', 'end']}
+            validateTrigger="onBlur"
+          >
+            <TimePicker
+              placeholder={t('form.fields.timeEndTo.placeholder')}
+              style={{ width: '100%' }}
+              showSecond={false}
+              needConfirm={false}
             />
           </AntdForm.Item>
         </div>

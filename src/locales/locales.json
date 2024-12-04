@@ -243,6 +243,16 @@
           "ru": "Выберите время окончания"
         }
       },
+      "workingHours": {
+        "label": {
+          "en": "Working hours",
+          "ru": "Время работы"
+        },
+        "placeholder": {
+          "en": "Select working hours",
+          "ru": "Выберите время работы"
+        }
+      },
       "description": {
         "label": {
           "en": "Description",

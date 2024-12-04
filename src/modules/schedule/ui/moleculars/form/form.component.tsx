@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import classNames from 'classnames';
 import { Button, DatePicker, Form as AntdForm, Input, Modal, Select, TimePicker } from 'antd';
 import { rules } from '@utils';
@@ -74,6 +74,28 @@ const Form = observer<FormProps>(
       );
 
       return isHoliday || isWeekend;
+    };
+
+    const checkForUserWorkingHoursAndGetDisabledHours = () => {
+      const splitUserWorkingHours = profile.user.workingHours?.split('-');
+      const start = dayjs(splitUserWorkingHours?.[0]?.trim(), 'HH:mm');
+      const end = dayjs(splitUserWorkingHours?.[1]?.trim(), 'HH:mm');
+
+      const disabledHours = [];
+
+      if (start) {
+        for (let i = 0; i < start.hour(); i++) {
+          disabledHours.push(i);
+        }
+      }
+
+      if (end) {
+        for (let i = end.hour(); i < 24; i++) {
+          disabledHours.push(i);
+        }
+      }
+
+      return disabledHours;
     };
 
     const dateRender = (current: Dayjs | string | number) => {
@@ -266,6 +288,8 @@ const Form = observer<FormProps>(
               <TimePicker
                 placeholder={t('form.fields.timeStartFrom.placeholder')}
                 style={{ width: '100%' }}
+                disabledHours={checkForUserWorkingHoursAndGetDisabledHours}
+                hideDisabledOptions
                 showSecond={false}
                 needConfirm={false}
               />
@@ -280,6 +304,8 @@ const Form = observer<FormProps>(
               <TimePicker
                 placeholder={t('form.fields.timeEndTo.placeholder')}
                 style={{ width: '100%' }}
+                disabledHours={checkForUserWorkingHoursAndGetDisabledHours}
+                hideDisabledOptions
                 showSecond={false}
                 needConfirm={false}
               />

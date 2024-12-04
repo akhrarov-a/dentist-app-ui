@@ -13,6 +13,10 @@ type ProfileForm = {
   useMyFirstNameAndLastnameForLayoutTitle: boolean;
   holidays: Dayjs[];
   weekends: number[];
+  workingHours: {
+    start: Dayjs;
+    end: Dayjs;
+  };
 };
 
 export type { ProfileForm };

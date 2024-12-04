@@ -1,11 +1,16 @@
 import classNames from 'classnames';
-import { slots } from './slots.constants';
 import styles from './slots.module.scss';
 
 /**
  * <Slots />
  */
-const Slots = ({ isWeek = false }: { isWeek: boolean }) => (
+const Slots = ({
+  isWeek = false,
+  slots
+}: {
+  isWeek: boolean;
+  slots: string[];
+}) => (
   <div
     className={classNames(styles.container, {
       [styles.container_week]: isWeek
