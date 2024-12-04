@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useStore } from '@store';
 import { useLocales } from '@locales';
-import { ScheduleForm } from '../../../schedule.types.ts';
+import { ScheduleForm } from '../../../schedule.types';
 
 /**
  * <UpdatePatient /> props

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Button, Calendar, Select } from 'antd';
 import { useModal } from '@hooks';
 import { DateType } from '@api';
-import { ScheduleParamsProps } from './schedule-params.props.ts';
+import { ScheduleParamsProps } from './schedule-params.props';
 import styles from './schedule-params.module.scss';
 
 /**

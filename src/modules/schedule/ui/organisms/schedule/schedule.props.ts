@@ -7,7 +7,7 @@ import { DateType } from '@api';
 import { useModal } from '@hooks';
 import { getMonth, getWeekday } from '@utils';
 import { AppointmentDataClickAction } from '../../atoms';
-import { slots } from './schedule.constants.ts';
+import { slots } from './schedule.constants';
 
 const format = 'YYYY-MM-DD';
 

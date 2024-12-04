@@ -4,7 +4,7 @@ import { Button, Form as AntdForm, Input } from 'antd';
 import { rules } from '@utils';
 import { NotFound } from '@components';
 import { useLocales } from '@locales';
-import { ServiceForm } from '../../../services.types.ts';
+import { ServiceForm } from '../../../services.types';
 import { FormProps } from './form.props';
 import styles from './form.module.scss';
 

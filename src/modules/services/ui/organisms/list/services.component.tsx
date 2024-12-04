@@ -2,7 +2,7 @@ import { hoc } from '@utils';
 import { Tables } from '@components';
 import { listLib } from '../../../lib';
 import { ServicesTableFilters } from '../../moleculars';
-import { useServicesListProps } from './services.props.ts';
+import { useServicesListProps } from './services.props';
 
 /**
  * <ServicesList />

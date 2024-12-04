@@ -3,7 +3,7 @@ import { Button, Modal } from 'antd';
 import { useLocales } from '@locales';
 import { useModal } from '@hooks';
 import { NotFound } from '@components';
-import { ServiceForm } from '../../../services.types.ts';
+import { ServiceForm } from '../../../services.types';
 import { AppointmentsHistoryTable } from '../appointments-history-table';
 import styles from './view.module.scss';
 

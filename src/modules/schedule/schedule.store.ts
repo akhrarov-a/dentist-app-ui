@@ -5,7 +5,7 @@ import { message } from 'antd';
 import { GlobalStore } from '@store';
 import { DateType, GetAppointmentsParams, ScheduleContract } from '@api';
 import { TranslationFunctionType } from '@locales';
-import { initialValues } from './ui/organisms/create/create.constants.ts';
+import { initialValues } from './ui/organisms/create/create.constants';
 import { ScheduleForm } from './schedule.types';
 import { ScheduleAdapter } from './lib';
 

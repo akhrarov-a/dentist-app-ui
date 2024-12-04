@@ -1,4 +1,4 @@
-import { ServiceForm } from '../../../services.types.ts';
+import { ServiceForm } from '../../../services.types';
 
 /**
  * <Form /> props

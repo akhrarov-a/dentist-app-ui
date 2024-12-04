@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import { ColumnsType } from 'antd/es/table';
 import { getMonth, getWeekday, hoc } from '@utils';
 import { ScheduleContract } from '@api';
-import { useAppointmentsHistoryTableProps } from './appointments-history-table.props.ts';
+import { useAppointmentsHistoryTableProps } from './appointments-history-table.props';
 import styles from './appointments-history-table.module.scss';
 
 /**

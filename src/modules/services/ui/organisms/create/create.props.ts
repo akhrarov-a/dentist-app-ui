@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '@store';
 import { useLocales } from '@locales';
-import { ServiceForm } from '../../../services.types.ts';
+import { ServiceForm } from '../../../services.types';
 
 /**
  * <CreateService /> props

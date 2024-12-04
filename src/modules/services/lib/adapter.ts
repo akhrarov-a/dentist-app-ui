@@ -1,5 +1,5 @@
 import { CreateServiceDto, ServiceContract, UpdateServiceDto } from '@api';
-import { ServiceForm } from '../services.types.ts';
+import { ServiceForm } from '../services.types';
 
 /**
  * Services adapter

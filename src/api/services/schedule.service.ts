@@ -1,7 +1,7 @@
 import { DateType } from '../models';
 import { HttpService } from './http.service';
 import { PatientContract } from './patients.service';
-import { ServiceContract } from './services.service.ts';
+import { ServiceContract } from './services.service';
 
 /**
  * Schedule service

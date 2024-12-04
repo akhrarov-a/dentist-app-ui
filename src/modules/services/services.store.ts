@@ -7,7 +7,7 @@ import { ApiErrorCodes, GetServicesParams, ServiceContract } from '@api';
 import { filterOutFalsyValuesFromObject } from '@utils';
 import { TranslationFunctionType } from '@locales';
 import { ServicesAdapter } from './lib';
-import { ServiceForm } from './services.types.ts';
+import { ServiceForm } from './services.types';
 
 /**
  * Services store
