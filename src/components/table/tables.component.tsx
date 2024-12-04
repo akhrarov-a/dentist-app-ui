@@ -20,6 +20,7 @@ const Tables = hoc.observer(
     page,
     total,
     allColumns,
+    buttonsModel,
     _columns,
     deleteDisabled,
     addDisabled,
@@ -97,6 +98,65 @@ const Tables = hoc.observer(
                   {column.title}
                 </Checkbox>
               ))}
+            </div>
+          )}
+        </div>
+
+        <div className={styles.tables_buttonContainer_mob}>
+          <img src="/img/more.svg" alt="More" onClick={buttonsModel.open} />
+
+          {buttonsModel.isOpen && (
+            <div
+              ref={buttonsModel.popoverRef}
+              className={styles.tables_buttonContainer_mob_buttons}
+            >
+              <Button
+                className={styles.tables_buttonContainer_button}
+                onClick={modal.open}
+                disabled={deleteDisabled}
+                type="link"
+              >
+                {t('table.delete')}
+              </Button>
+
+              {addText && (
+                <Button
+                  className={styles.tables_buttonContainer_button}
+                  onClick={onCreate}
+                  disabled={addDisabled}
+                  type="link"
+                >
+                  {addText}
+                </Button>
+              )}
+
+              <Button
+                className={styles.tables_buttonContainer_button}
+                onClick={popoverModel.open}
+                type="link"
+              >
+                {t('table.manageColumns')}
+              </Button>
+
+              {popoverModel.isOpen && (
+                <div
+                  ref={popoverModel.popoverRef}
+                  className={styles['more-columns-dropdown']}
+                >
+                  <p className={styles.option}>{t('table.selectColumns')}</p>
+                  {allColumns.map((column, index) => (
+                    <Checkbox
+                      key={index}
+                      checked={column.selected}
+                      className={styles.option}
+                      value={column.dataIndex}
+                      onChange={() => onSelectedColumnsClick(column.dataIndex)}
+                    >
+                      {column.title}
+                    </Checkbox>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>

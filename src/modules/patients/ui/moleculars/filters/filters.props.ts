@@ -1,11 +1,14 @@
 import { useSearchParams } from 'react-router-dom';
 import { useStore } from '@store';
 import { useLocales } from '@locales';
+import { useModal } from '@hooks';
 
 /**
  * <PatientsTableFilters /> props
  */
 const usePatientsTableFiltersProps = () => {
+  const filterModal = useModal()
+
   const [search] = useSearchParams();
 
   const { t } = useLocales();
@@ -34,6 +37,7 @@ const usePatientsTableFiltersProps = () => {
 
   return {
     t,
+    filterModal,
     patientsFilters,
     onFilterChange,
     onSearch

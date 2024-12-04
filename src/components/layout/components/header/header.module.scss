@@ -26,10 +26,14 @@
     line-height: 40px;
     font-weight: 300;
   }
+
+  &_title {
+    font-size: 24px !important;
+  }
 }
 
 .profile {
-  @include flex($align: center);
+  @include flex($align: flex-end);
 
   position: relative;
   gap: 20px;
@@ -47,7 +51,7 @@
 
 .content {
   &_links {
-    @include flex($align: center);
+    @include flex($align: flex-end);
 
     margin-top: 10px;
     padding: 5px 0;
@@ -65,6 +69,37 @@
     &_active {
       color: $white;
       background: $dark-blue;
+    }
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .logo {
+    height: 40px;
+
+    &_title {
+      font-size: 18px !important;
+      line-height: 26px !important;
+    }
+  }
+
+  .profile {
+    gap: 10px;
+
+    &_content {
+      @include size(40px);
+
+      font-size: 14px;
+    }
+
+    button {
+      font-size: 14px;
+    }
+  }
+
+  .content {
+    &_link {
+      font-size: 14px;
     }
   }
 }

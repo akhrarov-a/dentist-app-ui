@@ -8,6 +8,7 @@
 .header {
   @include flex(space-between, center);
 
+  gap: 15px;
   margin: 10px 0 20px;
 
   p {
@@ -23,6 +24,22 @@
 
     button {
       min-width: 100px;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    @include flex(column, flex-start);
+
+    p {
+      font-size: 14px;
+    }
+
+    &_buttons {
+      button {
+        font-size: 13px;
+      }
     }
   }
 }

@@ -12,6 +12,10 @@
 
     align-self: end;
 
+    &_mob {
+      display: none;
+    }
+
     &_button {
       height: 35px;
       min-width: fit-content;
@@ -40,17 +44,15 @@
       thead {
         tr {
           th {
-            font-weight: bold;
+            font-weight: bold !important;
           }
         }
       }
-    }
 
-    table {
       tbody {
         tr {
           td {
-            white-space: nowrap;
+            white-space: nowrap !important;
             cursor: pointer;
           }
         }
@@ -67,7 +69,7 @@
     color: $dark-blue;
     background-color: $white;
     border-radius: $border-radius;
-    box-shadow: 2px 6px 21px -2px $dark-blue;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.3), 0 3px 3px -2px rgba(0, 0, 0, 0.3), 0 1px 8px 0 rgba(0, 0, 0, 0.3);
 
     label {
       margin: 0;
@@ -80,5 +82,56 @@
     margin: 0;
     padding: 20px 40px 20px 20px;
     border-bottom: 1px solid $grey;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .tables {
+    &_buttonContainer {
+      display: none;
+
+      &_mob {
+        display: block;
+        position: relative;
+
+        &_buttons {
+          position: absolute;
+          top: 100%;
+          right: 0;
+          z-index: 120;
+          background: $white;
+          border-radius: $border-radius;
+          box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.3), 0 3px 3px -2px rgba(0, 0, 0, 0.3), 0 1px 8px 0 rgba(0, 0, 0, 0.3);
+
+          button {
+            margin: 0;
+            color: $dark-blue;
+          }
+        }
+
+        img {
+          cursor: pointer;
+          width: 32px;
+        }
+      }
+    }
+
+    &_table {
+      table {
+        thead,
+        tbody {
+          th,
+          td {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+    .more-columns-dropdown {
+      top: calc(100% + 10px);
+      right: 0;
+      min-width: 300px;
+    }
   }
 }

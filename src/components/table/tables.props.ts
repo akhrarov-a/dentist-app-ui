@@ -93,6 +93,7 @@ type _Column = {
  */
 const useTablesProps = ({ columns, moreColumn = [] }: TablesProps) => {
   const popoverModel = usePopover();
+  const buttonsModel = usePopover();
 
   const { t } = useLocales();
   const modal = useModal();
@@ -146,6 +147,7 @@ const useTablesProps = ({ columns, moreColumn = [] }: TablesProps) => {
     t,
     modal,
     popoverModel,
+    buttonsModel,
     moreColumn,
     allColumns,
     _columns,

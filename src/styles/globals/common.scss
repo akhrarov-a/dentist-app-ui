@@ -43,12 +43,14 @@ button, input {
   gap: 10px;
 
   input {
+    min-width: 100px;
     width: 10vw;
     height: 35px;
   }
 
   button {
     width: 12vw;
+    min-width: 70px;
     height: 35px;
     margin-left: 10px;
     overflow: hidden;

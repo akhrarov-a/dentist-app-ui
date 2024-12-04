@@ -55,3 +55,17 @@
     }
   }
 }
+
+@media screen and (max-width: 480px) {
+  .header {
+    p {
+      font-size: 18px;
+    }
+
+    &_buttons {
+      button {
+        font-size: 13px;
+      }
+    }
+  }
+}

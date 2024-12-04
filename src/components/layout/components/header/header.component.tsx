@@ -24,7 +24,7 @@ const Header = hoc.observer(
         <div className={styles.logo} onClick={onLogoClick}>
           <img src="/img/logo.webp" alt="Logo" />
           {layoutTitle ? (
-            <p style={{ fontSize: '24px' }}>{layoutTitle}</p>
+            <p className={styles.logo_title}>{layoutTitle}</p>
           ) : (
             <p>Dentica</p>
           )}

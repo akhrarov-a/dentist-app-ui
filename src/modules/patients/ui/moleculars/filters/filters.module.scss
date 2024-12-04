@@ -1,0 +1,66 @@
+@import '@styles/common.scss';
+
+.container {
+  &_filters {
+    @include flex(flex-start, flex-end);
+
+    gap: 10px;
+
+    input {
+      min-width: 100px;
+      width: 10vw;
+      height: 35px;
+    }
+  }
+
+  button {
+    width: 12vw;
+    min-width: 70px;
+    height: 35px;
+    margin-left: 10px;
+    overflow: hidden;
+  }
+
+  &_mob {
+    display: none
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .container {
+    &_mob {
+      display: block;
+
+      img {
+        @include size(32px);
+
+        cursor: pointer;
+        transform: rotate(90deg);
+      }
+
+      &_filters {
+        position: fixed;
+        z-index: 120;
+        top: 0;
+        left: 0;
+        background: $white;
+        width: calc(100vw - 60px);
+        height: 100vh;
+        padding: 30px;
+
+        input {
+          margin-bottom: 15px;
+        }
+
+        button {
+          margin: 0;
+          width: 100%;
+        }
+      }
+    }
+
+    &_filters {
+      display: none;
+    }
+  }
+}
