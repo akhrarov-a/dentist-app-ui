@@ -85,7 +85,10 @@ const AppointmentInfoModal = ({
             data-click-action={AppointmentDataClickAction.CLOSE}
           />
         </div>
-        <div data-click-action={AppointmentDataClickAction.MODAL}>
+        <div
+          className={styles.content_content}
+          data-click-action={AppointmentDataClickAction.MODAL}
+        >
           <p
             className={styles.content_title}
             data-click-action={AppointmentDataClickAction.MODAL}

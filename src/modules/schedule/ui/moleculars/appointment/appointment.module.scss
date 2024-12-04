@@ -61,3 +61,19 @@
     gap: 15px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .content {
+    p {
+      font-size: 12px;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .content {
+    p {
+      font-size: 11px;
+    }
+  }
+}

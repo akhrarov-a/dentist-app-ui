@@ -165,13 +165,7 @@ const useScheduleProps = () => {
         50
     );
 
-    if (!!dataClickAction && !isAppointmentModalOrAction) {
-      navigate(`/schedule/${dataClickAction}`);
-
-      return;
-    }
-
-    if (date && !isNaN(indexOfBlock) && indexOfBlock === -1) {
+    if (date && !isNaN(indexOfBlock) && indexOfBlock !== -1) {
       const splitUserWorkingHours = user.workingHours?.split('-');
       const start = splitUserWorkingHours?.[0]?.trim();
 
@@ -182,6 +176,12 @@ const useScheduleProps = () => {
       });
 
       onAddAppointmentClick();
+
+      return;
+    }
+
+    if (!!dataClickAction && !isAppointmentModalOrAction) {
+      navigate(`/schedule/${dataClickAction}`);
 
       return;
     }

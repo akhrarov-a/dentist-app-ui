@@ -31,3 +31,31 @@
     border-top: 1px solid $light-grey;
   }
 }
+
+@media screen and (max-width: 968px) {
+  .container {
+    left: 10px;
+  }
+
+  .slot {
+    gap: 6px;
+
+    p {
+      font-size: 13px;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    left: 5px;
+  }
+
+  .slot {
+    gap: 4px;
+
+    p {
+      font-size: 12px;
+    }
+  }
+}

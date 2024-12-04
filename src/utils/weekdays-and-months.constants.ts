@@ -23,6 +23,13 @@ const weekdaysEN = [
   'Saturday'
 ];
 
+/**
+ * Weekdays short
+ */
+const shortWeekDaysRU = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+
+const shortWeekdaysEN = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+
 export const getWeekdays = (lang: string) => {
   return lang === 'ru' ? weekdaysRU : weekdaysEN;
 };
@@ -31,6 +38,12 @@ export const getWeekday = (date: Dayjs, lang: string) => {
   const day = date.day();
 
   return lang === 'ru' ? weekdaysRU[day] : weekdaysEN[day];
+};
+
+export const getShortWeekday = (date: Dayjs, lang: string) => {
+  const day = date.day();
+
+  return lang === 'ru' ? shortWeekDaysRU[day] : shortWeekdaysEN[day];
 };
 
 /**

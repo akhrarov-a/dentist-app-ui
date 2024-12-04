@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import { DateType } from '@api';
-import { getWeekday, hoc } from '@utils';
+import { getShortWeekday, hoc } from '@utils';
 import { Appointment, ScheduleParams, Slots } from '../../moleculars';
 import { useScheduleProps } from './schedule.props';
 import styles from './schedule.module.scss';
@@ -80,7 +80,7 @@ const Schedule = hoc.observer(
           >
             {schedulesByDate.map(schedules => {
               const date = dayjs(schedules.date);
-              const weekday = getWeekday(date, language);
+              const weekday = getShortWeekday(date, language);
 
               const isWeekendOrHolidayForUser =
                 user.weekends?.includes(date.day() === 0 ? 7 : date.day()) ||

@@ -16,7 +16,7 @@
     @include flex(space-between, center);
 
     position: sticky;
-    z-index: 999;
+    z-index: 122;
     width: calc(100% + 260px);
     margin: 0 0 10px -315px;
     padding: 22px 30px 20px;
@@ -66,10 +66,83 @@
         }
 
         &_title {
-          margin: 0 0;
+          margin: 0 auto;
           line-height: 22px;
           text-align: center;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1140px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .appointments {
+    margin: 0;
+
+    &_header {
+      width: calc(100% - 60px);
+      margin: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 968px) {
+  .appointments {
+    &_header {
+      width: calc(100% - 40px);
+      padding: 15px 20px;
+
+      &_title {
+        font-size: 18px;
+      }
+
+      &_button {
+        width: auto;
+        height: 34px;
+        font-size: 14px;
+      }
+    }
+
+    &_content {
+      &_content {
+        padding-left: 45px;
+
+        &_day {
+          &_title {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .appointments {
+    &_header {
+      width: calc(100% - 30px);
+      padding: 15px 15px;
+
+      &_title {
+        font-size: 16px;
+      }
+
+      &_button {
+        width: auto;
+        font-size: 13px;
+      }
+    }
+
+    &_content {
+      &_content {
+        padding-left: 36px;
       }
     }
   }

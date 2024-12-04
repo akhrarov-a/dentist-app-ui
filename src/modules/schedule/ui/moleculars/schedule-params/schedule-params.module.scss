@@ -1,5 +1,14 @@
 @import '@styles/common.scss';
 
+.mob {
+  display: none;
+}
+
+.desktop {
+  position: relative;
+  height: 100%;
+}
+
 .container {
   position: sticky;
   top: 100px;
@@ -42,5 +51,24 @@
         color: $white;
       }
     }
+  }
+}
+
+@media screen and (max-width: 1140px) {
+  .mob {
+    display: block;
+
+    &_content {
+      position: fixed;
+      z-index: 120;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+    }
+  }
+
+  .desktop {
+    display: none;
   }
 }
