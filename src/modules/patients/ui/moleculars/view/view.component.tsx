@@ -14,8 +14,10 @@ const View = observer(
   ({
     initialValues,
     onDelete,
-    toggleEditing
+    toggleEditing,
+    isFetchedPatient
   }: {
+    isFetchedPatient: boolean;
     initialValues: PatientForm;
     onDelete: () => void;
     toggleEditing?: () => void;
@@ -24,7 +26,8 @@ const View = observer(
 
     const modal = useModal();
 
-    if (!Object.keys(initialValues || {}).length) return <NotFound />;
+    if (!Object.keys(initialValues || {}).length && isFetchedPatient)
+      return <NotFound />;
 
     return (
       <div className={styles.container}>

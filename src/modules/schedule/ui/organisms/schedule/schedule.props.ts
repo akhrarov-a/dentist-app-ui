@@ -23,7 +23,8 @@ const useScheduleProps = () => {
       clearSchedules,
       getSchedules,
       cloneScheduleById,
-      deleteSchedule
+      deleteSchedule,
+      setInitialValues
     }
   } = useStore();
 
@@ -154,9 +155,36 @@ const useScheduleProps = () => {
       AppointmentDataClickAction.CLOSE
     ].includes(dataClickAction);
 
-    if (!dataClickAction || isAppointmentModalOrAction) return;
+    const date = (event.target as any).id;
+    const appointmentsCalendar = document.getElementById(
+      'appointments-calendar'
+    );
 
-    navigate(`/schedule/${dataClickAction}`);
+    const indexOfBlock = Math.floor(
+      (event.clientY - appointmentsCalendar.getBoundingClientRect().top - 50) /
+        50
+    );
+
+    if (!!dataClickAction && !isAppointmentModalOrAction) {
+      navigate(`/schedule/${dataClickAction}`);
+
+      return;
+    }
+
+    if (date && !isNaN(indexOfBlock) && indexOfBlock === -1) {
+      const splitUserWorkingHours = user.workingHours?.split('-');
+      const start = splitUserWorkingHours?.[0]?.trim();
+
+      setInitialValues({
+        date: dayjs(date, 'YYYY-MM-DD'),
+        startTime: dayjs(start, 'HH:mm').add(indexOfBlock, 'hours'),
+        endTime: dayjs(start, 'HH:mm').add(indexOfBlock + 1, 'hours')
+      });
+
+      onAddAppointmentClick();
+
+      return;
+    }
   };
 
   useEffect(

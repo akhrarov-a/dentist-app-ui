@@ -27,6 +27,7 @@ class ServicesStore {
 
   public currentServiceId: ServiceContract['id'] = 0;
   public initialValues: ServiceForm = {} as ServiceForm;
+  public isFetchedService: boolean = false;
 
   public loading = {
     services: false
@@ -42,6 +43,7 @@ class ServicesStore {
     runInAction(() => {
       this.currentServiceId = 0;
       this.initialValues = {} as ServiceForm;
+      this.isFetchedService = false;
     });
   };
 
@@ -107,6 +109,10 @@ class ServicesStore {
         message.error(t('errors.somethingWentWrong'));
       }
     } finally {
+      runInAction(() => {
+        this.isFetchedService = true;
+      });
+
       this.global.hideLoader();
     }
   };

@@ -12,10 +12,12 @@ import styles from './view.module.scss';
  */
 const View = observer(
   ({
+    isFetchedService,
     initialValues,
     onDelete,
     toggleEditing
   }: {
+    isFetchedService: boolean;
     initialValues: ServiceForm;
     onDelete: () => void;
     toggleEditing?: () => void;
@@ -24,7 +26,8 @@ const View = observer(
 
     const modal = useModal();
 
-    if (!Object.keys(initialValues || {}).length) return <NotFound />;
+    if (!Object.keys(initialValues || {}).length && isFetchedService)
+      return <NotFound />;
 
     return (
       <div className={styles.container}>

@@ -31,6 +31,7 @@ class ScheduleStore {
   public currentScheduleId: ScheduleContract['id'] = 0;
   public initialValues: ScheduleForm = {} as ScheduleForm;
   public isCloning: boolean = false;
+  public isFetchedSchedule: boolean = false;
 
   public setInitialValues = (values: Partial<ScheduleForm>) => {
     runInAction(() => {
@@ -56,6 +57,7 @@ class ScheduleStore {
       this.currentScheduleId = 0;
       this.initialValues = {} as ScheduleForm;
       this.isCloning = false;
+      this.isFetchedSchedule = false;
     });
   };
 
@@ -171,6 +173,10 @@ class ScheduleStore {
         message.error(t('errors.somethingWentWrong'));
       }
     } finally {
+      runInAction(() => {
+        this.isFetchedSchedule = true;
+      });
+
       this.global.hideLoader();
     }
   };

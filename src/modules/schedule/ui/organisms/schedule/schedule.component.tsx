@@ -72,6 +72,7 @@ const Schedule = hoc.observer(
         >
           <Slots isWeek={dateType === DateType.WEEK} slots={_slots} />
           <div
+            id="appointments-calendar"
             className={styles.appointments_content_content}
             style={{
               gridTemplateColumns: `repeat(${schedulesByDate.length}, 1fr)`
@@ -128,6 +129,7 @@ const Schedule = hoc.observer(
                       }
                       dateType={dateType}
                       appointment={schedule}
+                      slots={_slots}
                     />
                   ))}
                 </div>

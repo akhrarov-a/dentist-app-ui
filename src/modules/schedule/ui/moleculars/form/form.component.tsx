@@ -124,10 +124,13 @@ const Form = observer<FormProps>(
         services: initialValues.services?.map(service => service.id) || []
       });
 
-      if (!isEdit && !store.isCloning) return;
+      if (isEdit || store.isCloning) {
+        setServicesDescriptions(initialValues.services || []);
+      }
 
-      setServicesDescriptions(initialValues.services || []);
-      setIsPastAppointment(initialValues.date?.isBefore(new Date(), 'day'));
+      if (isEdit) {
+        setIsPastAppointment(initialValues.date?.isBefore(new Date(), 'day'));
+      }
     }, [initialValues]);
 
     return (

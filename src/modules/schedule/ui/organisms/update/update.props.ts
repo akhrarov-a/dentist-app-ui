@@ -17,6 +17,7 @@ const useUpdatePatientProps = () => {
     schedule: {
       currentScheduleId,
       initialValues,
+      isFetchedSchedule,
       getScheduleById,
       updateSchedule,
       deleteSchedule,
@@ -45,6 +46,7 @@ const useUpdatePatientProps = () => {
 
   return {
     initialValues,
+    isFetchedSchedule,
     onSubmit: (values: ScheduleForm) => updateSchedule(t, values),
     onDelete
   };

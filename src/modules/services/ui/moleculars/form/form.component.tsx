@@ -12,7 +12,7 @@ import styles from './form.module.scss';
  * <Form />
  */
 const Form = observer<FormProps>(
-  ({ isEdit, initialValues, onSubmit, toggleEditing }) => {
+  ({ isEdit, isFetchedService, initialValues, onSubmit, toggleEditing }) => {
     const [form] = AntdForm.useForm();
 
     const { t } = useLocales();
@@ -23,7 +23,8 @@ const Form = observer<FormProps>(
       form.setFieldsValue(initialValues);
     }, [initialValues]);
 
-    if (!Object.keys(initialValues || {}).length) return <NotFound />;
+    if (!Object.keys(initialValues || {}).length && isFetchedService)
+      return <NotFound />;
 
     return (
       <div className={styles.container}>

@@ -27,6 +27,7 @@ class PatientsStore {
 
   public currentPatientId: PatientContract['id'] = 0;
   public initialValues: PatientForm = {} as PatientForm;
+  public isFetchedPatient: boolean = false;
 
   public loading = {
     patients: false
@@ -42,6 +43,7 @@ class PatientsStore {
     runInAction(() => {
       this.currentPatientId = 0;
       this.initialValues = {} as PatientForm;
+      this.isFetchedPatient = false;
     });
   };
 
@@ -94,6 +96,10 @@ class PatientsStore {
         message.error(t('errors.somethingWentWrong'));
       }
     } finally {
+      runInAction(() => {
+        this.isFetchedPatient = true;
+      });
+
       this.global.hideLoader();
     }
   };

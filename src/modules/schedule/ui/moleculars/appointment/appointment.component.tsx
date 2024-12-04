@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import dayjs from 'dayjs';
 import { DateType, ScheduleContract } from '@api';
 import { AppointmentInfoModal } from '../../atoms';
-import { slots } from '../../organisms/schedule/schedule.constants';
 import styles from './appointment.module.scss';
 
 const format = 'HH:mm';
@@ -15,12 +14,14 @@ const Appointment = ({
   showInfoModal,
   language,
   dateType,
-  appointment
+  appointment,
+  slots
 }: {
   showInfoModal: boolean;
   language: string;
   dateType: DateType;
   appointment: ScheduleContract;
+  slots: string[];
 }) => {
   const top = useMemo(() => {
     const startTime = dayjs(appointment.startTime).format('HH:00');
@@ -29,7 +30,7 @@ const Appointment = ({
     );
     const percentage = startTimeMinutes / 60;
 
-    return slots.indexOf(startTime) * 50 + 1 + 50 * percentage;
+    return (slots.indexOf(startTime) + 1) * 50 + 1 + 50 * percentage;
   }, [appointment]);
 
   const height = useMemo(() => {

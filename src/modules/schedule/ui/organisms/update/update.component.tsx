@@ -8,8 +8,9 @@ import { useUpdatePatientProps } from './update.props';
  */
 const UpdateAppointment = hoc.observer(
   useUpdatePatientProps,
-  ({ initialValues, onSubmit, onDelete }) => {
-    if (!Object.keys(initialValues || {}).length) return <NotFound />;
+  ({ initialValues, isFetchedSchedule, onSubmit, onDelete }) => {
+    if (!Object.keys(initialValues || {}).length && isFetchedSchedule)
+      return <NotFound />;
 
     return (
       <Form

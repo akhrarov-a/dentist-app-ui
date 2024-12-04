@@ -8,17 +8,26 @@ import { useUpdateServiceProps } from './update.props';
  */
 const UpdateService = hoc.observer(
   useUpdateServiceProps,
-  ({ isEditing, initialValues, onSubmit, onDelete, toggleEditing }) => (
+  ({
+    isEditing,
+    isFetchedService,
+    initialValues,
+    onSubmit,
+    onDelete,
+    toggleEditing
+  }) => (
     <Fragment>
       {isEditing ? (
         <Form
           isEdit
+          isFetchedService={isFetchedService}
           initialValues={initialValues}
           onSubmit={onSubmit}
           toggleEditing={toggleEditing}
         />
       ) : (
         <View
+          isFetchedService={isFetchedService}
           initialValues={initialValues}
           onDelete={onDelete}
           toggleEditing={toggleEditing}

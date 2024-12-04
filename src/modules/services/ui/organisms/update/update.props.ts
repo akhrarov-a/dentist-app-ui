@@ -17,6 +17,7 @@ const useUpdateServiceProps = () => {
     services: {
       currentServiceId,
       initialValues,
+      isFetchedService,
       getServiceById,
       updateService,
       deleteService,
@@ -50,6 +51,7 @@ const useUpdateServiceProps = () => {
   return {
     isEditing,
     initialValues,
+    isFetchedService,
     onSubmit: (values: ServiceForm) => updateService(t, values, toggleEditing),
     onDelete,
     toggleEditing

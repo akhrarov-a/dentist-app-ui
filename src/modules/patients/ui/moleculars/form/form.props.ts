@@ -5,6 +5,7 @@ import { PatientForm } from '../../../patients.types';
  */
 type FormProps = {
   isEdit?: boolean;
+  isFetchedPatient?: boolean;
   initialValues: PatientForm;
   onSubmit: (values: PatientForm) => void;
   toggleEditing?: () => void;

@@ -50,11 +50,14 @@
       &_day {
         position: relative;
         border-left: 1px solid $light-grey;
+        cursor: pointer;
 
         &_weekend {
           padding-top: 30px;
           color: $white;
           background: $persian-red;
+          pointer-events: none;
+          cursor: default;
 
           &_title {
             position: sticky;

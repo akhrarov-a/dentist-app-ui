@@ -17,6 +17,7 @@ const useUpdatePatientProps = () => {
     patients: {
       currentPatientId,
       initialValues,
+      isFetchedPatient,
       getPatientById,
       updatePatient,
       deletePatient,
@@ -50,6 +51,7 @@ const useUpdatePatientProps = () => {
   return {
     isEditing,
     initialValues,
+    isFetchedPatient,
     onSubmit: (values: PatientForm) => updatePatient(t, values, toggleEditing),
     onDelete,
     toggleEditing
