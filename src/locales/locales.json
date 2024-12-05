@@ -306,6 +306,16 @@
       "useMyFirstNameAndLastnameForLayoutTitle": {
         "en": "Use my firstname and lastname for layout title",
         "ru": "Использовать мое имя и фамилию для заголовка на сайте"
+      },
+      "password": {
+        "label": {
+          "en": "Password",
+          "ru": "Пароль"
+        },
+        "placeholder": {
+          "en": "Enter password",
+          "ru": "Введите пароль"
+        }
       }
     },
     "validations": {
@@ -320,6 +330,10 @@
       "shouldNotStartOrEndWithWhitespace": {
         "en": "Should not start or end with whitespace",
         "ru": "Не должно начинаться или заканчиваться пробелом"
+      },
+      "password": {
+        "en": "Password should contain at least 8 characters",
+        "ru": "Пароль должен содержать минимум 8 символов"
       }
     },
     "areYouSureToDelete": {
