@@ -53,6 +53,7 @@ const UsersTableFilters = hoc.observer(
             }
           ]}
           onChange={value => onFilterChange('role', value)}
+          allowClear
         />
         <Select
           className={styles.select}
@@ -69,6 +70,7 @@ const UsersTableFilters = hoc.observer(
             }
           ]}
           onChange={value => onFilterChange('status', value)}
+          allowClear
         />
         <Button
           type="primary"
@@ -148,6 +150,7 @@ const UsersTableFilters = hoc.observer(
                 }
               ]}
               onChange={value => onFilterChange('role', value)}
+              allowClear
             />
             <Select
               className={styles.select}
@@ -164,6 +167,7 @@ const UsersTableFilters = hoc.observer(
                 }
               ]}
               onChange={value => onFilterChange('status', value)}
+              allowClear
             />
             <Button
               type="primary"
