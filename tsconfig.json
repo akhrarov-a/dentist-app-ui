@@ -33,6 +33,8 @@
       "@auth/*": ["./src/modules/auth/*"],
       "@patients": ["./src/modules/patients/index"],
       "@patients/*": ["./src/modules/patients/*"],
+      "@users": ["./src/modules/users/index"],
+      "@users/*": ["./src/modules/users/*"],
       "@services": ["./src/modules/services/index"],
       "@services/*": ["./src/modules/services/*"],
       "@profile": ["./src/modules/profile/index"],

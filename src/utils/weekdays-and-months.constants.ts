@@ -34,6 +34,12 @@ export const getWeekdays = (lang: string) => {
   return lang === 'ru' ? weekdaysRU : weekdaysEN;
 };
 
+export const getWeekdaysByIndex = (index: string | number, lang: string) => {
+  return lang === 'ru'
+    ? weekdaysRU[index as number]
+    : weekdaysEN[index as number];
+};
+
 export const getWeekday = (date: Dayjs, lang: string) => {
   const day = date.day();
 

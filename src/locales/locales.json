@@ -283,6 +283,26 @@
           "ru": "Выберите язык"
         }
       },
+      "role": {
+        "label": {
+          "en": "Role",
+          "ru": "Роль"
+        },
+        "placeholder": {
+          "en": "Select role",
+          "ru": "Выберите роль"
+        }
+      },
+      "status": {
+        "label": {
+          "en": "Status",
+          "ru": "Статус"
+        },
+        "placeholder": {
+          "en": "Select status",
+          "ru": "Выберите статус"
+        }
+      },
       "useMyFirstNameAndLastnameForLayoutTitle": {
         "en": "Use my firstname and lastname for layout title",
         "ru": "Использовать мое имя и фамилию для заголовка на сайте"
@@ -344,6 +364,28 @@
       "createLabel": {
         "en": "Create patient",
         "ru": "Создание пациента"
+      }
+    }
+  },
+  "users": {
+    "table": {
+      "addUser": {
+        "en": "Add user",
+        "ru": "Добавить пользователя"
+      }
+    },
+    "form": {
+      "user": {
+        "en": "User",
+        "ru": "Пользователь"
+      },
+      "editLabel": {
+        "en": "Edit user",
+        "ru": "Редактирование пользователя"
+      },
+      "createLabel": {
+        "en": "Create user",
+        "ru": "Создание пользователя"
       }
     }
   },
@@ -433,6 +475,10 @@
     "serviceWithThisNameAlreadyExists": {
       "en": "Service with this name already exists",
       "ru": "Услуга с таким именем уже существует"
+    },
+    "userWithThisEmailAlreadyExists": {
+      "en": "User with this email already exists",
+      "ru": "Пользователь с таким э-майлом уже существует"
     }
   },
   "successfullyCreated": {

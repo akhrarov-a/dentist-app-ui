@@ -7,6 +7,7 @@ import { PatientsStore } from '@patients/patients.store';
 import { ProfileStore } from '@profile/profile.store';
 import { ScheduleStore } from '@schedule/schedule.store';
 import { ServicesStore } from '@services/services.store';
+import { UsersStore } from '@users/users.store.ts';
 
 /**
  * Global store
@@ -18,6 +19,7 @@ class GlobalStore {
   public profile: ProfileStore;
   public schedule: ScheduleStore;
   public services: ServicesStore;
+  public users: UsersStore;
 
   constructor() {
     this.api = new ApiService();
@@ -26,6 +28,7 @@ class GlobalStore {
     this.profile = new ProfileStore(this);
     this.schedule = new ScheduleStore(this);
     this.services = new ServicesStore(this);
+    this.users = new UsersStore(this);
 
     makeAutoObservable(this, {}, { autoBind: true });
   }

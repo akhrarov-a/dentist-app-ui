@@ -6,6 +6,7 @@ import { Login, ResetPassword } from '@auth';
 import { CreatePatient, PatientsList, UpdatePatient } from '@patients';
 import { CreateService, ServicesList, UpdateService } from '@services';
 import { CreateAppointment, Schedule, UpdateAppointment } from '@schedule';
+import { CreateUser, UpdateUser, UsersList } from '@users';
 import { App } from './app';
 
 /**
@@ -84,15 +85,15 @@ const router = createBrowserRouter([
         children: [
           {
             path: '/users/create',
-            element: <div>Create user</div>
+            element: <CreateUser />
           },
           {
             path: '/users/:id',
-            element: <div>Update user</div>
+            element: <UpdateUser />
           },
           {
             path: '',
-            element: <div>Users</div>
+            element: <UsersList />
           }
         ]
       },

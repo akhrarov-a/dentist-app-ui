@@ -4,7 +4,8 @@ import {
   PatientsService,
   ProfileService,
   ScheduleService,
-  ServicesService
+  ServicesService,
+  UsersService
 } from './services';
 
 /**
@@ -18,6 +19,7 @@ class ApiService {
   public services = new ServicesService(this.http);
   public profile = new ProfileService(this.http);
   public schedule = new ScheduleService(this.http);
+  public users = new UsersService(this.http);
 }
 
 export { ApiService };
