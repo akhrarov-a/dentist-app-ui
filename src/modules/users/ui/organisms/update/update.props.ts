@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useStore } from '@store';
 import { useLocales } from '@locales';
-import { UserForm } from '../../../users.types.ts';
+import { UserForm } from '../../../users.types';
 
 /**
  * <UpdateUser /> props

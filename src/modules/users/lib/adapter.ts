@@ -1,5 +1,5 @@
 import { CreateUserDto, UpdateUserDto, UserContract } from '@api';
-import { UserForm } from '../users.types.ts';
+import { UserForm } from '../users.types';
 
 /**
  * Users adapter

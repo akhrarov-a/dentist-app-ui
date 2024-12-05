@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Button, Form as AntdForm, Input, Select } from 'antd';
 import { rules } from '@utils';
+import { Status, UserRole } from '@api';
 import { NotFound } from '@components';
 import { useLocales } from '@locales';
-import { UserForm } from '../../../users.types.ts';
+import { UserForm } from '../../../users.types';
 import { FormProps } from './form.props';
 import styles from './form.module.scss';
-import { Status, UserRole } from '@api';
 
 /**
  * <Form />

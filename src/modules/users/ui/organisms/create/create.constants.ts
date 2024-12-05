@@ -1,5 +1,5 @@
-import { UserForm } from '../../../users.types.ts';
 import { Status, UserRole } from '@api';
+import { UserForm } from '../../../users.types';
 
 /**
  * Initial values

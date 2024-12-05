@@ -1,4 +1,4 @@
-import { UserForm } from '../../../users.types.ts';
+import { UserForm } from '../../../users.types';
 
 /**
  * <Form /> props

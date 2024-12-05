@@ -7,7 +7,7 @@ import { PatientsStore } from '@patients/patients.store';
 import { ProfileStore } from '@profile/profile.store';
 import { ScheduleStore } from '@schedule/schedule.store';
 import { ServicesStore } from '@services/services.store';
-import { UsersStore } from '@users/users.store.ts';
+import { UsersStore } from '@users/users.store';
 
 /**
  * Global store

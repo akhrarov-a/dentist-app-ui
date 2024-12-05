@@ -1,13 +1,13 @@
+import dayjs from 'dayjs';
 import { observer } from 'mobx-react-lite';
 import { Button, Modal } from 'antd';
 import { useLocales } from '@locales';
 import { useModal } from '@hooks';
 import { useStore } from '@store';
 import { NotFound } from '@components';
-import { UserForm } from '../../../users.types.ts';
-import styles from './view.module.scss';
 import { getMonth, getWeekday, getWeekdaysByIndex } from '@utils';
-import dayjs from 'dayjs';
+import { UserForm } from '../../../users.types';
+import styles from './view.module.scss';
 
 /**
  * <View />

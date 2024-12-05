@@ -6,7 +6,7 @@ import { GlobalStore } from '@store';
 import { ApiErrorCodes, GetUsersParams, UserContract } from '@api';
 import { filterOutFalsyValuesFromObject } from '@utils';
 import { TranslationFunctionType } from '@locales';
-import { UserForm } from './users.types.ts';
+import { UserForm } from './users.types';
 import { UsersAdapter } from './lib';
 
 /**
