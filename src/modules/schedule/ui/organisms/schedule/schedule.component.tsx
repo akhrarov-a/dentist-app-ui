@@ -14,6 +14,7 @@ const Schedule = hoc.observer(
   useScheduleProps,
   ({
     t,
+    filterModal,
     modal,
     language,
     user,
@@ -35,6 +36,7 @@ const Schedule = hoc.observer(
       <ScheduleParams
         t={t}
         user={user}
+        filterModal={filterModal}
         dateType={dateType}
         selectedDate={selectedDate}
         onCalendarChange={onCalendarChange}
@@ -58,13 +60,21 @@ const Schedule = hoc.observer(
 
         <div className={styles.appointments_header}>
           <p className={styles.appointments_header_title}>{headerText}</p>
-          <Button
-            type="primary"
-            className={styles.appointments_header_button}
-            onClick={onAddAppointmentClick}
-          >
-            {t('schedule.table.addAppointment')}
-          </Button>
+          <div className={styles.appointments_header_header}>
+            <img
+              className={styles.appointments_header_icon}
+              src="/img/filter.svg"
+              alt="Filter"
+              onClick={filterModal.open}
+            />
+            <Button
+              type="primary"
+              className={styles.appointments_header_button}
+              onClick={onAddAppointmentClick}
+            >
+              {t('schedule.table.addAppointment')}
+            </Button>
+          </div>
         </div>
         <div
           className={styles.appointments_content}

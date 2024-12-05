@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { Dayjs } from 'dayjs';
 import classNames from 'classnames';
 import { Button, Calendar, Select } from 'antd';
-import { useModal } from '@hooks';
 import { DateType } from '@api';
 import { ScheduleParamsProps } from './schedule-params.props';
 import styles from './schedule-params.module.scss';
@@ -15,12 +14,11 @@ const ScheduleParams: FC<ScheduleParamsProps> = ({
   user,
   selectedDate,
   dateType,
+  filterModal,
   onCalendarChange,
   onDateTypeChange,
   onTodayClick
 }) => {
-  const modal = useModal();
-
   const fullCellRender = (value: Dayjs) => {
     const isHoliday = user.holidays?.some(holiday =>
       value.isSame(holiday, 'date')
@@ -85,6 +83,9 @@ const ScheduleParams: FC<ScheduleParamsProps> = ({
 
   const filters = (
     <div id="schedule-params" className={styles.container}>
+      <div className={styles.close} onClick={filterModal.close}>
+        <img src="/img/close.svg" alt="Close" />
+      </div>
       <Button type="primary" className={styles.button} onClick={onTodayClick}>
         {t('schedule.table.today')}
       </Button>
@@ -118,7 +119,16 @@ const ScheduleParams: FC<ScheduleParamsProps> = ({
     <div style={{ position: 'relative' }}>
       <div className={styles.desktop}>{filters}</div>
       <div className={styles.mob}>
-        {modal.isOpen && <div className={styles.mob_content}>{filters}</div>}
+        {filterModal.isOpen && (
+          <div
+            className={classNames(
+              'animate__animated animate__fadeInUp animate__faster',
+              styles.mob_content
+            )}
+          >
+            {filters}
+          </div>
+        )}
       </div>
     </div>
   );

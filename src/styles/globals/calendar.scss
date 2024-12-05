@@ -16,3 +16,24 @@
     }
   }
 }
+
+@media screen and (max-width: 1140px) {
+  #schedule-params {
+    .ant-picker-calendar-header {
+      display: flex !important;
+      padding: 0 !important;
+      background: transparent !important;
+      justify-content: space-between !important;
+      margin: 10px 0 20px !important;
+
+      .ant-radio-group {
+        display: none !important
+      }
+
+      .ant-select {
+        width: calc(50vw - 30px) !important;
+        height: 32px !important;
+      }
+    }
+  }
+}

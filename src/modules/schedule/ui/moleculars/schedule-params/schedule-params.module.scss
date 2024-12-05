@@ -54,21 +54,49 @@
   }
 }
 
+.close {
+  display: none;
+}
+
 @media screen and (max-width: 1140px) {
   .mob {
     display: block;
 
     &_content {
       position: fixed;
-      z-index: 120;
+      z-index: 123;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
+      background: $white;
     }
   }
 
   .desktop {
     display: none;
+  }
+
+  .container {
+    padding: 30px;
+    margin: 0;
+    position: relative;
+    top: 0;
+  }
+
+  .calendar {
+    width: 100%;
+    border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+    border-radius: 0;
+  }
+
+  .close {
+    @include flex(flex-end, center);
+
+    margin-bottom: 20px;
+
+    img {
+      @include size(30px);
+    }
   }
 }

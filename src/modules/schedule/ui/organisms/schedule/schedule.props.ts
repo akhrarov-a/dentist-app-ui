@@ -32,6 +32,7 @@ const useScheduleProps = () => {
 
   const { t } = useLocales();
   const modal = useModal();
+  const filterModal = useModal();
 
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [dateType, setDateType] = useState(DateType.WEEK);
@@ -201,6 +202,7 @@ const useScheduleProps = () => {
   return {
     t,
     modal,
+    filterModal,
     language,
     user,
     schedulesByDate,
