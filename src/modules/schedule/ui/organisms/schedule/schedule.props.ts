@@ -62,7 +62,9 @@ const useScheduleProps = () => {
     if (end) {
       const endIndex = slots.indexOf(end);
 
-      _slots.splice(endIndex + 1);
+      if (endIndex !== -1) {
+        _slots.splice(endIndex);
+      }
     }
 
     return _slots;

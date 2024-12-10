@@ -78,7 +78,9 @@ const Schedule = hoc.observer(
         </div>
         <div
           className={styles.appointments_content}
-          style={{ height: `${_slots.length * 50}px` }}
+          style={{
+            height: `${(dateType === DateType.WEEK ? _slots.length + 1 : _slots.length) * 50}px`
+          }}
         >
           <Slots isWeek={dateType === DateType.WEEK} slots={_slots} />
           <div
