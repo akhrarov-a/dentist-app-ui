@@ -33,7 +33,7 @@ const Appointment = ({
     const top = slots.indexOf(startTime) * 50 + 1 + 50 * percentage;
 
     if (dateType === DateType.DAY) {
-      return top;
+      return top + 5;
     }
 
     return top + 50;
