@@ -1,5 +1,5 @@
-import { MouseEvent, useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { MouseEvent, useEffect, useMemo } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import dayjs, { Dayjs } from 'dayjs';
 import { useLocales } from '@locales';
 import { useStore } from '@store';
@@ -29,21 +29,22 @@ const useScheduleProps = () => {
   } = useStore();
 
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const selectedDate = searchParams.get('date');
+  const dateType = searchParams.get('type') as DateType;
+  const selectedAppointmentToDisplay = +(searchParams.get('selected') || '0');
 
   const { t } = useLocales();
   const modal = useModal();
   const filterModal = useModal();
 
-  const [selectedDate, setSelectedDate] = useState(dayjs());
-  const [dateType, setDateType] = useState(DateType.WEEK);
-  const [selectedAppointmentToDisplay, setSelectedAppointmentToDisplay] =
-    useState(null);
-
   const headerText = useMemo(() => {
-    const weekday = getWeekday(selectedDate, language);
-    const month = getMonth(selectedDate, language);
+    const _selectedDate = selectedDate ? dayjs(selectedDate, format) : dayjs();
+    const weekday = getWeekday(_selectedDate, language);
+    const month = getMonth(_selectedDate, language);
 
-    return `${weekday}, ${selectedDate.date()} ${month} ${selectedDate.year()}`;
+    return `${weekday}, ${_selectedDate.date()} ${month} ${_selectedDate.year()}`;
   }, [selectedDate, language]);
 
   const _slots = useMemo(() => {
@@ -70,6 +71,16 @@ const useScheduleProps = () => {
     return _slots;
   }, [user, slots]);
 
+  const clearSelectedAppointmentAndReturn = () => {
+    const currentParams = Object.fromEntries(searchParams.entries());
+
+    if (currentParams.selected) {
+      delete currentParams.selected;
+    }
+
+    return currentParams;
+  };
+
   const onAddAppointmentClick = () => {
     navigate('/schedule/create');
   };
@@ -77,33 +88,43 @@ const useScheduleProps = () => {
   const onDeleteAppointmentClick = async () => {
     await deleteSchedule(t, selectedAppointmentToDisplay, navigate);
 
-    getSchedules({ t, date: selectedDate.format(format), type: dateType });
+    getSchedules({
+      t,
+      date: selectedDate,
+      type: dateType
+    });
   };
 
   const onTodayClick = () => {
-    setSelectedDate(dayjs());
-    setSelectedAppointmentToDisplay(null);
+    const currentParams = clearSelectedAppointmentAndReturn();
+
+    setSearchParams({ ...currentParams, date: dayjs().format(format) });
   };
 
   const onDateTypeChange = (value: string) => {
-    setDateType(value as DateType);
-    setSelectedAppointmentToDisplay(null);
+    const currentParams = clearSelectedAppointmentAndReturn();
+
+    setSearchParams({ ...currentParams, type: value });
   };
 
   const onCalendarChange = (date: Dayjs) => {
-    if (dateType === DateType.DAY) {
-      if (selectedDate.isSame(date, 'date')) return;
+    const _selectedDate = dayjs(selectedDate, format);
 
-      setSelectedDate(date);
-      setSelectedAppointmentToDisplay(null);
+    if (dateType === DateType.DAY) {
+      if (_selectedDate.isSame(date, 'date')) return;
+
+      const currentParams = clearSelectedAppointmentAndReturn();
+
+      setSearchParams({ ...currentParams, date: date.format(format) });
 
       return;
     }
 
-    if (selectedDate.isSame(date, 'weeks')) return;
+    if (_selectedDate.isSame(date, 'weeks')) return;
 
-    setSelectedDate(date);
-    setSelectedAppointmentToDisplay(null);
+    const currentParams = clearSelectedAppointmentAndReturn();
+
+    setSearchParams({ ...currentParams, date: date.format(format) });
   };
 
   const onClickAppointment = async (event: MouseEvent) => {
@@ -126,22 +147,28 @@ const useScheduleProps = () => {
         break;
       }
       case AppointmentDataClickAction.CLONE: {
-        await cloneScheduleById(t, selectedAppointmentToDisplay);
+        await cloneScheduleById(t, +selectedAppointmentToDisplay);
 
         onAddAppointmentClick();
 
         break;
       }
       case AppointmentDataClickAction.CLOSE: {
-        setSelectedAppointmentToDisplay(null);
+        const currentParams = clearSelectedAppointmentAndReturn();
+
+        setSearchParams(currentParams);
 
         break;
       }
       default: {
         if (dataClickAction) {
-          setSelectedAppointmentToDisplay(+dataClickAction);
+          const currentParams = Object.fromEntries(searchParams.entries());
+
+          setSearchParams({ ...currentParams, selected: dataClickAction });
         } else if (selectedAppointmentToDisplay) {
-          setSelectedAppointmentToDisplay(null);
+          const currentParams = clearSelectedAppointmentAndReturn();
+
+          setSearchParams(currentParams);
         }
       }
     }
@@ -198,7 +225,23 @@ const useScheduleProps = () => {
   );
 
   useEffect(() => {
-    getSchedules({ t, date: selectedDate.format(format), type: dateType });
+    if (!selectedDate) {
+      const currentParams = clearSelectedAppointmentAndReturn();
+
+      setSearchParams({ ...currentParams, date: dayjs().format(format) });
+
+      return;
+    }
+
+    if (!dateType) {
+      const currentParams = clearSelectedAppointmentAndReturn();
+
+      setSearchParams({ ...currentParams, type: DateType.WEEK });
+
+      return;
+    }
+
+    getSchedules({ t, date: selectedDate, type: dateType });
   }, [selectedDate, dateType]);
 
   return {
@@ -210,7 +253,7 @@ const useScheduleProps = () => {
     schedulesByDate,
     _slots,
     headerText,
-    selectedDate,
+    selectedDate: dayjs(selectedDate, format),
     dateType,
     selectedAppointmentToDisplay,
     onCalendarChange,

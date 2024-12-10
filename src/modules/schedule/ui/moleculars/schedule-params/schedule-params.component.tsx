@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import classNames from 'classnames';
 import { Button, Calendar, Select } from 'antd';
 import { DateType } from '@api';
@@ -45,15 +45,24 @@ const ScheduleParams: FC<ScheduleParamsProps> = ({
     const dayOfWeek = selectedDate.day();
     const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
 
-    const startOfPeriod = new Date(selectedDate.format('YYYY-MM-DD'));
-    startOfPeriod.setDate(selectedDate.date() + diffToMonday);
-    startOfPeriod.setHours(0, 0, 0, 0);
+    const startOfPeriod = dayjs(selectedDate.format('YYYY-MM-DD'))
+      .set('date', selectedDate.date() + diffToMonday)
+      .set('hour', 0)
+      .set('minute', 0)
+      .set('second', 0)
+      .set('millisecond', 0);
 
-    const endOfPeriod = new Date(startOfPeriod);
-    endOfPeriod.setDate(startOfPeriod.getDate() + 6);
-    endOfPeriod.setHours(23, 59, 59, 999);
+    const endOfPeriod = dayjs(startOfPeriod)
+      .set('date', startOfPeriod.date() + 6)
+      .set('hour', 23)
+      .set('minute', 59)
+      .set('second', 59)
+      .set('millisecond', 999);
 
-    if (value.isAfter(startOfPeriod) && value.isBefore(endOfPeriod)) {
+    if (
+      startOfPeriod.date() <= value.date() &&
+      value.date() <= endOfPeriod.date()
+    ) {
       return (
         <div
           key={value.date()}
