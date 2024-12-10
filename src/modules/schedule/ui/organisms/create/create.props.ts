@@ -15,7 +15,8 @@ const useCreateAppointmentProps = () => {
 
   const {
     schedule: { isCloning, initialValues, createSchedule, clearInitialValues },
-    services: { getServices }
+    services: { getServices },
+    patients: { clearPatients }
   } = useStore();
 
   const _initialValues = useMemo(
@@ -28,6 +29,7 @@ const useCreateAppointmentProps = () => {
 
     return () => {
       clearInitialValues();
+      clearPatients();
     };
   }, []);
 

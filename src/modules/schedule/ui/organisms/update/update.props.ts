@@ -23,7 +23,8 @@ const useUpdatePatientProps = () => {
       deleteSchedule,
       clearInitialValues
     },
-    services: { getServices }
+    services: { getServices },
+    patients: { clearPatients }
   } = useStore();
 
   const onDelete = () => {
@@ -35,6 +36,7 @@ const useUpdatePatientProps = () => {
 
     return () => {
       clearInitialValues();
+      clearPatients();
     };
   }, []);
 

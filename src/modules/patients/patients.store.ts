@@ -47,6 +47,13 @@ class PatientsStore {
     });
   };
 
+  public clearPatients = () => {
+    runInAction(() => {
+      this.patients = [];
+      this.totalPatients = 0;
+    });
+  };
+
   public getPatients = async (
     t: TranslationFunctionType,
     page: number,
