@@ -197,7 +197,7 @@ const useScheduleProps = () => {
 
     if (date && !isNaN(indexOfBlock) && indexOfBlock !== -1) {
       const splitUserWorkingHours = user.workingHours?.split('-');
-      const start = splitUserWorkingHours?.[0]?.trim();
+      const start = splitUserWorkingHours?.[0]?.trim() || '00:00';
 
       setInitialValues({
         date: dayjs(date, 'YYYY-MM-DD'),

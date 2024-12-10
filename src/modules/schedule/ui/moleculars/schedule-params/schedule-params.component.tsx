@@ -60,6 +60,7 @@ const ScheduleParams: FC<ScheduleParamsProps> = ({
       .set('millisecond', 999);
 
     if (
+      value.month() === startOfPeriod.month() &&
       startOfPeriod.date() <= value.date() &&
       value.date() <= endOfPeriod.date()
     ) {
