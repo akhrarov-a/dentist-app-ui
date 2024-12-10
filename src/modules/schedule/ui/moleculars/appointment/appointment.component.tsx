@@ -30,8 +30,14 @@ const Appointment = ({
     );
     const percentage = startTimeMinutes / 60;
 
-    return (slots.indexOf(startTime) + 1) * 50 + 1 + 50 * percentage;
-  }, [appointment]);
+    const top = slots.indexOf(startTime) * 50 + 1 + 50 * percentage;
+
+    if (dateType === DateType.DAY) {
+      return top;
+    }
+
+    return top + 50;
+  }, [appointment, dateType]);
 
   const height = useMemo(() => {
     const startTime = dayjs(appointment.startTime).format('HH:00');
