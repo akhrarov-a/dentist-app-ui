@@ -120,22 +120,29 @@ const Form = observer<FormProps>(
             </AntdForm.Item>
           </div>
 
-          {!isEdit && (
-            <AntdForm.Item
-              label={t('form.fields.password.label')}
-              name="password"
-              rules={[
-                rules.password(t('form.validations.password')),
-                rules.whitespace(
-                  t('form.validations.shouldNotStartOrEndWithWhitespace')
-                ),
-                rules.required(t('form.validations.required'))
-              ]}
-              validateTrigger="onBlur"
-            >
-              <Input placeholder={t('form.fields.password.placeholder')} />
-            </AntdForm.Item>
-          )}
+          <AntdForm.Item
+            label={t('form.fields.password.label')}
+            name="password"
+            rules={
+              !isEdit
+                ? [
+                    rules.password(t('form.validations.password')),
+                    rules.whitespace(
+                      t('form.validations.shouldNotStartOrEndWithWhitespace')
+                    ),
+                    rules.required(t('form.validations.required'))
+                  ]
+                : [
+                    rules.password(t('form.validations.password')),
+                    rules.whitespace(
+                      t('form.validations.shouldNotStartOrEndWithWhitespace')
+                    )
+                  ]
+            }
+            validateTrigger="onBlur"
+          >
+            <Input placeholder={t('form.fields.password.placeholder')} />
+          </AntdForm.Item>
 
           <AntdForm.Item
             label={t('form.fields.role.label')}

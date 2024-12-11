@@ -41,13 +41,12 @@ class UsersAdapter {
   }
 
   static userFormToUpdateUserDto(user: UserForm): UpdateUserDto {
-    return {
+    const dto: UpdateUserDto = {
       firstname: user.firstname,
       lastname: user.lastname,
       description: user.description,
       phone: user.phone,
       email: user.email,
-      password: user.password,
       layoutTitle: user.layoutTitle,
       holidays: user.holidays,
       weekends: user.weekends,
@@ -56,6 +55,12 @@ class UsersAdapter {
       role: user.role,
       status: user.status
     };
+
+    if (user.password) {
+      dto.password = user.password;
+    }
+
+    return dto;
   }
 }
 
