@@ -51,6 +51,10 @@ class GlobalStore {
         this.auth.isAuthorized = false;
       });
 
+      cookie.remove('accessToken');
+      cookie.remove('refreshToken');
+      cookie.remove('user');
+
       window.location.href = '/login';
 
       return;

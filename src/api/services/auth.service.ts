@@ -98,6 +98,7 @@ class AuthService {
 
             cookie.remove('accessToken');
             cookie.remove('refreshToken');
+            cookie.remove('user');
 
             window.location.href = '/login';
           }
@@ -173,6 +174,7 @@ class AuthService {
 
     cookie.remove('accessToken');
     cookie.remove('refreshToken');
+    cookie.remove('user');
   };
 }
 
