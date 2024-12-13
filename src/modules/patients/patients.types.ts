@@ -3,10 +3,10 @@
  */
 type PatientForm = {
   firstname: string;
-  lastname: string;
+  lastname?: string;
   phone: string;
-  email: string;
-  description: string;
+  email?: string;
+  description?: string;
 };
 
 export type { PatientForm };

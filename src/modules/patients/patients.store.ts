@@ -114,7 +114,7 @@ class PatientsStore {
   public createPatient = async (
     t: TranslationFunctionType,
     data: PatientForm,
-    navigate: NavigateFunction
+    navigate?: NavigateFunction
   ) => {
     this.global.showLoader();
 
@@ -124,7 +124,9 @@ class PatientsStore {
       );
 
       message.success(t('successfullyCreated'));
-      navigate(`/patients/${response.data.id}`);
+      navigate?.(`/patients/${response.data.id}`);
+
+      return true;
     } catch (e) {
       const error = e as AxiosError;
 

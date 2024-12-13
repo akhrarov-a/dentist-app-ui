@@ -2,13 +2,14 @@ import { Fragment, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import dayjs, { Dayjs } from 'dayjs';
 import classNames from 'classnames';
-import { Button, DatePicker, Form as AntdForm, Input, Modal, Select, TimePicker } from 'antd';
+import { Button, DatePicker, Divider, Form as AntdForm, Input, Modal, Select, TimePicker } from 'antd';
 import { rules } from '@utils';
 import { useStore } from '@store';
 import { useLocales } from '@locales';
 import { useModal } from '@hooks';
 import { ServicesAdapter } from '@services/lib';
 import { PatientsAdapter } from '@patients/lib';
+import { AddPatientForm } from '../../atoms/add-patient-form';
 import { ScheduleForm } from '../../../schedule.types';
 import { FormProps } from './form.props';
 import styles from './form.module.scss';
@@ -205,6 +206,15 @@ const Form = observer<FormProps>(
                 patients.patients
               )}
               onSearch={value => patients.debounceFindPatients(t, value)}
+              dropdownRender={menu => (
+                <Fragment>
+                  {menu}
+
+                  <Divider style={{ margin: '8px 0' }} />
+
+                  <AddPatientForm />
+                </Fragment>
+              )}
               filterOption={false}
               showSearch
             />
