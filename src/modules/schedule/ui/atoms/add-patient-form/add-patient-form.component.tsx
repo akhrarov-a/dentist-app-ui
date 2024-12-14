@@ -6,6 +6,7 @@ import { useLocales } from '@locales';
 import { useStore } from '@store';
 import { PatientForm } from '@patients/patients.types.ts';
 import { AddPatientFormProps } from './add-patient-form.props.ts';
+import styles from './add-patient-form.module.scss';
 
 /**
  * <AddPatientForm />
@@ -29,6 +30,7 @@ const AddPatientForm: FC<AddPatientFormProps> = () => {
 
   return (
     <Form<Pick<PatientForm, 'firstname' | 'phone'>>
+      className={styles.container}
       form={form}
       layout="inline"
       initialValues={{
@@ -37,7 +39,6 @@ const AddPatientForm: FC<AddPatientFormProps> = () => {
       }}
       onFinish={onSubmitForm}
       validateMessages={{ required: 'Required' }}
-      style={{ width: '100%' }}
     >
       <Form.Item
         name="firstname"

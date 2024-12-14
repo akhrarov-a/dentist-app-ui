@@ -134,6 +134,10 @@ class PatientsStore {
 
       if (errorCode === ApiErrorCodes.ALREADY_EXISTS) {
         message.error(t('errors.patientWithThisPhoneAlreadyExists'));
+
+        if (window.location.pathname.includes('schedule')) {
+          await this.findPatients(t, data.phone);
+        }
       } else {
         message.error(t('errors.somethingWentWrong'));
       }
@@ -238,7 +242,7 @@ class PatientsStore {
   public findPatients = async (t: TranslationFunctionType, search: string) => {
     const _search = search?.trim();
 
-    if (!_search) return;
+    if (!_search || search?.length < 2) return;
 
     this.loading = {
       ...this.loading,
@@ -247,7 +251,7 @@ class PatientsStore {
 
     try {
       const response =
-        await this.global.api.patients.findPatientsByFirstnameOrLastname(
+        await this.global.api.patients.findPatientsByFirstnameOrLastnameOrPhone(
           _search
         );
 

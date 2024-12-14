@@ -17,11 +17,11 @@ class PatientsService {
     });
 
   /**
-   * Find patients by firstname or lastname
+   * Find patients by firstname or lastname or phone
    */
-  public findPatientsByFirstnameOrLastname = (search: string) =>
+  public findPatientsByFirstnameOrLastnameOrPhone = (search: string) =>
     this.http.request<PatientContract[]>({
-      url: '/patients/by/firstname-or-lastname',
+      url: '/patients/by/firstname-or-lastname-or-phone',
       method: 'GET',
       params: { search }
     });

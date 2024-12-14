@@ -193,8 +193,8 @@
           "ru": "Пациент"
         },
         "placeholder": {
-          "en": "Select a patient",
-          "ru": "Выберите пациента"
+          "en": "Firstname or lastname or phone",
+          "ru": "Имя или фамилия или телефон"
         }
       },
       "services": {
