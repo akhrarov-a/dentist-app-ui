@@ -87,7 +87,7 @@ const Schedule = hoc.observer(
             id="appointments-calendar"
             className={styles.appointments_content_content}
             style={{
-              gridTemplateColumns: `repeat(${schedulesByDate.length}, 1fr)`
+              gridTemplateColumns: `repeat(${schedulesByDate?.length || 1}, 1fr)`
             }}
           >
             {schedulesByDate.map(schedules => {
